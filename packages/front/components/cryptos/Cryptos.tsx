@@ -10,6 +10,7 @@ const Cryptos = () => {
     { symbol: 'BTC', name: 'Bitcoin', isVisible: true },
     { symbol: 'LTC', name: 'Litecoin', isVisible: true },
     { symbol: 'XRP', name: 'Ripple', isVisible: true },
+    { symbol: 'ETH', name: 'Ethereum', isVisible: true },
   ];
 
   const toShow = cryptos?.filter(

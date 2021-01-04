@@ -66,6 +66,8 @@ const getFullName = (symbol: string) => {
       return 'Litecoin';
     case 'XRP':
       return 'Ripple';
+    case 'ETH':
+      return 'Ethereum';
     default:
       return 'Unknown';
   }

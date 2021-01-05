@@ -31,12 +31,12 @@ const Options = React.memo<OptionsProps>(({ isMenuOpen, listOfCurrences, setList
     <section className={optionsClass}>
       <h2 className="text-center text-xl">Options</h2>
       {listOfCurrences.map((currency) => (
-        <div className="flex items-center py-2 px-2">
+        <div key={currency.symbol} className="flex items-center py-2 px-2">
           <input
             type="checkbox"
             checked={currency.isVisible}
             className="focus:ring-indigo-500 h-6 w-6 text-indigo-600 border-gray-300 rounded"
-            onClick={() => toggleVisibility(currency)}
+            onChange={() => toggleVisibility(currency)}
           />
           <span className="px-2">
             {currency.name} {currency.symbol}

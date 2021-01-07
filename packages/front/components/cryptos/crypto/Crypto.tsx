@@ -21,7 +21,9 @@ const Crypto = React.memo<CryptoProps>(({ crypto }) => {
             <p className="font-bold text-xs">{firstCurrency}</p>
           </div>
         </div>
-        <span className="text-xs md:text-xl">{price} PLN</span>
+        <p className="text-sm md:text-xl">
+          {price} <span className="text-xs">PLN</span>
+        </p>
         <Arrow pair={pair} currentPrice={price} />
       </div>
     </li>

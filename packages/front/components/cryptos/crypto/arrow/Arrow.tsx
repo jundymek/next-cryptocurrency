@@ -22,11 +22,11 @@ const Arrow = React.memo<ArrowProps>(({ pair, currentPrice }) => {
       const price24h = parseFloat(res.stats.r24h);
 
       if (price24h < parseFloat(currentPrice)) {
-        setArrow(ArrowEnum.Up);
         setArrowClass('text-green-500');
+        setArrow(ArrowEnum.Up);
       } else {
-        setArrow(ArrowEnum.Down);
         setArrowClass('text-red-500');
+        setArrow(ArrowEnum.Down);
       }
     } catch (err) {
       console.log(err);
@@ -37,6 +37,8 @@ const Arrow = React.memo<ArrowProps>(({ pair, currentPrice }) => {
     getArrow();
     console.log(arrow);
   }, []);
+
+  if (!arrow) return null;
 
   return (
     <div className={`w-6 h-6 mr-2 fill-current ${arrowClass}`}>

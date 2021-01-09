@@ -7,9 +7,9 @@ const plugin: Hapi.Plugin<undefined> = {
     server.route({
       method: 'GET',
       path: '/api/cryptos',
-      handler: async function (_, h: Hapi.ResponseToolkit) {
+      async handler() {
         const cryptos = await getCryptoData();
-        return h.response(cryptos).code(200);
+        return cryptos;
       },
     });
   },

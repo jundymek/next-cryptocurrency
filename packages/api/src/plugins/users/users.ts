@@ -1,15 +1,13 @@
 import Hapi from '@hapi/hapi';
-
-interface Asset {
-  currencyName: string;
-  amount: number;
-  buyPrice: number;
-}
+import Joi from 'joi';
 
 interface UserInput {
   username: string;
-  // assets: [];
 }
+
+const userInputValidator = Joi.object({
+  username: Joi.string().required(),
+});
 
 const plugin = {
   name: 'app/users',
@@ -20,6 +18,11 @@ const plugin = {
         method: 'POST',
         path: '/api/users',
         handler: createUserHandler,
+        options: {
+          validate: {
+            payload: userInputValidator,
+          },
+        },
       },
     ]);
   },
@@ -35,7 +38,6 @@ async function createUserHandler(request: Hapi.Request, h: Hapi.ResponseToolkit)
     const newUser = await prisma.user.create({
       data: {
         username: payload.username,
-        // assets: [],
       },
       select: {
         id: true,

@@ -19,12 +19,23 @@ describe('POST /api/users - create new user', () => {
       method: 'POST',
       url: '/api/users',
       payload: {
-        username: 'test',
+        username: 'test11',
       },
     });
 
     expect(response.statusCode).toEqual(201);
     userId = JSON.parse(response.payload)?.id;
     expect(typeof userId === 'number').toBeTruthy();
+  });
+
+  test('create user validation', async () => {
+    const response = await server.inject({
+      method: 'POST',
+      url: '/api/users',
+      payload: {
+        username: 123,
+      },
+    });
+    expect(response.statusCode).toEqual(400);
   });
 });

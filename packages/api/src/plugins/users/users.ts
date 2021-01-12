@@ -3,10 +3,12 @@ import Joi from 'joi';
 
 interface UserInput {
   username: string;
+  password: string;
 }
 
 const userInputValidator = Joi.object({
   username: Joi.string().required(),
+  password: Joi.string().required(),
 });
 
 const plugin = {
@@ -38,6 +40,7 @@ async function createUserHandler(request: Hapi.Request, h: Hapi.ResponseToolkit)
     const newUser = await prisma.user.create({
       data: {
         username: payload.username,
+        password: payload.password,
       },
       select: {
         id: true,

@@ -40,12 +40,9 @@ function useFetchCryptoData() {
   const [cryptos, setCryptos] = useState<CryptoData[] | undefined>(undefined);
   const getCryptoData = async (): Promise<any> => {
     try {
-      const cryptoData = await fetch('https://api.bitbay.net/rest/trading/ticker');
+      const cryptoData = await fetch('http://localhost:3001/api/cryptos');
       const res = await cryptoData.json();
-      const cryptoArrayData = Object.keys(res.items).map((pair) =>
-        getNecessaryData(res.items[pair]),
-      );
-      setCryptos(cryptoArrayData);
+      setCryptos(res);
     } catch (err) {
       console.log(err);
       setError('Something went wrong');

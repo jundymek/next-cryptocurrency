@@ -7,6 +7,7 @@ import assets from './plugins/assets/assets';
 const server: Hapi.Server = Hapi.server({
   port: process.env.PORT || 3001,
   host: process.env.HOST || 'localhost',
+  routes: { cors: true },
 });
 
 export async function createServer(): Promise<Hapi.Server> {

@@ -11,6 +11,9 @@ const plugin: Hapi.Plugin<undefined> = {
         const cryptos = await getCryptoData();
         return cryptos;
       },
+      options: {
+        auth: false,
+      },
     });
   },
 };

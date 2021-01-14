@@ -38,20 +38,14 @@ async function loginHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
   const { prisma } = request.server.app;
   const payload = request.payload as UserInput;
 
-  console.log(request.auth.isAuthenticated);
-
   const account = await prisma.user.findFirst({
     where: { username: payload.username },
   });
-
-  console.log(account);
 
   if (!account || !(await Bcrypt.compare(payload.password, account.password))) {
     return h.redirect('/api/login');
   }
   const token = generateToken(account);
   console.log(token);
-  console.log(request.auth.isAuthenticated);
-  console.log('SUCCESS');
-  return h.response(token);
+  return { token: token };
 }

@@ -21,13 +21,16 @@ const Cryptos = React.memo<CryptosProps>(({ isMenuOpen }) => {
     { symbol: 'ETH', name: 'Ethereum', isVisible: true },
   ]);
   const { error, cryptos } = useFetchCryptoData();
-  console.log(cryptos);
+
+  const visibleCryptos = cryptos?.filter((item) => {
+    return listOfCurrences.find((el) => el.symbol === item.firstCurrency)?.isVisible;
+  });
 
   if (error) return <div>{error}</div>;
   return (
     <>
       <ul className="list-none mt-4 p-2">
-        {cryptos?.map((item) => (
+        {visibleCryptos?.map((item) => (
           <Crypto key={item.name} crypto={item} />
         ))}
       </ul>

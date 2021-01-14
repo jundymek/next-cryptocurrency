@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | undefined>(undefined);
+
+  const router = useRouter();
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -11,9 +15,26 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const payload = { username, password };
     console.log(username, password);
+    const response = await fetch('http://localhost:3001/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const { token } = await response.json();
+    if (response.status !== 200) {
+      setError('Credentials not valid');
+      console.log('Credentials not valid');
+    } else {
+      localStorage.setItem('token', token);
+      router.push('/');
+    }
   };
   return (
     <form className="flex flex-col mt-12" onSubmit={handleSubmit}>
@@ -26,6 +47,7 @@ const Login = () => {
         <input type="password" name="password" id="password" onChange={handlePasswordChange} />
       </div>
       <button>Submit</button>
+      {error && <p>{error}</p>}
     </form>
   );
 };

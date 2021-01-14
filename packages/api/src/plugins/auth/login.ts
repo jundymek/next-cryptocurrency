@@ -1,6 +1,7 @@
 import Hapi from '@hapi/hapi';
 import Joi from 'joi';
 import Bcrypt from 'bcrypt';
+import generateToken from './utils/generateToken';
 
 interface UserInput {
   username: string;
@@ -13,14 +14,13 @@ const userInputValidator = Joi.object({
 });
 
 const plugin = {
-  name: 'app/users',
-  dependencies: ['prisma'],
+  name: 'app/login',
   register: async function (server: Hapi.Server) {
     server.route([
       {
         method: 'POST',
-        path: '/api/users',
-        handler: createUserHandler,
+        path: '/api/login',
+        handler: loginHandler,
         options: {
           validate: {
             payload: userInputValidator,
@@ -34,23 +34,24 @@ const plugin = {
 
 export default plugin;
 
-async function createUserHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+async function loginHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
   const { prisma } = request.server.app;
   const payload = request.payload as UserInput;
 
-  try {
-    const hashedPassword = await Bcrypt.hash(payload.password, 10);
-    const newUser = await prisma.user.create({
-      data: {
-        username: payload.username,
-        password: hashedPassword,
-      },
-      select: {
-        id: true,
-      },
-    });
-    return h.response(newUser).code(201);
-  } catch (err) {
-    console.log(err);
+  console.log(request.auth.isAuthenticated);
+
+  const account = await prisma.user.findFirst({
+    where: { username: payload.username },
+  });
+
+  console.log(account);
+
+  if (!account || !(await Bcrypt.compare(payload.password, account.password))) {
+    return h.redirect('/api/login');
   }
+  const token = generateToken(account);
+  console.log(token);
+  console.log(request.auth.isAuthenticated);
+  console.log('SUCCESS');
+  return h.response(token);
 }

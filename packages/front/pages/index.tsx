@@ -1,26 +1,17 @@
 import { useState } from 'react';
 import Cryptos from '../components/cryptos/Cryptos';
-import SettingsIcon from '../components/icons/SettingsIcon';
+import Header from '../components/header/Header';
+import Layout from '../components/layout/Layout';
 
 export default function Home() {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
-  const handleOptionsOpen = () => {
-    setIsOptionsOpen(!isOptionsOpen);
-  };
   return (
-    <div className="container mx-auto relative">
-      <section className="py-4">
-        <div className="border-b-2 py-2">
-          <h1 className="font-mono text-2xl text-center ">Cryptocurrences</h1>
-          <button onClick={handleOptionsOpen}>
-            <div className="w-7 h-7 absolute top-4 right-4">
-              <SettingsIcon />
-            </div>
-          </button>
-        </div>
+    <Layout title="Main page">
+      <div className="container mx-auto relative">
+        <Header isOptionsOpen={isOptionsOpen} setIsOptionsOpen={setIsOptionsOpen} />
         <Cryptos isMenuOpen={isOptionsOpen} />
-      </section>
-    </div>
+      </div>
+    </Layout>
   );
 }

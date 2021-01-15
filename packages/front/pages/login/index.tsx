@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import Layout from '../../components/layout/Layout';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -37,18 +38,20 @@ const Login = () => {
     }
   };
   return (
-    <form className="flex flex-col mt-12" onSubmit={handleSubmit}>
-      <div className="border border-gray-500 flex justify-between">
-        <label htmlFor="username">Username</label>
-        <input type="text" name="username" id="username" onChange={handleUsernameChange} />
-      </div>
-      <div className="border border-gray-500 flex justify-between">
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" onChange={handlePasswordChange} />
-      </div>
-      <button>Submit</button>
-      {error && <p>{error}</p>}
-    </form>
+    <Layout title="Login page">
+      <form className="flex flex-col mt-12" onSubmit={handleSubmit}>
+        <div className="border border-gray-500 flex justify-between">
+          <label htmlFor="username">Username</label>
+          <input type="text" name="username" id="username" onChange={handleUsernameChange} />
+        </div>
+        <div className="border border-gray-500 flex justify-between">
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" id="password" onChange={handlePasswordChange} />
+        </div>
+        <button>Submit</button>
+        {error && <p>{error}</p>}
+      </form>
+    </Layout>
   );
 };
 

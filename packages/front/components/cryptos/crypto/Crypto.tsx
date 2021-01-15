@@ -14,7 +14,7 @@ const Crypto = React.memo<CryptoProps>(({ crypto }) => {
     setAnimate('animate-pulse');
     setTimeout(() => {
       setAnimate('');
-    }, 2000);
+    }, 1000);
   }, [price]);
 
   return (

@@ -34,6 +34,7 @@ const Login = () => {
       console.log('Credentials not valid');
     } else {
       localStorage.setItem('token', token);
+      localStorage.setItem('username', username);
       router.push('/');
     }
   };

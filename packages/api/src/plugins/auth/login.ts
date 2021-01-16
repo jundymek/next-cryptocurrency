@@ -47,5 +47,5 @@ async function loginHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
   }
   const token = generateToken(account);
   console.log(token);
-  return { token: token };
+  return { token: token, userId: account.id };
 }

@@ -1,17 +1,19 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Currency } from '../cryptos/Cryptos';
+import { OptionsContext } from '../../context/optionsContext';
 
 interface OptionsProps {
-  isMenuOpen: boolean;
   listOfCurrences: Currency[];
   setListOfCurrences: React.Dispatch<React.SetStateAction<Currency[]>>;
 }
 
-const Options = React.memo<OptionsProps>(({ isMenuOpen, listOfCurrences, setListOfCurrences }) => {
+const Options = React.memo<OptionsProps>(({ listOfCurrences, setListOfCurrences }) => {
+  const { isOptionsOpen } = React.useContext(OptionsContext);
+
   const optionsClass = clsx(
     'h-screen w-1/2 md:w-60 bg-blue-300 fixed top-0 left-0 transition-transform duration-500 opacity-90 py-6',
-    isMenuOpen ? 'transform translate-x-0' : 'transform -translate-x-64 invisible',
+    isOptionsOpen ? 'transform translate-x-0' : 'transform -translate-x-64 invisible',
   );
 
   const toggleVisibility = (currency: Currency) => {

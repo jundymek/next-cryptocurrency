@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
+import { OptionsProvider } from '../../context/optionsContext';
+import Header from '../header/Header';
 
 interface LayoutProps {
   readonly children: ReactNode;
@@ -8,12 +10,15 @@ interface LayoutProps {
 
 const Layout = React.memo<LayoutProps>(({ children, title }) => {
   return (
-    <div>
-      <Head>
-        <title>{title}</title>
-      </Head>
-      <main>{children}</main>
-    </div>
+    <OptionsProvider>
+      <div className="container mx-auto relative">
+        <Head>
+          <title>{title}</title>
+        </Head>
+        <Header />
+        <main>{children}</main>
+      </div>
+    </OptionsProvider>
   );
 });
 

@@ -15,6 +15,9 @@ const Crypto = React.memo<CryptoProps>(({ crypto }) => {
     setTimeout(() => {
       setAnimate('');
     }, 1000);
+    return () => {
+      clearTimeout;
+    };
   }, [price]);
 
   return (

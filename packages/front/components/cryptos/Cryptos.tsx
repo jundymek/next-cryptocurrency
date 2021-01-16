@@ -3,10 +3,6 @@ import Options from '../options/Options';
 import Crypto from './crypto/Crypto';
 import useSWR from 'swr';
 
-interface CryptosProps {
-  isMenuOpen: boolean;
-}
-
 export interface Currency {
   symbol: string;
   name: string;
@@ -21,7 +17,7 @@ export interface CryptoData {
   price: string;
 }
 
-const Cryptos = React.memo<CryptosProps>(({ isMenuOpen }) => {
+const Cryptos = React.memo(() => {
   const [listOfCurrences, setListOfCurrences] = useState<Currency[]>([
     { symbol: 'BTC', name: 'Bitcoin', isVisible: true },
     { symbol: 'LTC', name: 'Litecoin', isVisible: true },
@@ -47,11 +43,7 @@ const Cryptos = React.memo<CryptosProps>(({ isMenuOpen }) => {
           <Crypto key={item.name} crypto={item} />
         ))}
       </ul>
-      <Options
-        isMenuOpen={isMenuOpen}
-        listOfCurrences={listOfCurrences}
-        setListOfCurrences={setListOfCurrences}
-      />
+      <Options listOfCurrences={listOfCurrences} setListOfCurrences={setListOfCurrences} />
     </>
   );
 });

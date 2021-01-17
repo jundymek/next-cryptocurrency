@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
   handleFlip?: () => void;
 }
 
-const LoginForm = React.memo<Props>(({ handleFlip }) => {
+const RegisterForm = React.memo<Props>(({ handleFlip }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | undefined>(undefined);
@@ -51,7 +51,7 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
               px-6 py-10 sm:px-10 sm:py-6 
               bg-white rounded-lg shadow-md lg:shadow-lg"
         >
-          <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">Login</h2>
+          <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">Register</h2>
 
           <form className="mt-10" method="POST" onSubmit={handleSubmit}>
             <label
@@ -61,7 +61,7 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
               Username
             </label>
             <input
-              id="username"
+              id="reg_username"
               type="text"
               name="username"
               placeholder="username"
@@ -81,7 +81,7 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
               Password
             </label>
             <input
-              id="password"
+              id="reg_password"
               type="password"
               name="password"
               placeholder="password"
@@ -96,16 +96,16 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
 
             <button
               type="submit"
-              className="w-full py-3 mt-10 bg-gray-800 rounded-sm 
+              className="w-full py-3 mt-10 bg-gray-800 rounded-sm
                       font-medium text-white uppercase
                       focus:outline-none hover:bg-gray-700 hover:shadow-none"
             >
-              Login
+              Register
             </button>
 
             <div className="mt-8 sm:mb-4 text-sm float-right">
               <button type="button" onClick={handleFlip} className="flex-2 underline">
-                Create an Account
+                Log in
               </button>
             </div>
           </form>
@@ -116,4 +116,4 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
   );
 });
 
-export default LoginForm;
+export default RegisterForm;

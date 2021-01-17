@@ -11,7 +11,7 @@ interface LayoutProps {
 const Layout = React.memo<LayoutProps>(({ children, title }) => {
   return (
     <OptionsProvider>
-      <div className="container mx-auto relative">
+      <div className="container mx-auto relative h-screen">
         <Head>
           <title>{title}</title>
         </Head>

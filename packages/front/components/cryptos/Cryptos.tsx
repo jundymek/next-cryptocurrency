@@ -37,14 +37,14 @@ const Cryptos = React.memo(() => {
 
   if (error) return <div>{error}</div>;
   return (
-    <>
-      <ul className="list-none mt-4 p-2">
+    <div className="flex justify-center items-center content-area">
+      <ul className="list-none mt-4 p-2 w-full">
         {visibleCryptos?.map((item: CryptoData) => (
           <Crypto key={item.name} crypto={item} />
         ))}
       </ul>
       <Options listOfCurrences={listOfCurrences} setListOfCurrences={setListOfCurrences} />
-    </>
+    </div>
   );
 });
 

@@ -10,6 +10,9 @@ const plugin = {
         handler: function (request: Hapi.Request, h: Hapi.ResponseToolkit) {
           return h.response('You are logged out').code(401);
         },
+        options: {
+          auth: false,
+        },
       },
     ]);
   },

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
 
 interface Props {
   handleFlip?: () => void;

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import LoginForm from '../../components/loginForm/LoginForm';
 import RegisterForm from '../../components/registerForm/RegisterForm';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 interface Props {
   isRegisterOpen: boolean;
@@ -47,6 +48,12 @@ const RegisterWrapper = styled.div`
 
 const Login = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    setIsRegisterOpen(router.query.isRegisterOpen == 'true');
+  }, [router.query]);
 
   const handleFlip = () => {
     setIsRegisterOpen((prevState) => !prevState);

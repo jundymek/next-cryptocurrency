@@ -15,10 +15,7 @@ const server: Hapi.Server = Hapi.server({
 
 const validate = async (decoded: any, request: Hapi.Request, h: Hapi.ResponseToolkit) => {
   const { prisma } = request.server.app;
-  const decodedx = request.payload;
-  console.log('XXXXXXXX', decodedx);
   const searchResults = await prisma.user.findFirst({ where: { id: decoded.id } });
-  console.log('SEARCHRES', searchResults);
   if (searchResults) {
     return { isValid: true };
   }

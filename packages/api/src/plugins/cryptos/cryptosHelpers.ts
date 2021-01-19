@@ -44,7 +44,6 @@ export async function getCryptoData() {
       (item) =>
         ['BTC', 'LTC', 'XRP', 'ETH'].includes(item.firstCurrency) && item.secondCurrency === 'PLN',
     );
-  console.log(cryptos);
 
   return cryptos;
 }
@@ -73,5 +72,3 @@ const getNecessaryData = (data: MarketData) => {
     price: data.previousRate,
   };
 };
-
-// export default useFetchCryptoData;

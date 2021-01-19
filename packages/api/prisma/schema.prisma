@@ -21,7 +21,6 @@ model Asset {
   id           Int    @id @default(autoincrement())
   currencyName String @unique
   amount       Int
-  buyPrice     Int
   User         User?  @relation(fields: [userId], references: [id])
   userId       Int?
 }

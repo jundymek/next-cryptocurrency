@@ -1,12 +1,6 @@
 import Hapi from '@hapi/hapi';
 import Joi from 'joi';
-import Bcrypt from 'bcrypt';
-import generateToken from './utils/generateToken';
-
-interface UserInput {
-  username: string;
-  password: string;
-}
+import { loginHandler } from './handlers/loginHandler';
 
 const userInputValidator = Joi.object({
   username: Joi.string().required(),
@@ -33,19 +27,3 @@ const plugin = {
 };
 
 export default plugin;
-
-async function loginHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
-  const { prisma } = request.server.app;
-  const payload = request.payload as UserInput;
-
-  const account = await prisma.user.findFirst({
-    where: { username: payload.username },
-  });
-
-  if (!account || !(await Bcrypt.compare(payload.password, account.password))) {
-    return h.redirect('/api/login');
-  }
-  const token = generateToken(account);
-  console.log(token);
-  return { token: token, userId: account.id, username: account.username };
-}

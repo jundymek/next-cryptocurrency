@@ -1,8 +1,11 @@
 import Boom from '@hapi/boom';
 import Hapi from '@hapi/hapi';
 import Joi from 'joi';
+import { createAssetHandler } from './handlers/createAssetHandler';
+import { getAssetsHandler } from './handlers/getAssetsHandler';
+import { updateAssetHandler } from './handlers/updateAssetHandler';
 
-interface AssetInput {
+export interface AssetInput {
   username: string;
   currencyName: string;
   amount: number;
@@ -22,7 +25,7 @@ const plugin = {
       {
         method: ['GET'],
         path: '/api/assets',
-        handler: getAssetHandler,
+        handler: getAssetsHandler,
       },
       {
         method: ['POST'],
@@ -49,72 +52,3 @@ const plugin = {
 };
 
 export default plugin;
-
-async function getAssetHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
-  const { prisma } = request.server.app;
-  const userId = request.auth.credentials.userId as number;
-  try {
-    const assets = await prisma.asset.findMany({
-      where: {
-        userId,
-      },
-    });
-    console.log(assets);
-    return h.response(assets).code(200);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function updateAssetHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
-  const { prisma } = request.server.app;
-  const payload = request.payload as AssetInput;
-  const username = request.auth.credentials.userName as string;
-
-  try {
-    const modifiedAsset = await prisma.asset.update({
-      where: {
-        currencyName: payload.currencyName,
-      },
-      data: {
-        currencyName: payload.currencyName,
-        amount: payload.amount,
-        User: {
-          connect: {
-            username,
-          },
-        },
-      },
-    });
-    return h.response(modifiedAsset).code(200);
-  } catch (err) {
-    console.log(err);
-    return Boom.badImplementation();
-  }
-}
-
-async function createAssetHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
-  const { prisma } = request.server.app;
-  const payload = request.payload as AssetInput;
-
-  const username = request.auth.credentials.userName as string;
-
-  try {
-    const newAsset = await prisma.asset.create({
-      data: {
-        currencyName: payload.currencyName,
-        amount: payload.amount,
-        User: {
-          connect: {
-            username,
-          },
-        },
-      },
-    });
-
-    return h.response(newAsset).code(201);
-  } catch (err) {
-    console.log(err.code);
-    return Boom.conflict();
-  }
-}

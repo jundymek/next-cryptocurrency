@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { CryptoData } from '../Cryptos';
 import { Icon } from 'coinmarketcap-cryptocurrency-icons';
 
 interface CryptoProps {
   crypto: CryptoData;
   animate?: string;
-  token: string;
+  asset?: Asset;
 }
 
 interface Asset {
@@ -13,35 +13,10 @@ interface Asset {
   amount: number;
 }
 
-const CryptoAuth = React.memo<CryptoProps>(({ crypto, animate, token }) => {
-  const [assetAmount, setAssetAmount] = useState<number>(0);
+const CryptoAuth = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
   const { firstCurrency, name, price } = crypto;
 
-  const assetValue: number = assetAmount * parseInt(price);
-
-  async function getAssets() {
-    if (token) {
-      const response = await fetch('http://localhost:3001/api/assets', {
-        headers: {
-          Authorization: token,
-        },
-      });
-      const assets: Asset[] = await response.json();
-      const thisAsset = assets.find((asset) => asset.currencyName === crypto.firstCurrency);
-      if (thisAsset) {
-        setAssetAmount(thisAsset.amount);
-      }
-    }
-  }
-
-  const memoizedCallback = useCallback(() => {
-    getAssets();
-  }, []);
-
-  useEffect(() => {
-    memoizedCallback();
-  }, [memoizedCallback]);
-  if (assetAmount > 0) {
+  if (asset?.amount) {
     return (
       <li className="flex items-center">
         <div
@@ -62,9 +37,9 @@ const CryptoAuth = React.memo<CryptoProps>(({ crypto, animate, token }) => {
             </div>
 
             <div className="flex flex-col">
-              <p>{assetValue} PLN</p>
+              <p>{asset?.amount * parseInt(price)} PLN</p>
               <p>
-                {assetAmount} {firstCurrency}
+                {asset.amount} {firstCurrency}
               </p>
             </div>
           </div>

@@ -45,14 +45,12 @@ const Cryptos = React.memo(() => {
     return listOfCurrences.find((el) => el.symbol === item.firstCurrency)?.isVisible;
   });
 
-  console.log(visibleCryptos);
-
   if (error) return <div>{error}</div>;
 
   return (
     <div className="flex justify-center items-center content-area">
       {token ? (
-        <CryptosAuthUser visibleCryptos={visibleCryptos} token={token} />
+        <CryptosAuthUser visibleCryptos={visibleCryptos} />
       ) : (
         <CryptosNotAuthUser visibleCryptos={visibleCryptos} />
       )}

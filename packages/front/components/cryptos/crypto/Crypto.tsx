@@ -28,7 +28,7 @@ const Crypto = React.memo<CryptoProps>(({ crypto }) => {
   if (!token) {
     return <CryptoNotAuth crypto={crypto} animate={animate} />;
   }
-  return <CryptoAuth crypto={crypto} animate={animate} token={token} />;
+  return <CryptoAuth crypto={crypto} animate={animate} />;
 });
 
 export default Crypto;

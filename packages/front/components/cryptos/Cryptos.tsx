@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Options from '../options/Options';
-import Crypto from './crypto/Crypto';
 import useSWR from 'swr';
+import CryptosAuthUser from './CryptosAuthUser';
+import CryptosNotAuthUser from './CryptosNotAuthUser';
 
 export interface Currency {
   symbol: string;
@@ -25,6 +26,15 @@ const Cryptos = React.memo(() => {
     { symbol: 'ETH', name: 'Ethereum', isVisible: true },
   ]);
 
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setToken(token);
+    }
+  }, []);
+
   const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
   const { data, error } = useSWR('http://localhost:3001/api/cryptos', fetcher, {
@@ -35,14 +45,18 @@ const Cryptos = React.memo(() => {
     return listOfCurrences.find((el) => el.symbol === item.firstCurrency)?.isVisible;
   });
 
+  console.log(visibleCryptos);
+
   if (error) return <div>{error}</div>;
+
   return (
     <div className="flex justify-center items-center content-area">
-      <ul className="list-none mt-4 p-2 w-full">
-        {visibleCryptos?.map((item: CryptoData) => (
-          <Crypto key={item.name} crypto={item} />
-        ))}
-      </ul>
+      {token ? (
+        <CryptosAuthUser visibleCryptos={visibleCryptos} token={token} />
+      ) : (
+        <CryptosNotAuthUser visibleCryptos={visibleCryptos} />
+      )}
+
       <Options listOfCurrences={listOfCurrences} setListOfCurrences={setListOfCurrences} />
     </div>
   );

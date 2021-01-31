@@ -12,7 +12,6 @@ const LogoImage = ({ className }: LogoImageProps) => {
       className={className}
       viewBox="0 0 933.32126 629.28662"
     >
-      <title>digital currency</title>
       <circle cx="603.48189" cy="110.6591" r="32" fill="#f2f2f2" />
       <rect
         x="175.66063"

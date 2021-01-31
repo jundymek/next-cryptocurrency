@@ -4,6 +4,7 @@ import LoginForm from '../../components/loginForm/LoginForm';
 import RegisterForm from '../../components/registerForm/RegisterForm';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import LogoImage from '../../components/header/LogoImage';
 
 interface Props {
   isRegisterOpen: boolean;
@@ -26,7 +27,7 @@ const InnerContainer = styled.div<Props>`
 const LoginWrapper = styled.div`
   position: absolute;
   width: 100%;
-  height: calc(100vh - 130px);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,7 +38,7 @@ const LoginWrapper = styled.div`
 const RegisterWrapper = styled.div`
   position: absolute;
   width: 100%;
-  height: calc(100vh - 130px);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,18 +60,18 @@ const Login = () => {
     setIsRegisterOpen((prevState) => !prevState);
   };
   return (
-    <Layout title="Login page">
-      <Container>
-        <InnerContainer isRegisterOpen={isRegisterOpen}>
-          <LoginWrapper>
-            <LoginForm handleFlip={handleFlip} />
-          </LoginWrapper>
-          <RegisterWrapper>
-            <RegisterForm handleFlip={handleFlip} />
-          </RegisterWrapper>
-        </InnerContainer>
-      </Container>
-    </Layout>
+    // <Layout title="Login page">
+    <Container>
+      <InnerContainer isRegisterOpen={isRegisterOpen}>
+        <LoginWrapper>
+          <LoginForm handleFlip={handleFlip} />
+        </LoginWrapper>
+        <RegisterWrapper>
+          <RegisterForm handleFlip={handleFlip} />
+        </RegisterWrapper>
+      </InnerContainer>
+    </Container>
+    // </Layout>
   );
 };
 

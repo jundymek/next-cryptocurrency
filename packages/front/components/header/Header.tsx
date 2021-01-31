@@ -12,11 +12,11 @@ const Header = React.memo(() => {
     <header className="py-4">
       <div className="border-b-2 py-2 flex flex-col sm:flex-row justify-between items-center">
         <Link href="/">
-          <div className="flex flex-col md:flex-row items-center p-2  mx-auto md:m-0">
-            <LogoImage className="w-full h-full  md:w-40 md:h-40" />
-          </div>
+          <a className="p-2 mx-auto md:m-0 cursor-pointer" title="Cryptocurrences portfolio">
+            <LogoImage className="w-full h-full md:w-40 md:h-40" />
+          </a>
         </Link>
-        <h1 className="font-mono text-xl my-2 md:text-2xl text-center cursor-pointer font-semibold">
+        <h1 className="font-mono text-xl my-2 md:text-2xl text-center font-semibold">
           Cryptocurrences portfolio
         </h1>
         <div className="flex flex-col items-end px-2 sm:px-0 md:self-start">

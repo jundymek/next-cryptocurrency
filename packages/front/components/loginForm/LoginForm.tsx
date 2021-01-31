@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import LogoImage from '../header/LogoImage';
+import Link from 'next/link';
 
 interface Props {
   handleFlip?: () => void;
@@ -44,12 +46,32 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
 
   return (
     <>
-      <div className="grid place-items-center mx-2 my-20 sm:my-auto">
+      <div className="grid place-items-center mx-2">
         <div
           className="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
               px-6 py-10 sm:px-10 sm:py-6 
               bg-white rounded-lg shadow-md lg:shadow-lg"
         >
+          <Link href="/">
+            <a title="Home page">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="w-6 h-6 float-right text-blue-500 hover:text-blue-800 transform transition-colors duration-300 cursor-pointer"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+            </a>
+          </Link>
+
+          <LogoImage className="w-40 h-40 mx-auto" />
           <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">Login</h2>
 
           <form className="mt-10" method="POST" onSubmit={handleSubmit}>

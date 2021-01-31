@@ -16,7 +16,7 @@ const CryptosAuthUser = React.memo<CryptoAuthUserProps>(({ visibleCryptos }) => 
   };
   return (
     <div className="w-full sm:w-6/12">
-      <div>
+      <div className="max-w-md mx-auto">
         In portfolio:
         <ul className="list-none mt-4 p-2 w-full">
           {visibleCryptos?.map((item: CryptoData) => (
@@ -24,7 +24,7 @@ const CryptosAuthUser = React.memo<CryptoAuthUserProps>(({ visibleCryptos }) => 
           ))}
         </ul>
       </div>
-      <div>
+      <div className="max-w-md mx-auto">
         Not in portfolio:
         <ul className="list-none mt-4 p-2 w-full">
           {visibleCryptos

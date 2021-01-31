@@ -40,8 +40,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         y2="458.19436"
         fill="#3f3d56"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <circle cx="890.59609" cy="458.19436" r="18.8858" fill="#3f3d56" />
       <path
@@ -59,8 +59,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         transform="translate(-133.33937 -135.40665)"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <path
         d="M966.78347,760.36107c-.72063.869-1.35644,1.61076-1.87928,2.21832-1.1586,1.32112-1.81566,2.01351-1.81566,2.01351s-.79829-1.00324-2.14063-2.88247c-7.36862-10.27226-31.07113-46.79747-29.24137-88.9887q.14838-3.31695.48748-6.56322,2.08768,2.2254,4.06228,4.61332C963.99285,704.22386,966.57856,749.234,966.78347,760.36107Z"
@@ -79,8 +79,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         y2="450.53065"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <line
         x1="57.47171"
@@ -89,8 +89,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         y2="627.96785"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <circle cx="237.15556" cy="369.08439" r="42.72978" fill="#00b0ff" />
       <circle cx="164.52594" cy="469.64849" r="42.72978" fill="#00b0ff" />
@@ -102,8 +102,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         y2="549.72504"
         fill="#3f3d56"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <circle cx="75.09765" cy="549.72504" r="10.96103" fill="#3f3d56" />
       <path
@@ -118,8 +118,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         y2="369.24136"
         fill="#3f3d56"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <circle cx="237.18237" cy="369.11888" r="10.96103" fill="#3f3d56" />
       <circle cx="203.51633" cy="556.17215" r="10.96103" fill="#3f3d56" />
@@ -138,8 +138,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         transform="translate(-133.33937 -135.40665)"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <circle cx="270.85321" cy="556.17215" r="10.96103" fill="#3f3d56" />
       <path
@@ -147,8 +147,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         transform="translate(-133.33937 -135.40665)"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <circle cx="271.52086" cy="453.35361" r="10.96103" fill="#3f3d56" />
       <path
@@ -156,8 +156,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         transform="translate(-133.33937 -135.40665)"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <line
         x1="164.56493"
@@ -166,8 +166,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         y2="469.60063"
         fill="#3f3d56"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <circle cx="164.56493" cy="469.60063" r="10.96103" fill="#3f3d56" />
       <path
@@ -180,8 +180,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         transform="translate(-133.33937 -135.40665)"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
       />
       <circle cx="130.89889" cy="556.50598" r="10.96103" fill="#3f3d56" />
       <circle cx="766.48189" cy="369.6591" r="18" fill="#f2f2f2" />
@@ -256,8 +256,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         transform="translate(-133.33937 -135.40665)"
         fill="none"
         stroke="#000"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
         opacity="0.2"
       />
       <path
@@ -280,8 +280,8 @@ const LogoImage = ({ className }: LogoImageProps) => {
         transform="translate(-133.33937 -135.40665)"
         fill="none"
         stroke="#000"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeMiterlimit="10"
+        strokeWidth="2"
         opacity="0.2"
       />
       <path

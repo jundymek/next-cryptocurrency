@@ -48,7 +48,7 @@ const Cryptos = React.memo(() => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="flex justify-center items-center content-area">
+    <div className="flex justify-center items-center">
       {token ? (
         <CryptosAuthUser visibleCryptos={visibleCryptos} />
       ) : (

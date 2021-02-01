@@ -35,6 +35,9 @@ const Arrow = React.memo<ArrowProps>(({ pair, currentPrice }) => {
 
   useEffect(() => {
     getArrow();
+    return () => {
+      setArrow(undefined);
+    };
   }, []);
 
   if (!arrow) return null;

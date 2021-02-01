@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 interface Asset {
@@ -8,6 +9,7 @@ interface Asset {
 export function useGetAssets() {
   const [assets, setAssets] = useState<Asset[]>([]);
   const token = localStorage.getItem('token');
+  const router = useRouter();
   async function getAssets() {
     if (token) {
       const response = await fetch('http://localhost:3001/api/assets', {
@@ -15,6 +17,9 @@ export function useGetAssets() {
           Authorization: token,
         },
       });
+      if (response.status === 401) {
+        return router.push('/login');
+      }
       const assets: Asset[] = await response.json();
       return setAssets(assets);
     }

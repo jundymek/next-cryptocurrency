@@ -1,17 +1,12 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useAuthDispatch, useAuthState } from '../../context/authContext';
 
 const LoginLogout = () => {
-  const [username, setUsername] = useState<string | undefined>(undefined);
+  const { username } = useAuthState();
+  const { setUsername } = useAuthDispatch();
   const router = useRouter();
-
-  useEffect(() => {
-    const user = localStorage.getItem('username');
-    if (user) {
-      setUsername(user);
-    }
-  }, []);
 
   const handleLogout = async () => {
     await fetch('http://localhost:3001/api/logout');

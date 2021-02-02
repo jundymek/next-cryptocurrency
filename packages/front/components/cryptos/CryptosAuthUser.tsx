@@ -10,15 +10,13 @@ interface CryptoAuthUserProps {
 }
 
 const CryptosAuthUser = React.memo<CryptoAuthUserProps>(({ visibleCryptos }) => {
-  const assets = useGetAssets();
-
-  console.log(assets);
+  const { assets, isLoading } = useGetAssets();
 
   const getAsset = (currency: string) => {
     return assets.filter((item) => item.currencyName === currency)[0];
   };
 
-  if (!assets) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 

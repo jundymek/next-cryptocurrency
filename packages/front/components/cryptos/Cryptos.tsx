@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Options from '../options/Options';
 import useSWR from 'swr';
 import CryptosAuthUser from './CryptosAuthUser';
@@ -28,28 +28,7 @@ const Cryptos = React.memo(() => {
     { symbol: 'ETH', name: 'Ethereum', isVisible: true },
   ]);
 
-  const [logged, setLogged] = useState(false);
-
   const { token } = useAuthState();
-
-  async function checkToken() {
-    const res = await fetch('http://localhost:3001/api/status', {
-      headers: {
-        Authorization: token!,
-      },
-    });
-    if (res.status === 200) {
-      console.log('logged');
-      setLogged(true);
-    } else {
-      console.log('not logged');
-      setLogged(false);
-    }
-  }
-
-  useEffect(() => {
-    checkToken();
-  }, [token]);
 
   const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -71,7 +50,7 @@ const Cryptos = React.memo(() => {
     );
   return (
     <div className="flex justify-center items-center">
-      {logged ? (
+      {token ? (
         <CryptosAuthUser visibleCryptos={visibleCryptos} />
       ) : (
         <CryptosNotAuthUser visibleCryptos={visibleCryptos} />

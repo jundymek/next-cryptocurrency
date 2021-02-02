@@ -26,12 +26,21 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     const user = localStorage.getItem('username');
-    const tok = localStorage.getItem('token');
-    console.log(user);
-    if (user && tok) {
-      setUsername(user);
-      setToken(tok);
+    const token = localStorage.getItem('token');
+
+    async function checkAuthState() {
+      if (token) {
+        const isAuth = await checkToken(token);
+        if (user && isAuth) {
+          setUsername(user);
+          setToken(token);
+          return;
+        }
+        setUsername(undefined);
+        setToken(undefined);
+      }
     }
+    checkAuthState();
   }, []);
 
   const state = { username, token };
@@ -60,3 +69,17 @@ function useAuthDispatch() {
 }
 
 export { AuthProvider, useAuthState, useAuthDispatch };
+
+async function checkToken(token: string) {
+  const res = await fetch('http://localhost:3001/api/status', {
+    headers: {
+      Authorization: token!,
+    },
+  });
+  if (res.status === 200) {
+    return true;
+  } else {
+    console.log('not logged');
+    return false;
+  }
+}

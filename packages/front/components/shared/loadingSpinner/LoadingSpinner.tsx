@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
       <div className="animate-spin ease-linear rounded-full border-8 border-t-2 border-gray-200 h-24 w-24"></div>
       <div className="absolute top-4 left-4">
         <svg
-          enable-background="new 0 0 226.777 226.777"
+          enableBackground="new 0 0 226.777 226.777"
           height="64px"
           id="Layer_1"
           version="1.1"

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useAuthState } from '../../../context/authContext';
 
 interface Asset {
   currencyName: string;
@@ -8,7 +9,7 @@ interface Asset {
 
 export function useGetAssets() {
   const [assets, setAssets] = useState<Asset[]>([]);
-  const token = localStorage.getItem('token');
+  const { token } = useAuthState();
   const router = useRouter();
   async function getAssets() {
     if (token) {

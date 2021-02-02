@@ -5,7 +5,7 @@ import { useAuthDispatch, useAuthState } from '../../context/authContext';
 
 const LoginLogout = () => {
   const { username } = useAuthState();
-  const { setUsername } = useAuthDispatch();
+  const { setUsername, setToken } = useAuthDispatch();
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -13,6 +13,7 @@ const LoginLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     setUsername(undefined);
+    setToken(undefined);
     router.push('/');
   };
   return (

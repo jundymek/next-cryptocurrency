@@ -14,6 +14,7 @@ const CryptosAuthUser = React.memo<CryptoAuthUserProps>(({ visibleCryptos }) => 
   const getAsset = (currency: string) => {
     return assets.filter((item) => item.currencyName === currency)[0];
   };
+
   return (
     <div className="w-full sm:w-6/12">
       <div className="max-w-md mx-auto">

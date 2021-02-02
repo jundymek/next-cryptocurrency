@@ -5,6 +5,7 @@ import users from './plugins/users/users';
 import assets from './plugins/assets/assets';
 import login from './plugins/auth/login';
 import logout from './plugins/auth/logout';
+import status from './plugins/status/status';
 import Jwt from 'hapi-auth-jwt2';
 
 const server: Hapi.Server = Hapi.server({
@@ -23,7 +24,7 @@ const validate = async (decoded: any, request: Hapi.Request, h: Hapi.ResponseToo
 };
 
 export async function createServer(): Promise<Hapi.Server> {
-  await server.register([Jwt, cryptos, prisma, users, assets, login, logout]);
+  await server.register([Jwt, cryptos, prisma, users, assets, login, logout, status]);
   server.auth.strategy('jwt', 'jwt', {
     key: 'topSecretKey_ToBePutInFileInProductionEnv', // secret key, define your own, or get from Auth0
     validate, // the function which validates the token

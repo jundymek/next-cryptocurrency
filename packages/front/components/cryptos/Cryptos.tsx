@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import CryptosAuthUser from './CryptosAuthUser';
 import CryptosNotAuthUser from './CryptosNotAuthUser';
 import { useAuthState } from '../../context/authContext';
+import LoadingSpinner from '../shared/loadingSpinner/LoadingSpinner';
 
 export interface Currency {
   symbol: string;
@@ -62,6 +63,12 @@ const Cryptos = React.memo(() => {
 
   if (error) return <div>{error}</div>;
 
+  if (!data)
+    return (
+      <div className="flex w-full justify-center">
+        <LoadingSpinner />
+      </div>
+    );
   return (
     <div className="flex justify-center items-center">
       {logged ? (

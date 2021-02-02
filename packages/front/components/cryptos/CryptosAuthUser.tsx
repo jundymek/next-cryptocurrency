@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingSpinner from '../shared/loadingSpinner/LoadingSpinner';
 import CryptoAuth from './crypto/CryptoAuth';
 import CryptoNotAuth from './crypto/CryptoNotAuth';
 import { CryptoData } from './Cryptos';
@@ -11,9 +12,15 @@ interface CryptoAuthUserProps {
 const CryptosAuthUser = React.memo<CryptoAuthUserProps>(({ visibleCryptos }) => {
   const assets = useGetAssets();
 
+  console.log(assets);
+
   const getAsset = (currency: string) => {
     return assets.filter((item) => item.currencyName === currency)[0];
   };
+
+  if (!assets) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="w-full sm:w-6/12">

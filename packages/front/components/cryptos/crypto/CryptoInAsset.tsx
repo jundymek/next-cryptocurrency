@@ -13,14 +13,27 @@ interface Asset {
   amount: number;
 }
 
-const CryptoAuth = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
+const CryptoInAsset = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
   const [isEditVisible, setIsEditVisible] = useState(false);
+  const [animates, setAnimate] = useState('');
   const { firstCurrency, name, price } = crypto;
   const inputReference = useRef<HTMLInputElement>(null);
+
+  console.log(animate);
 
   const handleToggleEdit = () => {
     setIsEditVisible((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    setAnimate('animate-pulse');
+    setTimeout(() => {
+      setAnimate('');
+    }, 1000);
+    return () => {
+      clearTimeout;
+    };
+  }, [price]);
 
   useEffect(() => {
     if (isEditVisible) {
@@ -32,7 +45,7 @@ const CryptoAuth = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
     return (
       <li className="flex flex-col items-center">
         <div
-          className={`flex items-center py-4 w-full max-w-md mx-auto bg-blue-100 m-2 p-2 rounded-md relative ${animate}`}
+          className={`flex items-center py-4 w-full max-w-md mx-auto bg-blue-100 m-2 p-2 rounded-md relative ${animates}`}
         >
           <div className="flex justify-between items-center w-full ">
             <div className="flex items-center">
@@ -136,4 +149,4 @@ const CryptoAuth = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
   return null;
 });
 
-export default CryptoAuth;
+export default CryptoInAsset;

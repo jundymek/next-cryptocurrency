@@ -36,10 +36,6 @@ const Cryptos = React.memo(() => {
     refreshInterval: 1000,
   });
 
-  const visibleCryptos = data?.filter((item: CryptoData) => {
-    return listOfCurrences.find((el) => el.symbol === item.firstCurrency)?.isVisible;
-  });
-
   if (error) return <div>{error}</div>;
 
   if (!data)
@@ -48,15 +44,22 @@ const Cryptos = React.memo(() => {
         <LoadingSpinner />
       </div>
     );
-  return (
-    <div className="flex justify-center items-center">
-      {token ? (
-        <CryptosAuthUser visibleCryptos={visibleCryptos} />
-      ) : (
-        <CryptosNotAuthUser visibleCryptos={visibleCryptos} />
-      )}
 
-      <Options listOfCurrences={listOfCurrences} setListOfCurrences={setListOfCurrences} />
+  const visibleCryptos = data?.filter((item: CryptoData) => {
+    return listOfCurrences.find((el) => el.symbol === item.firstCurrency)?.isVisible;
+  });
+
+  return (
+    <div className="z-10 bg-white">
+      <div className="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:pt-20 ">
+        {token ? (
+          <CryptosAuthUser visibleCryptos={visibleCryptos} />
+        ) : (
+          <CryptosNotAuthUser visibleCryptos={visibleCryptos} />
+        )}
+
+        <Options listOfCurrences={listOfCurrences} setListOfCurrences={setListOfCurrences} />
+      </div>
     </div>
   );
 });

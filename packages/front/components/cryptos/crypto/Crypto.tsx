@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CryptoData } from '../Cryptos';
-import CryptoNotAuth from './CryptoNotAuth';
-import CryptoAuth from './CryptoAuth';
+import CryptoNotInAsset from './CryptoNotInAsset';
+import CryptoInAsset from './CryptoInAsset';
 interface CryptoProps {
   crypto: CryptoData;
 }
@@ -26,9 +26,9 @@ const Crypto = React.memo<CryptoProps>(({ crypto }) => {
   }, [price, isAuthenticated]);
 
   if (!token) {
-    return <CryptoNotAuth crypto={crypto} animate={animate} />;
+    return <CryptoNotInAsset crypto={crypto} animate={animate} />;
   }
-  return <CryptoAuth crypto={crypto} animate={animate} />;
+  return <CryptoInAsset crypto={crypto} animate={animate} />;
 });
 
 export default Crypto;

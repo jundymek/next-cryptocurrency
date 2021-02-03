@@ -8,7 +8,7 @@ interface CryptoProps {
   animate?: string;
 }
 
-const CryptoNotAuth = React.memo<CryptoProps>(({ crypto, animate }) => {
+const CryptoNotInAsset = React.memo<CryptoProps>(({ crypto, animate }) => {
   const { firstCurrency, name, price, pair } = crypto;
   return (
     <li className="flex items-center">
@@ -35,4 +35,4 @@ const CryptoNotAuth = React.memo<CryptoProps>(({ crypto, animate }) => {
   );
 });
 
-export default CryptoNotAuth;
+export default CryptoNotInAsset;

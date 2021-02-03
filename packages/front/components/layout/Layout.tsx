@@ -11,12 +11,12 @@ interface LayoutProps {
 const Layout = React.memo<LayoutProps>(({ children, title }) => {
   return (
     <OptionsProvider>
-      <div className="container mx-auto relative h-screen">
+      <div className=" mx-auto relative h-screen">
         <Head>
           <title>{title}</title>
         </Head>
         <Header />
-        <main>{children}</main>
+        <main className="transform sm:-skew-y-6 z-0 sm:-mt-48">{children}</main>
       </div>
     </OptionsProvider>
   );

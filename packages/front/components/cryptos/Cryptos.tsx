@@ -30,28 +30,30 @@ const Cryptos = React.memo(() => {
 
   const { token } = useAuthState();
 
-  const fetcher = (url: string) => fetch(url).then((r) => r.json());
+  const fetcher = (url: string): Promise<any> => fetch(url).then((r) => r.json());
 
   const { data, error } = useSWR('http://localhost:3001/api/cryptos', fetcher, {
-    refreshInterval: 1000,
+    refreshInterval: 100000,
   });
 
-  if (error) return <div>{error}</div>;
+  console.log(data);
+
+  if (error || data?.statusCode === 500) return <div>{error}dsfsd</div>;
 
   if (!data)
     return (
-      <div className="flex w-full justify-center">
+      <div className="flex w-full justify-center bg-white h-screen">
         <LoadingSpinner />
       </div>
     );
 
-  const visibleCryptos = data?.filter((item: CryptoData) => {
+  const visibleCryptos = data.filter((item: CryptoData) => {
     return listOfCurrences.find((el) => el.symbol === item.firstCurrency)?.isVisible;
   });
 
   return (
-    <div className="z-10 bg-white">
-      <div className="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:pt-20 ">
+    <div className="z-10 bg-gradient-to-r from-red-200">
+      <div className="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:pt-40">
         {token ? (
           <CryptosAuthUser visibleCryptos={visibleCryptos} />
         ) : (

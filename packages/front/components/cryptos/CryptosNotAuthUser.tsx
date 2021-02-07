@@ -11,7 +11,7 @@ const CryptosNotAuthUser = React.memo<CryptoNotInAssetUserProps>(({ visibleCrypt
   return (
     <>
       <Hero />
-      <ul className="list-none mt-4 p-2 w-full sm:w-1/2 transform sm:skew-y-6 z-10 relative">
+      <ul className="list-none mt-4 p-2 w-full sm:w-1/2 transform z-10 pb-20">
         {visibleCryptos?.map((item: CryptoData) => (
           <CryptoNotInAsset key={item.name} crypto={item} />
         ))}

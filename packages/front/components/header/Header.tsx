@@ -9,7 +9,7 @@ const Header = React.memo(() => {
   const { toggleMenuOpen } = React.useContext(OptionsContext);
 
   return (
-    <header className="py-4 bg-gradient-to-r from-blue-400 sm:h-96">
+    <header className="py-4 bg-gradient-to-r from-blue-400 pb-10">
       <div className="container mx-auto border-b-2 py-2 flex flex-col sm:flex-row justify-between items-center transform z-10 relative">
         <Link href="/">
           <a className="p-2 mx-auto md:m-0 cursor-pointer" title="Cryptocurrences portfolio">

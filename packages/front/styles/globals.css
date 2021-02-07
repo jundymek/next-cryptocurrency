@@ -5,3 +5,34 @@
 .content-area {
   min-height: calc(100vh - 130px);
 }
+
+.clipped {
+  z-index: 1;
+  position: relative;
+  /* background-image: inherit; */
+  /* background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; */
+  /* background-color: inherit; */
+  /* background-color: red; */
+  /* background-color: transparent; */
+  /* clip-path: polygon(0% 0%, 100% 50px, 100% 100%, 0% calc(100% - 50px));
+  -webkit-clip-path: polygon(0% 0%, 100% 50px, 100% 100%, 0% calc(100% - 50px)); */
+}
+
+.clipped::before {
+  /* --tw-bg-opacity: 1; */
+  /* z-index: 100; */
+  background-color: inherit;
+  /* background-image: inherit;
+  background-size: cover; */
+  /* background-color: rgba(191, 219, 254, var(--tw-bg-opacity)); */
+  content: '';
+  position: absolute;
+  top: -70px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 140px);
+  clip-path: polygon(0% 0%, 100% 70px, 100% 100%, 0% calc(100% - 70px));
+  -webkit-clip-path: polygon(0% 0%, 100% 70px, 100% 100%, 0% calc(100% - 70px));
+}

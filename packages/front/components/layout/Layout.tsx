@@ -17,9 +17,7 @@ const Layout = React.memo<LayoutProps>(({ children, title }) => {
       </Head>
       <div className="mx-auto relative min-h-screen">
         <Header />
-        <main className="transform sm:-skew-y-6 sm:-mt-48  min-h-screen bg-blue-200">
-          {children}
-        </main>
+        <main className="">{children}</main>
         <Footer />
       </div>
     </OptionsProvider>

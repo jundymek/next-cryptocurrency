@@ -2,8 +2,8 @@ import React from 'react';
 
 const Features = () => {
   return (
-    <section className="clipped bg-yellow-600 z-10">
-      <div className="flex items-center justify-center container">
+    <section className="clipped bg-gray-800 text-white">
+      <div className="flex items-center justify-center container mx-auto relative z-10">
         <div className="w-1/2">Right side</div>
         <div className="flex flex-col w-1/2">
           <h2 className="font-bold text-gray-700 text-2xl sm:text-5xl tracking-wide">

@@ -52,7 +52,7 @@ const Cryptos = React.memo(() => {
   });
 
   return (
-    <div className="clipped-bg bg-white">
+    <div className="clipped-bg bg-gray-900">
       <div className="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:py-40">
         {token ? (
           <CryptosAuthUser visibleCryptos={visibleCryptos} />

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section className="self-start z-10 text-center sm:text-left sm:w-3/5 p-4 -mt-20">
+    <section className="self-start z-10 text-center sm:text-left sm:w-3/5 p-4 sm:-mt-20">
       <div className="flex flex-col ">
         <h2 className="font-bold text-white sm:text-4xl sm:leading-snug tracking-wide">
           The world's most popular Bitcoin & cryptocurrency portfolio tracker. Now with trading.

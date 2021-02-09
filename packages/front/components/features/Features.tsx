@@ -54,7 +54,7 @@ const Features = () => {
   };
 
   return (
-    <section className="clipped bg-black text-gray-100 h-96 my-5">
+    <section className="clipped bg-black text-gray-100 h-full sm:my-10">
       <div className="flex flex-col items-center justify-center container mx-auto relative overflow-x-hidden">
         {/* <div className="mx-auto overflow-hidden"> */}
         <Wrapper className="flex" visibleFeature={visibleFeature}>
@@ -75,7 +75,7 @@ const Features = () => {
           />
         </Wrapper>
         {/* </div> */}
-        <div className="mt-6">
+        <div className="py-10">
           <StyledButton
             className=""
             currentNumber={0}

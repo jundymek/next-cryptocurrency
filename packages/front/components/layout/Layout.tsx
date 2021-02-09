@@ -15,7 +15,7 @@ const Layout = React.memo<LayoutProps>(({ children, title }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <div className="mx-auto relative min-h-screen font-raleway">
+      <div className="mx-auto relative  font-raleway">
         <Header />
         <main className="">{children}</main>
         <Footer />

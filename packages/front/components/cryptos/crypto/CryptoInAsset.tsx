@@ -45,7 +45,7 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
     return (
       <li className="flex flex-col items-center">
         <div
-          className={`flex items-center py-4 w-full max-w-md mx-auto bg-blue-100 m-2 p-2 rounded-md relative ${animates}`}
+          className={`flex items-center py-4 w-full max-w-md mx-auto bg-blue-300 m-2 p-2 rounded-md relative ${animates}`}
         >
           <div className="flex justify-between items-center w-full ">
             <div className="flex items-center">

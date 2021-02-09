@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+body {
+  overflow-x: hidden; /* Hide scrollbars */
+}
+
 .content-area {
   min-height: calc(100vh - 130px);
 }
@@ -12,8 +19,43 @@
 }
 
 .clipped::before {
-  --diagonal-padding: 120px;
+  --diagonal-padding: 80px;
   background-color: inherit;
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--diagonal-padding));
+  left: 0;
+  width: 100%;
+  height: calc(100% + (var(--diagonal-padding) * 2));
+  clip-path: polygon(
+    0% var(--diagonal-padding),
+    100% 0%,
+    100% calc(100% - var(--diagonal-padding)),
+    0% 100%
+  );
+  -webkit-clip-path: polygon(
+    0% var(--diagonal-padding),
+    100% 0%,
+    100% calc(100% - var(--diagonal-padding)),
+    0% 100%
+  );
+}
+
+.clipped-bg {
+  z-index: 0;
+  position: relative;
+  /* background-size: cover; */
+  /* background-repeat: no-repeat;
+  background-position: center; */
+}
+
+.clipped-bg::before {
+  --diagonal-padding: 80px;
+  display: block;
+  background-image: url('../assets/btc_wallet.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   content: '';
   position: absolute;
   top: calc(-1 * var(--diagonal-padding));

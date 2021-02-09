@@ -3,7 +3,12 @@ module.exports = {
   purge: ['./pages/**/*.js', './components/**/*.js'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        caveat: ['caveat', 'sans-serif'],
+        raleway: ['raleway', 'sans-serif'],
+      },
+    },
   },
   variants: {
     transform: ['responsive', 'group-hover'],

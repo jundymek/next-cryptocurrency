@@ -15,19 +15,19 @@ const Wrapper = styled.div<WrapperProps>`
   overflow: hidden;
   transition-duration: 0.2s;
   transform: translateX(
-    ${(props) => (props.visibleFeature === 0 ? 0 : -props.visibleFeature * 100)}vw
+    ${(props) => (props.visibleFeature == 0 ? 100 : 100 - props.visibleFeature * 100)}vw
   );
 `;
 
 const InnerButton = styled.div<ButtonProps>`
-  transition: min-height 500ms ease;
-  height: 100%;
-  min-height: ${(props) => (props.visibleFeature === props.currentNumber ? '6px' : '1px')};
+  transition: max-height 500ms;
+  height: 6px;
+  max-height: ${(props) => (props.visibleFeature === props.currentNumber ? '6px' : '1px')};
   width: 30px;
   background: ${(props) =>
     props.visibleFeature === props.currentNumber
       ? 'linear-gradient(90deg, rgb(106, 17, 203) 0%, rgb(37, 117, 252) 100%)'
-      : 'red'};
+      : 'linear-gradient(90deg, rgb(226, 226, 226) 0%, rgb(33, 112, 152) 100%)'};
 
   &:hover {
     width: 30px;
@@ -37,15 +37,11 @@ const InnerButton = styled.div<ButtonProps>`
 
 const StyledButton = styled.button<ButtonProps>`
   margin: 0 2px;
-  padding: 20px 0;
-  height: 4px;
+  padding: 10px 0;
   position: relative;
   &:hover ${InnerButton} {
     width: 30px;
     max-width: 30px;
-  }
-  &:focus {
-    /* outline: 0; */
   }
 `;
 
@@ -58,27 +54,27 @@ const Features = () => {
   };
 
   return (
-    <section className="clipped bg-gray-800 text-white h-96">
-      <div className="flex flex-col items-center justify-center container mx-auto relative z-10 overflow-hidden">
-        <div className="mx-auto overflow-hidden">
-          <Wrapper className="flex" visibleFeature={visibleFeature}>
-            <Feature
-              title="The world's most popular Bitcoin & cryptocurrency portfolio tracker. Now with trading."
-              text="Track your portfolio, get Blockfolio Signal updates from top teams, and buy and sell
+    <section className="clipped bg-black text-gray-100 h-96 my-5">
+      <div className="flex flex-col items-center justify-center container mx-auto relative overflow-x-hidden">
+        {/* <div className="mx-auto overflow-hidden"> */}
+        <Wrapper className="flex" visibleFeature={visibleFeature}>
+          <Feature
+            title="The world's most popular Bitcoin & cryptocurrency portfolio tracker. Now with trading."
+            text="Track your portfolio, get Blockfolio Signal updates from top teams, and buy and sell
           crypto with zero fees."
-            />
-            <Feature
-              title="Connect to Blockfolio with your favorite messaging apps"
-              text="Automatically receive the latest real-time Blockfolio Signal updates and pricing straight
+          />
+          <Feature
+            title="Connect to Blockfolio with your favorite messaging apps"
+            text="Automatically receive the latest real-time Blockfolio Signal updates and pricing straight
               to your Slack groups"
-            />
-            <Feature
-              title="3 feature"
-              text="Automatically receive the latest real-time Blockfolio Signal updates and pricing straight
+          />
+          <Feature
+            title="3 feature"
+            text="Automatically receive the latest real-time Blockfolio Signal updates and pricing straight
               to your Slack groups"
-            />
-          </Wrapper>
-        </div>
+          />
+        </Wrapper>
+        {/* </div> */}
         <div className="mt-6">
           <StyledButton
             className=""

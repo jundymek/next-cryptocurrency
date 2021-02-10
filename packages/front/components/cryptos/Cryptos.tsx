@@ -5,6 +5,9 @@ import CryptosAuthUser from './CryptosAuthUser';
 import CryptosNotAuthUser from './CryptosNotAuthUser';
 import { useAuthState } from '../../context/authContext';
 import LoadingSpinner from '../shared/loadingSpinner/LoadingSpinner';
+import { ClippedSection } from '../shared/styledComponents/ClippedSection';
+// @ts-ignore
+import bgImage from '../../assets/btc_wallet.jpg';
 
 export interface Currency {
   symbol: string;
@@ -52,7 +55,7 @@ const Cryptos = React.memo(() => {
   });
 
   return (
-    <div className="clipped-bg bg-gray-900">
+    <ClippedSection className="bg-gray-900" bgImage={bgImage}>
       <div className="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:py-40">
         {token ? (
           <CryptosAuthUser visibleCryptos={visibleCryptos} />
@@ -62,7 +65,7 @@ const Cryptos = React.memo(() => {
 
         <Options listOfCurrences={listOfCurrences} setListOfCurrences={setListOfCurrences} />
       </div>
-    </div>
+    </ClippedSection>
   );
 });
 

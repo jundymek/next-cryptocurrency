@@ -18,6 +18,8 @@ module.exports = {
     transitionProperty: ['responsive', 'group-hover'],
     transitionTimingFunction: ['responsive', 'group-hover'],
     translate: ['responsive', 'hover', 'focus', 'group-hover'],
+    scale: ['responsive', 'hover', 'focus', 'group-hover'],
+    opacity: ['group-hover'],
     extend: {},
   },
   plugins: [],

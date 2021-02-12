@@ -21,16 +21,16 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) 
   }
 
   return (
-    <div className="w-full sm:w-6/12">
-      <div className="max-w-md mx-auto">
+    <div className="w-full flex flex-col sm:flex-row">
+      <div className="w-full sm:w-3/5 text-white z-10">
         In portfolio:
-        <ul className="list-none mt-4 p-2 w-full ">
+        <ul className="list-none mt-4 p-2 w-full flex flex-wrap justify-center">
           {visibleCryptos?.map((item: CryptoData) => (
             <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
           ))}
         </ul>
       </div>
-      <div className="max-w-md mx-auto">
+      <div className="sm:w-1/3">
         Not in portfolio:
         <ul className="list-none mt-4 p-2 w-full transform">
           {visibleCryptos

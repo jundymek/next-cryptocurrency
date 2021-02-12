@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CryptoData } from '../Cryptos';
 import { Icon } from 'coinmarketcap-cryptocurrency-icons';
+import styled from 'styled-components';
+// @ts-ignore
+import bgImage from '../../../assets/bg_circle1.svg';
+import EditIcon from '../../icons/EditIcon';
 
 interface CryptoProps {
   crypto: CryptoData;
@@ -13,13 +17,30 @@ interface Asset {
   amount: number;
 }
 
+interface StyledLiProps {
+  bgImage?: string;
+}
+
+interface StyledFormProps {
+  isEditVisible: boolean;
+}
+
+const StyledLi = styled.li<StyledLiProps>`
+  background: ${(props) => `url('${props.bgImage}')`};
+  background-size: cover;
+`;
+
+const StyledForm = styled.form<StyledFormProps>`
+  transition: 1s;
+  opacity: ${(props) => (props.isEditVisible ? 1 : 0)};
+  transform: ${(props) => props.isEditVisible && `translateY(4rem)`};
+`;
+
 const CryptoInAsset = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
   const [isEditVisible, setIsEditVisible] = useState(false);
   const [animates, setAnimate] = useState('');
   const { firstCurrency, name, price } = crypto;
   const inputReference = useRef<HTMLInputElement>(null);
-
-  console.log(animate);
 
   const handleToggleEdit = () => {
     setIsEditVisible((prevState) => !prevState);
@@ -43,8 +64,60 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
 
   if (asset?.amount) {
     return (
-      <li className="flex flex-col items-center">
-        <div
+      <StyledLi
+        className="group my-10 sm:m-10 w-full sm:w-80 h-80 rounded-md relative flex flex-col items-center justify-between border border-gray-600 hover:border-gray-200 z-10 font-mono font-thin"
+        bgImage={bgImage}
+      >
+        <button
+          className="hidden sm:flex absolute -top-24 left-28  sm:-top-8 sm:-left-8 w-16 h-16 z-20 bg-white rounded-full transform opacity-0 group-hover:opacity-100 duration-1000 group-hover:scale-110  justify-center items-center"
+          onClick={handleToggleEdit}
+        >
+          <EditIcon />
+        </button>
+        <div className="absolute -top-8 left-8  sm:-top-8 sm:-left-8 z-10 transform group-hover:scale-110 duration-1000 group-hover:opacity-0">
+          <Icon i={firstCurrency.toLowerCase()} size={64} />
+        </div>
+        <div className="w-full h-2/5">
+          <div className="flex flex-col justify-center items-center bg-black bg-opacity-25 rounded-t-md h-full relative">
+            <span className="absolute top-0 right-4 text-xl">{asset.amount}</span>
+            <span className="absolute bottom-0 right-4 text-md pt-10">{price} PLN</span>
+            <h2 className="text-4xl font-bold text-white">{firstCurrency}</h2>
+            <span className="text-lg text-white">{name}</span>
+          </div>
+        </div>
+        <p className="text-4xl text-center mb-8 text-gray-100">
+          {asset?.amount * parseInt(price)} <span className="text-xs">PLN</span>
+        </p>
+        <div className="flex flex-col items-end w-full mt-6 mr-6">
+          <p className="text-xl">
+            8h change <span className="text-green-400">+24</span>%
+          </p>
+          <p className="text-xl">
+            7d change <span className="text-red-600">-3.2</span>%
+          </p>
+        </div>
+        <StyledForm className="absolute bottom-0 left-0 w-full z-0" isEditVisible={isEditVisible}>
+          <form action="">
+            <div className="flex w-full items-center font-mono">
+              <label htmlFor="newAmount" className="w-2/3 px-2">
+                {firstCurrency} amount
+              </label>
+              <input
+                id="newAmount"
+                ref={inputReference}
+                type="number"
+                name="newAmount"
+                defaultValue={asset.amount.toString()}
+                className="block w-1/3 py-3 px-1 mb-2
+                        text-white appearance-none text-center 
+                        border-b-2 border-gray-100 bg-transparent
+                        focus:text-green-500 focus:outline-none focus:border-gray-200"
+                required
+              />
+            </div>
+          </form>
+        </StyledForm>
+        {/* <div
           className={`flex items-center py-4 w-full max-w-md mx-auto bg-blue-300 m-2 p-2 rounded-md relative ${animates}`}
         >
           <div className="flex justify-between items-center w-full ">
@@ -85,8 +158,8 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
               </svg>
             )}
           </div>
-        </div>
-        {isEditVisible && (
+        </div> */}
+        {/* {isEditVisible && (
           <form
             className="flex items-center justify-center w-full bg-gray-100 border border-gray-200 rounded-md relative my-1"
             method="POST"
@@ -142,8 +215,8 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, animate, asset }) => {
               </button>
             </div>
           </form>
-        )}
-      </li>
+        )} */}
+      </StyledLi>
     );
   }
   return null;

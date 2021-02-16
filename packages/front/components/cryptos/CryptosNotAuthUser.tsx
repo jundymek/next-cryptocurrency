@@ -1,6 +1,6 @@
 import React from 'react';
 import Hero from '../hero/Hero';
-import CryptoNotInAsset from './crypto/CryptoNotInAsset';
+import CryptoNotInAsset from './crypto/cryptoNotInAsset/CryptoNotInAsset';
 import { CryptoData } from './Cryptos';
 
 interface CryptoNotInAssetUserProps {

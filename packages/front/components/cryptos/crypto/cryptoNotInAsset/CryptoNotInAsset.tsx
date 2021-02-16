@@ -1,6 +1,6 @@
 import React from 'react';
-import { CryptoData } from '../Cryptos';
-import Arrow from './arrow/Arrow';
+import { CryptoData } from '../../Cryptos';
+import Arrow from '../utils/arrow/Arrow';
 import { Icon } from 'coinmarketcap-cryptocurrency-icons';
 
 interface CryptoProps {

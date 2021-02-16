@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CryptoData } from '../Cryptos';
-import CryptoNotInAsset from './CryptoNotInAsset';
-import CryptoInAsset from './CryptoInAsset';
+import CryptoNotInAsset from './cryptoNotInAsset/CryptoNotInAsset';
+import CryptoInAsset from './cryptoInAsset/CryptoInAsset';
 interface CryptoProps {
   crypto: CryptoData;
 }

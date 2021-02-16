@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useAssetState } from '../../../context/assetContext';
 import LoadingSpinner from '../../shared/loadingSpinner/LoadingSpinner';
-import CryptoInAsset from '../crypto/CryptoInAsset';
-import CryptoNotInAsset from '../crypto/CryptoNotInAsset';
+import CryptoInAsset from '../crypto/cryptoInAsset/CryptoInAsset';
+import CryptoNotInAsset from '../crypto/cryptoNotInAsset/CryptoNotInAsset';
 import { CryptoData } from '../Cryptos';
-import { useGetAssets, Asset } from '../utils/useGetAssets';
 import AddNewAssetForm from './addNewAssetForm/AddNewAssetForm';
 
 interface CryptoInAssetUserProps {
@@ -11,21 +11,15 @@ interface CryptoInAssetUserProps {
 }
 
 const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) => {
-  const [visibleAssets, setVisibleAssets] = useState<Asset[]>([]);
-  const [notInAssets, setNotInAssets] = useState<CryptoData[]>([]);
-  const { assets, isLoading } = useGetAssets();
+  const { assets, isLoading } = useAssetState();
 
   const getAsset = (currency: string) => {
-    return visibleAssets.filter((item) => item.currencyName === currency)[0];
+    return assets?.filter((item) => item.currencyName === currency)[0];
   };
 
-  useEffect(() => {
-    const data = visibleCryptos?.filter(
-      (item: CryptoData) => !assets.some((asset) => asset.currencyName === item.firstCurrency),
-    );
-    setNotInAssets(data);
-    setVisibleAssets(assets);
-  }, [assets]);
+  const notInAssets = visibleCryptos?.filter(
+    (item: CryptoData) => !assets?.some((asset) => asset.currencyName === item.firstCurrency),
+  );
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -40,13 +34,7 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) 
             <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
           ))}
         </ul>
-        {notInAssets.length > 0 && (
-          <AddNewAssetForm
-            cryptos={notInAssets}
-            setVisibleAssets={setVisibleAssets}
-            setNotInAssets={setNotInAssets}
-          />
-        )}
+        {notInAssets.length > 0 && <AddNewAssetForm cryptos={notInAssets} />}
       </div>
       <div className="sm:w-1/3">
         Not in portfolio:

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useAuthState } from '../../../context/authContext';
 
-interface Asset {
+export interface Asset {
   currencyName: string;
   amount: number;
 }
@@ -24,7 +24,11 @@ export function useGetAssets() {
         setisLoading(false);
         return router.push('/login');
       }
-      const assets: Asset[] = await response.json();
+      const res = await response.json();
+      const assets = res.map((item: Asset) => ({
+        currencyName: item.currencyName,
+        amount: item.amount,
+      }));
       setisLoading(false);
       return setAssets(assets);
     }

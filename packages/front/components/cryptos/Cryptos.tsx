@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Options from '../options/Options';
 import useSWR from 'swr';
-import CryptosAuthUser from './CryptosAuthUser';
+import CryptosAuthUser from './cryptosAuthUser/CryptosAuthUser';
 import CryptosNotAuthUser from './CryptosNotAuthUser';
 import { useAuthState } from '../../context/authContext';
 import LoadingSpinner from '../shared/loadingSpinner/LoadingSpinner';

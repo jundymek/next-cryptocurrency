@@ -30,7 +30,7 @@ const StyledLi = styled.li<StyledLiProps>`
   background-size: cover;
 `;
 
-const StyledForm = styled.form<StyledFormProps>`
+const StyledForm = styled.div<StyledFormProps>`
   transition: 1s;
   opacity: ${(props) => (props.isEditVisible ? 1 : 0)};
   transform: ${(props) => props.isEditVisible && `translateY(4rem)`};

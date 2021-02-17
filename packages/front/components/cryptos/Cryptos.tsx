@@ -8,6 +8,7 @@ import LoadingSpinner from '../shared/loadingSpinner/LoadingSpinner';
 import { ClippedSection } from '../shared/styledComponents/ClippedSection';
 // @ts-ignore
 import bgImage from '../../assets/btc_wallet.jpg';
+import { useCryptosState } from '../../context/cryptosContext';
 
 export interface Currency {
   symbol: string;
@@ -33,23 +34,18 @@ const Cryptos = React.memo(() => {
   ]);
 
   const { token } = useAuthState();
+  const { cryptos, error } = useCryptosState();
 
-  const fetcher = (url: string): Promise<any> => fetch(url).then((r) => r.json());
+  if (error) return <div>{error}Jakiś tam error na serwerze</div>;
 
-  const { data, error } = useSWR('http://localhost:3001/api/cryptos', fetcher, {
-    refreshInterval: 100000,
-  });
-
-  if (error || data?.statusCode === 500) return <div>{error}Jakiś tam error na serwerze</div>;
-
-  if (!data)
+  if (!cryptos)
     return (
       <div className="flex w-full justify-center bg-white h-screen">
         <LoadingSpinner />
       </div>
     );
 
-  const visibleCryptos = data.filter((item: CryptoData) => {
+  const visibleCryptos = cryptos.filter((item: CryptoData) => {
     return listOfCurrences.find((el) => el.symbol === item.firstCurrency)?.isVisible;
   });
 

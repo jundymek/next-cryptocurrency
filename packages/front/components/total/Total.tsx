@@ -3,7 +3,7 @@ import { CryptoData } from '../cryptos/Cryptos';
 import { useGetTotal } from '../cryptos/utils/useGetTotal';
 
 interface TotalProps {
-  cryptos: CryptoData[];
+  cryptos: CryptoData[] | undefined;
 }
 
 const Total = React.memo<TotalProps>(({ cryptos }) => {

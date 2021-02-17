@@ -6,6 +6,23 @@ import { Icon } from '@iconify/react';
 import twotoneSaveAlt from '@iconify/icons-ic/twotone-save-alt';
 import { useAuthState } from '../../../../context/authContext';
 import { useAssetDispatch } from '../../../../context/assetContext';
+import styled from 'styled-components';
+
+const StyledInput = styled.input`
+  &::placeholder {
+    color: transparent;
+  }
+`;
+
+interface LabelProps {
+  inputFocused: boolean;
+}
+
+const StyledLabel = styled.label<LabelProps>`
+  color: ${(props) => (props.inputFocused ? 'white' : 'rgba(107, 114, 128, 1)')};
+  transition: 1s;
+  transform: ${(props) => (props.inputFocused ? 'translateY(-20px)' : 'translateY(-.2rem)')};
+`;
 
 interface AddNewAssetFormProps {
   cryptos: CryptoData[];
@@ -15,16 +32,20 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos }) => {
   const [selectedAsset, setSelectedAsset] = useState<string>('');
   const [amount, setAmount] = useState<number>(0);
 
+  const [inputFocused, setInputFocused] = useState(amount > 0);
+
   const { setAssets } = useAssetDispatch();
 
   const { token } = useAuthState();
+
+  console.log(amount);
 
   const customStyles = {
     option: () => ({
       borderBottom: '1px dotted pink',
       cursor: 'pointer',
       padding: 10,
-      width: '100%',
+      // width: '500px',
     }),
     control: () => ({
       borderRadius: 5,
@@ -36,6 +57,10 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos }) => {
     valueContainer: () => ({
       width: '100%',
     }),
+    // menu: () => ({
+    //   width: '300px',
+    //   background: 'red',
+    // }),
   };
 
   const options = cryptos.map((item) => {
@@ -53,13 +78,10 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos }) => {
 
   const handleChange = (value: any) => {
     setSelectedAsset(value.value);
-    console.log(value);
-    console.log(selectedAsset);
   };
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(parseFloat(e.target.value));
-    console.log(amount);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -80,8 +102,8 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos }) => {
   };
 
   return (
-    <form className="w-full flex items-center" onSubmit={handleSubmit}>
-      <div className="w-full">
+    <form className="w-full flex flex-col items-center" onSubmit={handleSubmit}>
+      <div className="w-full px-4 sm:w-1/2">
         <label id="listbox-label" className="block text-sm font-medium text-white">
           Add selected asset
         </label>
@@ -90,23 +112,27 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos }) => {
           styles={customStyles}
           placeholder="Select crypto..."
           onChange={handleChange}
-          width="600px"
           isSearchable={false}
         />
       </div>
-      <div className="ml-10 flex flex-col justify-between">
-        <label id="listbox-label" className="block text-sm font-medium text-white self-start">
+      <div className="flex items-center justify-center relative">
+        <StyledLabel
+          id="listbox-label"
+          className="text-sm font-medium text-white absolute bottom-0 left-0"
+          inputFocused={inputFocused}
+        >
           Amount
-        </label>
-        <input
+        </StyledLabel>
+        <StyledInput
           id="amount"
           type="number"
           name="amount"
           onChange={handleAmountChange}
-          defaultValue={0}
-          className="text-white appearance-none text-center text-2xl w-64 h-14
-                          border-b-2 border-gray-100 bg-transparent
-                          focus:text-green-500 focus:outline-none focus:border-gray-200"
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => !amount && setInputFocused(false)}
+          className="text-white appearance-none text-center text-2xl w-full h-14
+                          border-b-2 border-gray-500 bg-transparent group
+                          focus:text-green-500 focus:outline-none focus:border-white"
           required
         />
       </div>

@@ -30,6 +30,7 @@ const Cryptos = React.memo(() => {
     { symbol: 'LTC', name: 'Litecoin', isVisible: true },
     { symbol: 'XRP', name: 'Ripple', isVisible: true },
     { symbol: 'ETH', name: 'Ethereum', isVisible: true },
+    { symbol: 'DASH', name: 'Dash', isVisible: true },
   ]);
 
   const { token } = useAuthState();

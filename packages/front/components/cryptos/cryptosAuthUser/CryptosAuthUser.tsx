@@ -26,19 +26,19 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) 
   }
 
   return (
-    <div className="w-full flex flex-col sm:flex-row">
-      <div className="w-full sm:w-3/5 text-white z-10">
+    <div className="w-full flex flex-col">
+      <div className="w-full text-white z-10">
         In portfolio:
-        <ul className="list-none mt-4 p-2 w-full flex flex-wrap justify-center">
+        <ul className="list-none mt-4 p-2 w-full ms:w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center">
           {visibleCryptos?.map((item: CryptoData) => (
             <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
           ))}
         </ul>
         {notInAssets.length > 0 && <AddNewAssetForm cryptos={notInAssets} />}
       </div>
-      <div className="sm:w-1/3">
+      <div className="w-full">
         Not in portfolio:
-        <ul className="list-none mt-4 p-2 w-full transform">
+        <ul className="list-none mt-4 p-2 w-full sm:w-2/3 mx-auto transform grid grid-cols-1 sm:grid-cols-2 gap-2 col-span-4">
           {notInAssets.map((item: CryptoData) => (
             <CryptoNotInAsset key={item.name} crypto={item} />
           ))}

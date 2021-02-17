@@ -8,7 +8,6 @@ import LoadingSpinner from '../shared/loadingSpinner/LoadingSpinner';
 import { ClippedSection } from '../shared/styledComponents/ClippedSection';
 // @ts-ignore
 import bgImage from '../../assets/btc_wallet.jpg';
-import { useAssetState } from '../../context/assetContext';
 
 export interface Currency {
   symbol: string;
@@ -34,16 +33,12 @@ const Cryptos = React.memo(() => {
   ]);
 
   const { token } = useAuthState();
-  const assets = useAssetState();
-  console.log(assets);
 
   const fetcher = (url: string): Promise<any> => fetch(url).then((r) => r.json());
 
   const { data, error } = useSWR('http://localhost:3001/api/cryptos', fetcher, {
     refreshInterval: 100000,
   });
-
-  console.log(data);
 
   if (error || data?.statusCode === 500) return <div>{error}Jakiś tam error na serwerze</div>;
 

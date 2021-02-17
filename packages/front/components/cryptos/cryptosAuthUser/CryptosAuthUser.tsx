@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAssetState } from '../../../context/assetContext';
 import LoadingSpinner from '../../shared/loadingSpinner/LoadingSpinner';
+import Total from '../../total/Total';
 import CryptoInAsset from '../crypto/cryptoInAsset/CryptoInAsset';
 import CryptoNotInAsset from '../crypto/cryptoNotInAsset/CryptoNotInAsset';
 import { CryptoData } from '../Cryptos';
@@ -28,7 +29,7 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) 
   return (
     <div className="w-full flex flex-col">
       <div className="w-full text-white z-10">
-        In portfolio:
+        <Total cryptos={visibleCryptos} />
         <ul className="list-none mt-4 p-2 w-full ms:w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center">
           {visibleCryptos?.map((item: CryptoData) => (
             <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />

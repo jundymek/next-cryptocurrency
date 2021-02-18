@@ -50,7 +50,6 @@ const Features = () => {
   const [visibleFeature, setvisibleFeature] = useState(0);
 
   const handleClick = (feature: number) => {
-    console.log(feature);
     setvisibleFeature(feature);
   };
 

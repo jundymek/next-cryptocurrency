@@ -36,7 +36,6 @@ function AssetProvider({ children }: AssetProviderProps) {
   useEffect(() => {
     async function checkAssetState() {
       if (token) {
-        console.log(token);
         setisLoading(true);
         const response = await fetch('http://localhost:3001/api/assets', {
           headers: {
@@ -53,7 +52,6 @@ function AssetProvider({ children }: AssetProviderProps) {
           amount: item.amount,
         }));
         setisLoading(false);
-        console.log(assets);
         return setAssets(assets);
       }
     }

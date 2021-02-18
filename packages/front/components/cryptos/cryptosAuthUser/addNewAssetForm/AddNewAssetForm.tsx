@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import { CryptoData } from '../../Cryptos';
 import { Icon as CryptoIcon } from 'coinmarketcap-cryptocurrency-icons';
 import Select from 'react-select';
-import { Icon } from '@iconify/react';
-import twotoneSaveAlt from '@iconify/icons-ic/twotone-save-alt';
 import { useAuthState } from '../../../../context/authContext';
 import { useAssetDispatch } from '../../../../context/assetContext';
 import styled from 'styled-components';
+import ActionButton from '../../../shared/button/ActionButton';
 
 const StyledInput = styled.input`
   &::placeholder {
     color: transparent;
   }
 `;
-
 interface LabelProps {
   inputFocused: boolean;
 }
@@ -26,19 +24,15 @@ const StyledLabel = styled.label<LabelProps>`
 
 interface AddNewAssetFormProps {
   cryptos: CryptoData[];
+  toggleAddFormVisible: () => void;
 }
 
-const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos }) => {
+const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFormVisible }) => {
   const [selectedAsset, setSelectedAsset] = useState<string>('');
   const [amount, setAmount] = useState<number>(0);
-
   const [inputFocused, setInputFocused] = useState(amount > 0);
-
   const { setAssets } = useAssetDispatch();
-
   const { token } = useAuthState();
-
-  console.log(amount);
 
   const customStyles = {
     option: () => ({
@@ -57,10 +51,6 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos }) => {
     valueContainer: () => ({
       width: '100%',
     }),
-    // menu: () => ({
-    //   width: '300px',
-    //   background: 'red',
-    // }),
   };
 
   const options = cryptos.map((item) => {
@@ -102,7 +92,10 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos }) => {
   };
 
   return (
-    <form className="w-full flex flex-col items-center" onSubmit={handleSubmit}>
+    <form
+      className="w-full sm:w-2/3 flex flex-col items-center border py-8"
+      onSubmit={handleSubmit}
+    >
       <div className="w-full px-4 sm:w-1/2">
         <label id="listbox-label" className="block text-sm font-medium text-white">
           Add selected asset
@@ -136,9 +129,10 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos }) => {
           required
         />
       </div>
-      <button className="ml-4" type="submit">
-        <Icon icon={twotoneSaveAlt} className="h-14 w-14" />
-      </button>
+      <div className="grid grid-cols-2 gap-4 mt-8">
+        <ActionButton type="submit" text="submit" />
+        <ActionButton handleFunction={toggleAddFormVisible} text="cancel" />
+      </div>
     </form>
   );
 });

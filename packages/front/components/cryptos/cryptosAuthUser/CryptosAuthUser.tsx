@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAssetState } from '../../../context/assetContext';
+import ActionButton from '../../shared/button/ActionButton';
 import LoadingSpinner from '../../shared/loadingSpinner/LoadingSpinner';
-import Total from '../../total/Total';
 import CryptoInAsset from '../crypto/cryptoInAsset/CryptoInAsset';
 import CryptoNotInAsset from '../crypto/cryptoNotInAsset/CryptoNotInAsset';
 import { CryptoData } from '../Cryptos';
@@ -12,6 +12,7 @@ interface CryptoInAssetUserProps {
 }
 
 const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) => {
+  const [isAddFormVisible, setIsAddFormVisible] = useState(false);
   const { assets, isLoading } = useAssetState();
 
   const getAsset = (currency: string) => {
@@ -22,20 +23,28 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) 
     (item: CryptoData) => !assets?.some((asset) => asset.currencyName === item.firstCurrency),
   );
 
+  const toggleAddFormVisible = () => {
+    setIsAddFormVisible(!isAddFormVisible);
+  };
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   return (
     <div className="w-full flex flex-col">
-      <div className="w-full text-white z-10">
-        <Total cryptos={visibleCryptos} />
-        <ul className="list-none mt-4 p-2 w-full ms:w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center">
+      <div className="w-full p-2 text-white z-10 flex flex-col justify-center items-center">
+        <ul className="list-none mt-4 w-full ms:w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center">
           {visibleCryptos?.map((item: CryptoData) => (
             <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
           ))}
         </ul>
-        {notInAssets.length > 0 && <AddNewAssetForm cryptos={notInAssets} />}
+        {notInAssets.length > 0 && !isAddFormVisible && (
+          <ActionButton handleFunction={toggleAddFormVisible} text="ADD" />
+        )}
+        {isAddFormVisible && (
+          <AddNewAssetForm cryptos={notInAssets} toggleAddFormVisible={toggleAddFormVisible} />
+        )}
       </div>
       <div className="w-full">
         Not in portfolio:

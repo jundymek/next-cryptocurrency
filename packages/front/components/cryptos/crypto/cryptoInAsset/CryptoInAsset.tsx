@@ -59,14 +59,14 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
         </div>
         <div className="w-full h-2/5">
           <div className="flex flex-col justify-center items-center bg-black bg-opacity-25 rounded-t-md h-full relative">
-            <span className="absolute top-0 right-4 text-xl">{asset.amount}</span>
+            <span className="absolute top-0 right-0 p-1 bg-white text-black">{asset.amount}</span>
             <span className="absolute bottom-0 right-4 text-md pt-10">{price} PLN</span>
             <h2 className="text-4xl font-bold text-white">{firstCurrency}</h2>
             <span className="text-lg text-white">{name}</span>
           </div>
         </div>
-        <p className="text-4xl text-center mb-8 text-gray-100">
-          {asset?.amount * parseInt(price)} <span className="text-xs">PLN</span>
+        <p className="text-4xl text-center mb-8 p-2 bg-white text-black transform rotate-1">
+          {(asset?.amount * parseInt(price)).toPrecision(5)} <span className="text-xs">PLN</span>
         </p>
         <div className="flex flex-col items-end w-full mt-6 mr-6">
           <p className="text-xl">

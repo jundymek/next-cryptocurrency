@@ -12,3 +12,8 @@ body {
 .content-area {
   min-height: calc(100vh - 130px);
 }
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  appearance: none;
+}

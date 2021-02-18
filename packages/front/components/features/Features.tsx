@@ -56,7 +56,6 @@ const Features = () => {
   return (
     <ClippedSection className="bg-black text-gray-100 h-full sm:my-10">
       <div className="flex flex-col items-center justify-center container mx-auto relative overflow-x-hidden">
-        {/* <div className="mx-auto overflow-hidden"> */}
         <Wrapper className="flex" visibleFeature={visibleFeature}>
           <Feature
             title="The world's most popular Bitcoin & cryptocurrency portfolio tracker. Now with trading."

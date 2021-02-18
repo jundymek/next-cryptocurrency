@@ -74,6 +74,7 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
               id="newAmount"
               ref={inputReference}
               type="number"
+              step="0.000001"
               name="newAmount"
               onChange={handleChange}
               defaultValue={asset.amount.toString()}

@@ -66,7 +66,8 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
           </div>
         </div>
         <p className="text-4xl text-center mb-8 p-2 bg-white text-black transform rotate-1">
-          {(asset?.amount * parseInt(price)).toPrecision(5)} <span className="text-xs">PLN</span>
+          {parseFloat((asset?.amount * parseInt(price)).toPrecision(5))}{' '}
+          <span className="text-xs">PLN</span>
         </p>
         <div className="flex flex-col items-end w-full mt-6 mr-6">
           <p className="text-xl">

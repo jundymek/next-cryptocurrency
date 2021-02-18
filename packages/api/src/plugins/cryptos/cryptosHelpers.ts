@@ -42,7 +42,8 @@ export async function getCryptoData() {
     .map((pair) => getNecessaryData(res.items[pair]))
     .filter(
       (item) =>
-        ['BTC', 'LTC', 'XRP', 'ETH'].includes(item.firstCurrency) && item.secondCurrency === 'PLN',
+        ['BTC', 'LTC', 'XRP', 'ETH', 'DASH'].includes(item.firstCurrency) &&
+        item.secondCurrency === 'PLN',
     );
 
   return cryptos;
@@ -58,6 +59,8 @@ const getFullName = (symbol: string) => {
       return 'Ripple';
     case 'ETH':
       return 'Ethereum';
+    case 'DASH':
+      return 'Dash';
     default:
       return 'Unknown';
   }

@@ -13,7 +13,7 @@ const CryptoNotInAsset = React.memo<CryptoProps>(({ crypto, animate }) => {
   return (
     <li className="flex items-center">
       <div
-        className={`flex items-center shadow-xl py-4 w-full max-w-md mx-auto text-gray-900 bg-blue-300 m-2 p-2 rounded-md ${animate}`}
+        className={`flex items-center shadow-xl border border-purple-600 py-4 w-full max-w-md mx-auto text-gray-900 bg-white m-2 p-2 ${animate}`}
       >
         <div className="flex justify-between items-center w-full">
           <div className="flex items-center">

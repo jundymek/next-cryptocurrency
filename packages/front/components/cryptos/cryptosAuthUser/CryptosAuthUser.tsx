@@ -34,7 +34,7 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) 
   return (
     <div className="w-full flex flex-col">
       <div className="w-full p-2 text-white z-10 flex flex-col justify-center items-center">
-        <ul className="list-none mt-4 w-full ms:w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center">
+        <ul className="list-none mt-4 p-2 w-full ms:w-2/3 mx-auto flex flex-wrap justify-center">
           {visibleCryptos?.map((item: CryptoData) => (
             <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
           ))}

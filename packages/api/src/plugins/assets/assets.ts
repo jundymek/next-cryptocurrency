@@ -2,20 +2,31 @@ import Boom from '@hapi/boom';
 import Hapi from '@hapi/hapi';
 import Joi from 'joi';
 import { createAssetHandler } from './handlers/createAssetHandler';
+import { deleteAssetHandler } from './handlers/deleteAssetHandler';
 import { getAssetsHandler } from './handlers/getAssetsHandler';
 import { updateAssetHandler } from './handlers/updateAssetHandler';
 
 export interface AssetInput {
-  username: string;
+  username?: string;
   currencyName: string;
   amount: number;
-  buyPrice: number;
+  buyPrice?: number;
+  id: number;
 }
 
 const AssetInputValidator = Joi.object({
   currencyName: Joi.string().required(),
   amount: Joi.number().required(),
 });
+const AssetUpdateValidator = Joi.object({
+  // currencyName: Joi.string().required(),
+  amount: Joi.number().required(),
+  id: Joi.number().required()
+});
+
+const AssetDeleteValidator = Joi.object({
+  id: Joi.number().required()
+})
 
 const plugin = {
   name: 'app/assets',
@@ -38,12 +49,22 @@ const plugin = {
         },
       },
       {
-        method: ['PUT'],
-        path: '/api/assets/{currencyName}',
+        method: ['PATCH'],
+        path: '/api/assets',
         handler: updateAssetHandler,
         options: {
           validate: {
-            payload: AssetInputValidator,
+            payload: AssetUpdateValidator,
+          },
+        },
+      },
+      {
+        method: ['DELETE'],
+        path: '/api/assets',
+        handler: deleteAssetHandler,
+        options: {
+          validate: {
+            payload: AssetDeleteValidator,
           },
         },
       },

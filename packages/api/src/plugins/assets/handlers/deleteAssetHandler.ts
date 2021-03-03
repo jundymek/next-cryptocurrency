@@ -3,26 +3,19 @@ import Hapi from '@hapi/hapi';
 import { handlePrismaError } from '../../../utils/handlePrismaError';
 import { AssetInput } from '../assets';
 
-export async function updateAssetHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+
+export async function deleteAssetHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
   const { prisma } = request.server.app;
   const payload = request.payload as AssetInput;
   const username = request.auth.credentials.userName as string;
 
   try {
-    const modifiedAsset = await prisma.asset.update({
+    await prisma.asset.delete({
       where: {
         id: payload.id,
       },
-      data: {
-        amount: payload.amount,
-        User: {
-          connect: {
-            username,
-          },
-        },
-      },
     });
-    return h.response(modifiedAsset).code(200);
+    return h.response().code(204);
   } catch (err) {
     console.log(err);
     return handlePrismaError(err);

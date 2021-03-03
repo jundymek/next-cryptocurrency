@@ -6,7 +6,7 @@ interface AssetProviderProps {
   children: React.ReactNode;
 }
 
-interface Asset {
+export interface Asset {
   currencyName: string;
   amount: number;
   id: number;
@@ -48,7 +48,6 @@ function AssetProvider({ children }: AssetProviderProps) {
           return router.push('/login');
         }
         const res = await response.json();
-        console.log(res)
         const assets = await res.map((item: Asset) => ({
           currencyName: item.currencyName,
           amount: item.amount,

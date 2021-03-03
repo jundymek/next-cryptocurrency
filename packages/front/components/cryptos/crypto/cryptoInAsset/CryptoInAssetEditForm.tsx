@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useAssetDispatch } from '../../../../context/assetContext';
+import { Asset, useAssetDispatch } from '../../../../context/assetContext';
 import { useAuthState } from '../../../../context/authContext';
 import { CryptoData } from '../../Cryptos';
-import { Asset } from '../../utils/useGetAssets';
 
 interface CryptoInAssetEditFormProps {
   isActive: boolean;
@@ -33,13 +32,13 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (token) {
-        const payload = { currencyName: firstCurrency, amount: amount };
+        const payload = { id: asset.id, amount: amount };
         const headers = {
           'Content-Type': 'application/json',
           Authorization: token,
         };
-        await fetch(`http://localhost:3001/api/assets/${firstCurrency}`, {
-          method: 'PUT',
+        await fetch(`http://localhost:3001/api/assets`, {
+          method: 'PATCH',
           headers: headers,
           body: JSON.stringify(payload),
         });
@@ -67,15 +66,15 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
           onSubmit={handleSubmit}
         >
           <div className="flex w-full items-center font-mono px-4">
-            <label htmlFor="newAmount" className="w-1/2 px-2">
+            <label htmlFor={firstCurrency} className="w-1/2 px-2">
               {firstCurrency} amount
             </label>
             <input
-              id="newAmount"
+              id={firstCurrency}
               ref={inputReference}
               type="number"
               step="0.000001"
-              name="newAmount"
+              name={firstCurrency}
               onChange={handleChange}
               defaultValue={asset.amount.toString()}
               className="w-1/2 py-2 px-1 my-4

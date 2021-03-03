@@ -31,7 +31,6 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
   const [isEditVisible, setIsEditVisible] = useState(false);
   const { firstCurrency, name, price } = crypto;
   const inputReference = useRef<HTMLInputElement>(null);
-  console.log(asset)
 
   const handleToggleEdit = () => {
     setIsEditVisible((prevState) => !prevState);

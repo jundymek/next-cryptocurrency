@@ -19,7 +19,6 @@ const AssetInputValidator = Joi.object({
   amount: Joi.number().required(),
 });
 const AssetUpdateValidator = Joi.object({
-  // currencyName: Joi.string().required(),
   amount: Joi.number().required(),
   id: Joi.number().required()
 });

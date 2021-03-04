@@ -16,7 +16,7 @@ const createToken = (user: User) =>
       userName: user.username,
     },
     secretKey,
-    { expiresIn: '1h', algorithm: 'HS256' },
+    { expiresIn: '30d', algorithm: 'HS256' },
   ); // Choose a expiry time and algorithm which suits you
 
 export default createToken;

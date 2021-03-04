@@ -10,6 +10,8 @@ import DeleteIcon from '../../../icons/DeleteIcon';
 import CancelIcon from '../../../icons/CancelIcon';
 import { useAuthState } from '../../../../context/authContext';
 import { Asset, useAssetDispatch } from '../../../../context/assetContext';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 interface CryptoProps {
   crypto: CryptoData;
@@ -35,6 +37,52 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
 
   const handleToggleEdit = () => {
     setIsEditVisible((prevState) => !prevState);
+  };
+
+  const handleOpenConfirmModal = async () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        setTimeout(() => {
+          onClose();
+        }, 1000);
+        return (
+          <div className="w-96 h-64 bg-black text-white p-4 flex flex-col items-center justify-center rounded-md">
+            <h3 className="text-xl">{firstCurrency} was removed</h3>
+          </div>
+        );
+      },
+    });
+  };
+
+  const handleOpenDeleteModal = async () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="w-96 h-64 bg-black text-white p-4 flex flex-col items-center rounded-md">
+            <h3 className="text-xl mt-8">Are you sure?</h3>
+            <div className="h-full flex flex-col justify-center">
+              <p className="mb-10 text-center">
+                You want to remove <span>{firstCurrency}</span> from your wallet?
+              </p>
+              <div className="flex w-1/2 self-end">
+                <button className="mr-2 border border-white px-6 py-2" onClick={onClose}>
+                  <span className="p2">No</span>
+                </button>
+                <button
+                  className="mr-2 border border-white px-6 py-2"
+                  onClick={async () => {
+                    await handleDelete();
+                    handleOpenConfirmModal();
+                  }}
+                >
+                  <span className="p2">Yes</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      },
+    });
   };
 
   const handleDelete = async () => {
@@ -78,7 +126,7 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
             </div>
           </>
         ) : (
-          <div className="absolute -top-8 left-8  sm:-top-8 sm:-left-8 z-10 bg-white w-16 h-16 rounded-full">
+          <div className="absolute -top-8 left-8  sm:-top-8 sm:-left-8 z-10 bg-gray-900 w-16 h-16 rounded-full">
             <div className="relative w-full h-full flex justify-center items-center">
               <button
                 className="absolute top-2 left-2 mr-4"
@@ -87,10 +135,10 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
               >
                 <CancelIcon />
               </button>
-              <span className="text-black text-xs">/</span>
+              <span className="text-white text-xs">/</span>
               <button
                 className="absolute bottom-2 right-2 ml-4"
-                onClick={handleDelete}
+                onClick={handleOpenDeleteModal}
                 title="Delete"
               >
                 <DeleteIcon />

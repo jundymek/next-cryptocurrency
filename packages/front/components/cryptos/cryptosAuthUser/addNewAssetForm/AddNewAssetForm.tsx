@@ -82,18 +82,19 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
         'Content-Type': 'application/json',
         Authorization: token,
       };
-      await fetch('http://localhost:3001/api/assets', {
+      const res = await fetch('http://localhost:3001/api/assets', {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(payload),
       });
-      setAssets((prevState) => [...prevState, payload]);
+      const newAsset = await res.json();
+      setAssets((prevState) => [...prevState, newAsset]);
     }
   };
 
   return (
     <form
-      className="w-full sm:w-2/3 flex flex-col items-center border py-8"
+      className="w-full sm:w-2/3 flex flex-col items-center border py-8 scale-up-center"
       onSubmit={handleSubmit}
     >
       <div className="w-full px-4 sm:w-1/2">

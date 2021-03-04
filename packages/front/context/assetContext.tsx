@@ -9,7 +9,7 @@ interface AssetProviderProps {
 export interface Asset {
   currencyName: string;
   amount: number;
-  id?: number;
+  id: number;
 }
 
 interface Dispatch {

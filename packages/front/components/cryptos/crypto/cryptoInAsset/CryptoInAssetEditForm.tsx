@@ -13,10 +13,9 @@ interface CryptoInAssetEditFormProps {
 const StyledForm = styled.div<Partial<CryptoInAssetEditFormProps>>`
   transition: max-height 0.3s ease-out, opacity 0.3s;
   overflow: hidden;
-  height: auto;
   opacity: ${(props) => (props.isActive ? 1 : 0)};
   background: linear-gradient(90deg, rgb(106, 17, 203) 0%, rgb(37, 117, 252) 100%);
-  max-height: ${(props) => (props.isActive ? `8rem` : 0)};
+  max-height: ${(props) => (props.isActive ? `60%` : 0)};
 `;
 
 const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
@@ -57,12 +56,12 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
 
     return (
       <StyledForm
-        className="absolute bottom-0 left-0 w-full z-0 rounded-b-md h-32"
+        className="absolute bottom-0 left-0 w-full z-0 rounded-b-md h-3/5"
         isActive={isActive}
       >
         <form
           action=""
-          className="flex flex-col justify-center items-center"
+          className="flex flex-col justify-center items-center h-full"
           onSubmit={handleSubmit}
         >
           <div className="flex w-full items-center font-mono px-4">
@@ -84,7 +83,11 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
               required
             />
           </div>
-          <button className="w-1/2 bg-purple-700 border border-white text-white h-10 rounded-md my-2 hover:bg-purple-800 transform transition-colors duration-300">
+          <button
+            className="w-1/2 bg-purple-700 border border-white text-white h-10 
+                      rounded-md my-2 hover:text-gray-300  hover:border-gray-400 
+                      transform transition-colors duration-300"
+          >
             Save
           </button>
         </form>

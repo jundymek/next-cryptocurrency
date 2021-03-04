@@ -3,7 +3,7 @@ import React from 'react';
 const DeleteIcon = () => {
   return (
     <svg
-      className="h-6 w-6 fill-current transform transition-all duration-300 text-black hover:text-red-700 hover:scale-110"
+      className="h-6 w-6 fill-current transform transition-all duration-300 text-gray-200 hover:text-red-700 hover:scale-110"
       height="512px"
       id="Layer_1"
       version="1.1"

@@ -8,6 +8,7 @@ interface CryptoInAssetEditFormProps {
   isActive: boolean;
   crypto: CryptoData;
   asset: Asset;
+  handleOpenDeleteModal: () => Promise<void>;
 }
 
 const StyledForm = styled.div<Partial<CryptoInAssetEditFormProps>>`
@@ -19,7 +20,7 @@ const StyledForm = styled.div<Partial<CryptoInAssetEditFormProps>>`
 `;
 
 const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
-  ({ isActive, crypto, asset }) => {
+  ({ isActive, crypto, asset, handleOpenDeleteModal }) => {
     const { firstCurrency } = crypto;
     const inputReference = useRef<HTMLInputElement>(null);
     const [amount, setAmount] = useState(asset.amount);
@@ -41,12 +42,16 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
           headers: headers,
           body: JSON.stringify(payload),
         });
-        setAssets((prevState) =>
-          prevState.map((item) => {
-            if (item.currencyName === firstCurrency) return { ...item, amount: amount };
-            return item;
-          }),
-        );
+        if (amount === 0) {
+          handleOpenDeleteModal();
+        } else {
+          setAssets((prevState) =>
+            prevState.map((item) => {
+              if (item.currencyName === firstCurrency) return { ...item, amount: amount };
+              return item;
+            }),
+          );
+        }
       }
     };
 

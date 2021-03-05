@@ -159,7 +159,12 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
           {parseFloat((asset?.amount * parseFloat(price)).toPrecision(5))}{' '}
           <span className="text-xs">PLN</span>
         </p>
-        <CryptoInAssetEditForm isActive={isEditVisible} crypto={crypto} asset={asset} />
+        <CryptoInAssetEditForm
+          isActive={isEditVisible}
+          crypto={crypto}
+          asset={asset}
+          handleOpenDeleteModal={handleOpenDeleteModal}
+        />
       </StyledLi>
     );
   }

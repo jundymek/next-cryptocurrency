@@ -121,6 +121,7 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
           id="amount"
           type="number"
           name="amount"
+          step="0.000001"
           onChange={handleAmountChange}
           onFocus={() => setInputFocused(true)}
           onBlur={() => !amount && setInputFocused(false)}

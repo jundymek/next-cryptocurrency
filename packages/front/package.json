@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@iconify/icons-mdi": "^1.1.12",
     "autoprefixer": "^10.1.0",
     "clsx": "^1.1.1",
     "coinmarketcap-cryptocurrency-icons": "^1.0.1",

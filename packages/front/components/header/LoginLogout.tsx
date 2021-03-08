@@ -20,7 +20,7 @@ const LoginLogout = () => {
     <div>
       {username ? (
         <div className="flex flex-col items-end">
-          <p className="text-xs">
+          <p className="text-xs text-gray-300">
             Logged as <span className="underline">{username}</span>
           </p>
           <button className="text-red-400 underline text-xs" onClick={handleLogout}>

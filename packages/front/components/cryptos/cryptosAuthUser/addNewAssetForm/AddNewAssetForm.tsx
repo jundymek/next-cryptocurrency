@@ -42,7 +42,7 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
       // width: '500px',
     }),
     control: () => ({
-      borderRadius: 5,
+      borderRadius: '0.125rem',
       padding: 10,
       width: '100%',
       backgroundColor: 'white',
@@ -95,7 +95,7 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
 
   return (
     <form
-      className="w-full flex flex-col items-center  py-8 scale-up-center rounded-md"
+      className="w-full flex flex-col items-center  py-8 scale-up-center"
       onSubmit={handleSubmit}
     >
       <div className="w-full px-4 sm:w-1/2">

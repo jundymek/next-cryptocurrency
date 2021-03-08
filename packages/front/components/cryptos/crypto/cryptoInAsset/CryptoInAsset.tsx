@@ -104,7 +104,7 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
   if (asset?.amount) {
     if (!isEditVisible) {
       return (
-        <li className="w-full h-24 bg-gray-900 flex items-center justify-between my-2 bg-transparent rounded-md px-4 opacity-90 hover:bg-gray-700 transition-colors duration-200 text-gray-300">
+        <li className="w-full h-24 bg-gray-900 flex items-center justify-between my-2 bg-transparent rounded-sm px-4 opacity-90 hover:bg-gray-700 transition-colors duration-200 text-gray-300">
           <div className="flex items-center w-4/5 justify-between text-sm">
             <div className="flex items-center">
               <CryptoIcon i={firstCurrency.toLowerCase()} size={cryptoIconSize} />

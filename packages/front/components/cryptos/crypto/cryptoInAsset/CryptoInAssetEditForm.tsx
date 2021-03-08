@@ -3,25 +3,21 @@ import styled from 'styled-components';
 import { Asset, useAssetDispatch } from '../../../../context/assetContext';
 import { useAuthState } from '../../../../context/authContext';
 import { CryptoData } from '../../Cryptos';
+import { Icon as CryptoIcon } from 'coinmarketcap-cryptocurrency-icons';
+import { Icon } from '@iconify/react';
+import contentSaveEditOutline from '@iconify/icons-mdi/content-save-edit-outline';
+import closeBoxOutline from '@iconify/icons-mdi/close-box-outline';
 
 interface CryptoInAssetEditFormProps {
-  isActive: boolean;
   crypto: CryptoData;
   asset: Asset;
   handleOpenDeleteModal: () => Promise<void>;
+  setIsEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const StyledForm = styled.div<Partial<CryptoInAssetEditFormProps>>`
-  transition: max-height 0.3s ease-out, opacity 0.3s;
-  overflow: hidden;
-  opacity: ${(props) => (props.isActive ? 1 : 0)};
-  background: linear-gradient(90deg, rgb(106, 17, 203) 0%, rgb(37, 117, 252) 100%);
-  max-height: ${(props) => (props.isActive ? `60%` : 0)};
-`;
-
 const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
-  ({ isActive, crypto, asset, handleOpenDeleteModal }) => {
-    const { firstCurrency } = crypto;
+  ({ crypto, asset, handleOpenDeleteModal, setIsEditVisible }) => {
+    const { firstCurrency, name } = crypto;
     const inputReference = useRef<HTMLInputElement>(null);
     const [amount, setAmount] = useState(asset.amount);
 
@@ -52,6 +48,7 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
             }),
           );
         }
+        setIsEditVisible(false);
       }
     };
 
@@ -60,19 +57,20 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
     };
 
     return (
-      <StyledForm
-        className="absolute bottom-0 left-0 w-full z-0 rounded-b-md h-3/5"
-        isActive={isActive}
-      >
+      <>
         <form
           action=""
-          className="flex flex-col justify-center items-center h-full"
+          className="w-full h-24 bg-gray-900 flex items-center justify-between my-2 bg-transparent rounded-md px-4 opacity-90"
           onSubmit={handleSubmit}
         >
-          <div className="flex w-full items-center font-mono px-4">
-            <label htmlFor={firstCurrency} className="w-1/2 px-2">
-              {firstCurrency} amount
-            </label>
+          <div className="flex items-center w-4/5 justify-between">
+            <div className="flex items-center">
+              <CryptoIcon i={firstCurrency.toLowerCase()} size={64} />
+              <h3 className="md:text-lg text-white ml-4">
+                {name} <span className="text-md font-bold text-white">({firstCurrency})</span>
+              </h3>
+            </div>
+
             <input
               id={firstCurrency}
               ref={inputReference}
@@ -81,22 +79,26 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
               name={firstCurrency}
               onChange={handleChange}
               defaultValue={asset.amount.toString()}
-              className="w-1/2 py-2 px-1 my-4
-                        text-white appearance-none text-center 
-                        border-b-2 border-gray-100 bg-transparent
-                        focus:text-green-500 focus:outline-none focus:border-gray-200"
+              className="py-2 px-1 m-4 w-2/3
+                            text-white appearance-none text-center text-4xl
+                            border-b-2 border-gray-100 bg-transparent
+                            focus:text-green-500 focus:outline-none focus:border-gray-200"
               required
             />
           </div>
-          <button
-            className="w-1/2 bg-purple-700 border border-white text-white h-10 
-                      rounded-md my-2 hover:text-gray-300  hover:border-gray-400 
-                      transform transition-colors duration-300"
-          >
-            Save
-          </button>
+          <div className="flex">
+            <button className="text-gray-300 text-2xl sm:text-4xl md:text-6xl md:mr-4">
+              <Icon icon={contentSaveEditOutline} />
+            </button>
+            <button
+              className="text-gray-300 text-2xl sm:text-4xl md:text-6xl"
+              onClick={() => setIsEditVisible(false)}
+            >
+              <Icon icon={closeBoxOutline} />
+            </button>
+          </div>
         </form>
-      </StyledForm>
+      </>
     );
   },
 );

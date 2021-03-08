@@ -26,6 +26,12 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
   const { token } = useAuthState();
   const { setAssets } = useAssetDispatch();
 
+  useEffect(() => {
+    if (isEditVisible) {
+      inputReference.current?.focus();
+    }
+  }, [isEditVisible]);
+
   const handleToggleEdit = () => {
     setIsEditVisible((prevState) => !prevState);
   };
@@ -92,44 +98,32 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
     }
   };
 
-  useEffect(() => {
-    if (isEditVisible) {
-      inputReference.current?.focus();
-    }
-  }, [isEditVisible]);
-
   const windowWidth = useWindowWidth();
   const cryptoIconSize = windowWidth < 1024 ? 32 : 64;
 
   if (asset?.amount) {
     if (!isEditVisible) {
       return (
-        <li className="w-full h-24 bg-gray-900 flex items-center justify-between my-2 bg-transparent rounded-md px-4 opacity-90 hover:bg-gray-700 transition-colors duration-200">
+        <li className="w-full h-24 bg-gray-900 flex items-center justify-between my-2 bg-transparent rounded-md px-4 opacity-90 hover:bg-gray-700 transition-colors duration-200 text-gray-300">
           <div className="flex items-center w-4/5 justify-between text-sm">
             <div className="flex items-center">
               <CryptoIcon i={firstCurrency.toLowerCase()} size={cryptoIconSize} />
-              <h3 className="lg:text-lg text-white ml-4 w-20 md:w-40">
-                {name} <span className="text-md font-bold text-white">({firstCurrency})</span>
+              <h3 className="lg:text-lg  ml-4 w-20 md:w-40">
+                {name} <span className="text-md font-bold ">({firstCurrency})</span>
               </h3>
-              <span className="text-white  md:text-3xl lg:text-4xl ml-2 md:ml-12 font-mono">
+              <span className="md:text-3xl lg:text-4xl ml-2 md:ml-12 font-sans">
                 {asset.amount}
               </span>
             </div>
-            <span className="ml-4 md:text-3xl lg:text-4xl font-mono">
+            <span className="ml-4 md:text-3xl lg:text-4xl font-sans ">
               {parseFloat((asset?.amount * parseFloat(price)).toPrecision(5))} PLN
             </span>
           </div>
           <div className="flex">
-            <button
-              className="text-gray-300 text-2xl sm:text-4xl lg:text-6xl md:mr-4"
-              onClick={handleToggleEdit}
-            >
+            <button className="text-2xl sm:text-4xl lg:text-6xl md:mr-4" onClick={handleToggleEdit}>
               <Icon icon={squareEditOutline} />
             </button>
-            <button
-              className="text-gray-300 text-2xl sm:text-4xl lg:text-6xl"
-              onClick={handleOpenDeleteModal}
-            >
+            <button className="text-2xl sm:text-4xl lg:text-6xl" onClick={handleOpenDeleteModal}>
               <Icon icon={deleteOutline} />
             </button>
           </div>

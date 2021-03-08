@@ -101,11 +101,15 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
           />
         </div>
         <div className="flex">
-          <button className="text-2xl sm:text-4xl lg:text-6xl md:mr-4">
+          <button
+            className="text-2xl sm:text-4xl lg:text-6xl md:mr-4 transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
+            title="Save"
+          >
             <Icon icon={contentSaveEditOutline} />
           </button>
           <button
-            className="text-2xl sm:text-4xl lg:text-6xl"
+            className="text-2xl sm:text-4xl lg:text-6xl transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
+            title="Cancel"
             onClick={() => setIsEditVisible(false)}
           >
             <Icon icon={closeBoxOutline} />

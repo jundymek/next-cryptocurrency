@@ -89,12 +89,13 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
       });
       const newAsset = await res.json();
       setAssets((prevState) => [...prevState, newAsset]);
+      toggleAddFormVisible();
     }
   };
 
   return (
     <form
-      className="w-full sm:w-2/3 flex flex-col items-center border py-8 scale-up-center rounded-md"
+      className="w-full flex flex-col items-center  py-8 scale-up-center rounded-md"
       onSubmit={handleSubmit}
     >
       <div className="w-full px-4 sm:w-1/2">

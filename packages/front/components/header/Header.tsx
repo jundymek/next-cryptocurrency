@@ -4,12 +4,9 @@ import { OptionsContext } from '../../context/optionsContext';
 import LoginLogout from './LoginLogout';
 import Link from 'next/link';
 import LogoImage from './LogoImage';
-import Total from '../total/Total';
-import { useAuthState } from '../../context/authContext';
 
 const Header = React.memo(() => {
   const { toggleMenuOpen } = React.useContext(OptionsContext);
-  const { token } = useAuthState();
 
   return (
     <header className="py-4 sm:py-10 bg-black">
@@ -21,7 +18,6 @@ const Header = React.memo(() => {
         </Link>
 
         <div className="flex flex-col items-end px-2 sm:px-0 md:self-start">
-          {token && <Total />}
           <button onClick={toggleMenuOpen} className="absolute top-2 sm:top-0 right-2 sm:right-0">
             <div className="w-7 h-7 absolute sm:relative top-2 sm:top-0 right-2 sm:right-0 text-right">
               <SettingsIcon />

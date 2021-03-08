@@ -11,6 +11,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Icon } from '@iconify/react';
 import squareEditOutline from '@iconify/icons-mdi/square-edit-outline';
 import deleteOutline from '@iconify/icons-mdi/delete-outline';
+import { useWindowWidth } from '../../../../customHooks/useWindowWidth';
 
 interface CryptoProps {
   crypto: CryptoData;
@@ -97,8 +98,8 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
     }
   }, [isEditVisible]);
 
-  const isMobile = window.innerWidth < 800;
-  console.log(isMobile);
+  const windowWidth = useWindowWidth();
+  const cryptoIconSize = windowWidth < 1024 ? 32 : 64;
 
   if (asset?.amount) {
     if (!isEditVisible) {
@@ -106,27 +107,27 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
         <li className="w-full h-24 bg-gray-900 flex items-center justify-between my-2 bg-transparent rounded-md px-4 opacity-90 hover:bg-gray-700 transition-colors duration-200">
           <div className="flex items-center w-4/5 justify-between text-sm">
             <div className="flex items-center">
-              <CryptoIcon i={firstCurrency.toLowerCase()} size={64} />
-              <h3 className="md:text-lg text-white ml-4 w-20 md:w-40">
+              <CryptoIcon i={firstCurrency.toLowerCase()} size={cryptoIconSize} />
+              <h3 className="lg:text-lg text-white ml-4 w-20 md:w-40">
                 {name} <span className="text-md font-bold text-white">({firstCurrency})</span>
               </h3>
-              <span className="text-white  md:text-4xl ml-2 md:ml-12 font-mono">
+              <span className="text-white  md:text-3xl lg:text-4xl ml-2 md:ml-12 font-mono">
                 {asset.amount}
               </span>
             </div>
-            <span className="ml-4 md:text-4xl font-mono">
+            <span className="ml-4 md:text-3xl lg:text-4xl font-mono">
               {parseFloat((asset?.amount * parseFloat(price)).toPrecision(5))} PLN
             </span>
           </div>
           <div className="flex">
             <button
-              className="text-gray-300 text-2xl sm:text-4xl md:text-6xl md:mr-4"
+              className="text-gray-300 text-2xl sm:text-4xl lg:text-6xl md:mr-4"
               onClick={handleToggleEdit}
             >
               <Icon icon={squareEditOutline} />
             </button>
             <button
-              className="text-gray-300 text-2xl sm:text-4xl md:text-6xl"
+              className="text-gray-300 text-2xl sm:text-4xl lg:text-6xl"
               onClick={handleOpenDeleteModal}
             >
               <Icon icon={deleteOutline} />

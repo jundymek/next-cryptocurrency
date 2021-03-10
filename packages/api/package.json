@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn ./src/index.ts -p 3001",
     "build": "tsc",
-    "start": "tsc && node ./dist/index.js",
+    "start": "node index.js",
     "test": "jest"
   },
   "keywords": [],

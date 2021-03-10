@@ -10,7 +10,7 @@ import Jwt from 'hapi-auth-jwt2';
 
 const server: Hapi.Server = Hapi.server({
   port: process.env.PORT || 3001,
-  host: process.env.HOST || 'localhost',
+  host: process.env.HOST || '0.0.0.0',
   routes: { cors: true },
 });
 

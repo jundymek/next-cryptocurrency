@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "publish-heroku": "cd ../../ && git subtree push --prefix packages/front next-crypto-front master"
   },
   "dependencies": {
     "autoprefixer": "^10.1.0",

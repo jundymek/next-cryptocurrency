@@ -34,7 +34,7 @@ function AssetProvider({ children }: AssetProviderProps) {
   const { token } = useAuthState();
   const router = useRouter();
 
-  console.log(`${process.env.API_URL}/api/assets`);
+  console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/assets`);
 
   useEffect(() => {
     async function checkAssetState() {

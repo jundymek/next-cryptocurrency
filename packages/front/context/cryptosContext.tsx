@@ -33,7 +33,7 @@ function CryptosProvider({ children }: CryptosProviderProps) {
     return res.json();
   };
 
-  const { data, error } = useSWR('https://next-crypto-api.herokuapp.com/api/cryptos', fetcher, {
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/cryptos`, fetcher, {
     refreshInterval: 100000,
   });
   const cryptos = data;

@@ -25,7 +25,7 @@ const RegisterForm = React.memo<Props>(({ handleFlip }) => {
     e.preventDefault();
     const payload = { username, password };
     console.log(username, password);
-    const response = await fetch('http://localhost:3001/api/users', {
+    const response = await fetch(`${process.env.API_URL}/api/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

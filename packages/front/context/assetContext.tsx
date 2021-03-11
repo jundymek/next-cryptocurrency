@@ -34,11 +34,13 @@ function AssetProvider({ children }: AssetProviderProps) {
   const { token } = useAuthState();
   const router = useRouter();
 
+  console.log(`${process.env.API_URL}/api/assets`);
+
   useEffect(() => {
     async function checkAssetState() {
       if (token) {
         setisLoading(true);
-        const response = await fetch('http://localhost:3001/api/assets', {
+        const response = await fetch(`${process.env.API_URL}/api/assets`, {
           headers: {
             Authorization: token,
           },

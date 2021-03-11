@@ -39,6 +39,7 @@ function CryptosProvider({ children }: CryptosProviderProps) {
   const cryptos = data;
 
   const state = { cryptos, error };
+  console.log(process.env.customKey);
 
   return <CryptosStateContext.Provider value={state}>{children}</CryptosStateContext.Provider>;
 }

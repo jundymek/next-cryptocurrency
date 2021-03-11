@@ -44,7 +44,7 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
           'Content-Type': 'application/json',
           Authorization: token,
         };
-        await fetch(`http://localhost:3001/api/assets`, {
+        await fetch(`${process.env.API_URL}/api/assets`, {
           method: 'PATCH',
           headers: headers,
           body: JSON.stringify(payload),

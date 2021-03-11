@@ -4,7 +4,7 @@ import { CryptoData } from '../Cryptos';
 
 export function useGetTotal() {
   const { assets } = useAssetState();
-  const { cryptos, error } = useCryptosState();
+  const { cryptos } = useCryptosState();
 
   const inAssets = cryptos?.filter((item: CryptoData) =>
     assets?.some((asset) => asset.currencyName === item.firstCurrency),

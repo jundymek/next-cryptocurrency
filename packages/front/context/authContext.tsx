@@ -71,7 +71,7 @@ function useAuthDispatch() {
 export { AuthProvider, useAuthState, useAuthDispatch };
 
 async function checkToken(token: string) {
-  const res = await fetch(`${process.env.API_URL}/api/status`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/status`, {
     headers: {
       Authorization: token!,
     },

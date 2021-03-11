@@ -9,7 +9,7 @@ const LoginLogout = () => {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await fetch(`${process.env.API_URL}/api/logout`);
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/logout`);
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     setUsername(undefined);

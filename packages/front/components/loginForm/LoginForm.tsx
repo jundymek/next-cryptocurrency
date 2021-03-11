@@ -25,7 +25,7 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
     e.preventDefault();
     const payload = { username, password };
     console.log(username, password);
-    const response = await fetch(`${process.env.API_URL}/api/login`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -89,7 +89,7 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
         'Content-Type': 'application/json',
         Authorization: token,
       };
-      await fetch(`${process.env.API_URL}/api/assets`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/assets`, {
         method: 'DELETE',
         headers: headers,
         body: JSON.stringify(payload),

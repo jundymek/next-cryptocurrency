@@ -40,7 +40,7 @@ function AssetProvider({ children }: AssetProviderProps) {
     async function checkAssetState() {
       if (token) {
         setisLoading(true);
-        const response = await fetch(`${process.env.API_URL}/api/assets`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/assets`, {
           headers: {
             Authorization: token,
           },

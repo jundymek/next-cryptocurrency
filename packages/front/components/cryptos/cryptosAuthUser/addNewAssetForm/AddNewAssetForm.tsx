@@ -82,7 +82,7 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
         'Content-Type': 'application/json',
         Authorization: token,
       };
-      const res = await fetch(`${process.env.API_URL}/api/assets`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/assets`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(payload),

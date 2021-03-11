@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../../components/layout/Layout';
 import LoginForm from '../../components/loginForm/LoginForm';
 import RegisterForm from '../../components/registerForm/RegisterForm';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import LogoImage from '../../components/header/LogoImage';
 
 interface Props {
   isRegisterOpen: boolean;

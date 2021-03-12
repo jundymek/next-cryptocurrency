@@ -8,10 +8,10 @@ import { CryptoData } from '../Cryptos';
 import AddNewAssetForm from './addNewAssetForm/AddNewAssetForm';
 
 interface CryptoInAssetUserProps {
-  visibleCryptos: CryptoData[];
+  cryptos: CryptoData[];
 }
 
-const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) => {
+const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
   const [isAddFormVisible, setIsAddFormVisible] = useState(false);
   const { assets, isLoading } = useAssetState();
 
@@ -19,7 +19,7 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) 
     return assets?.filter((item) => item.currencyName === currency)[0];
   };
 
-  const notInAssets = visibleCryptos?.filter(
+  const notInAssets = cryptos?.filter(
     (item: CryptoData) => !assets?.some((asset) => asset.currencyName === item.firstCurrency),
   );
 
@@ -39,7 +39,7 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ visibleCryptos }) 
           <Total />
         </div>
         <ul className="list-none mt-4 py-2 w-full ms:w-2/3 mx-auto flex flex-wrap justify-center">
-          {visibleCryptos?.map((item: CryptoData) => (
+          {cryptos?.map((item: CryptoData) => (
             <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
           ))}
         </ul>

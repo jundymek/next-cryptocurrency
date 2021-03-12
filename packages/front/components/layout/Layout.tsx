@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
-import { OptionsProvider } from '../../context/optionsContext';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 
@@ -11,7 +10,7 @@ interface LayoutProps {
 
 const Layout = React.memo<LayoutProps>(({ children, title }) => {
   return (
-    <OptionsProvider>
+    <>
       <Head>
         <title>{title}</title>
       </Head>
@@ -20,7 +19,7 @@ const Layout = React.memo<LayoutProps>(({ children, title }) => {
         <main className="">{children}</main>
         <Footer />
       </div>
-    </OptionsProvider>
+    </>
   );
 });
 

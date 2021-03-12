@@ -34,8 +34,6 @@ function AssetProvider({ children }: AssetProviderProps) {
   const { token } = useAuthState();
   const router = useRouter();
 
-  console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/assets`);
-
   useEffect(() => {
     async function checkAssetState() {
       if (token) {

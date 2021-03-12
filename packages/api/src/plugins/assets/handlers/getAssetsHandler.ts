@@ -9,7 +9,6 @@ export async function getAssetsHandler(request: Hapi.Request, h: Hapi.ResponseTo
         userId,
       },
     });
-    console.log(assets);
     return h.response(assets).code(200);
   } catch (err) {
     throw new Error(err);

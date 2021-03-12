@@ -3,13 +3,16 @@ import React from 'react';
 const Hero = () => {
   return (
     <section className="self-start z-10 text-center sm:text-left sm:w-3/5 p-4 sm:-mt-20">
-      <div className="flex flex-col ">
+      <div className="flex flex-col sm:w-3/4">
         <h2 className="font-bold text-white sm:text-4xl sm:leading-snug tracking-wide">
-          The world's most popular Bitcoin & cryptocurrency portfolio tracker. Now with trading.
+          Simplest Bitcoin & cryptocurrency portfolio tracker. No redundant options.{' '}
+          <span className="tracking-widest sm:text-4xl text-yellow-500">
+            Keep It Simple - stupid.
+          </span>
         </h2>
         <p className="mt-4 text-gray-400 text-md sm:text-2xl leading-relaxed">
-          Track your portfolio, get Blockfolio Signal updates from top teams, and buy and sell
-          crypto with zero fees.
+          Sign up, add cryptos to your portfolio and monitor your wallet ballance in real time. No
+          redundant opions - no pain.
         </p>
       </div>
     </section>

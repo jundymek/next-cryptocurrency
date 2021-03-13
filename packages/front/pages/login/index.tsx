@@ -9,13 +9,17 @@ interface Props {
 }
 
 const Container = styled.div`
-  background-color: transparent;
+  height: 100vh;
+  width: 100%;
 `;
 
 const InnerContainer = styled.div<Props>`
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
@@ -36,7 +40,7 @@ const LoginWrapper = styled.div`
 const RegisterWrapper = styled.div`
   position: absolute;
   width: 100%;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,10 +62,9 @@ const Login = () => {
     setIsRegisterOpen((prevState) => !prevState);
   };
   return (
-    // <Layout title="Login page">
-    <Container>
+    <Container className="bg-black">
       <InnerContainer isRegisterOpen={isRegisterOpen}>
-        <LoginWrapper>
+        <LoginWrapper className="bg-black">
           <LoginForm handleFlip={handleFlip} />
         </LoginWrapper>
         <RegisterWrapper>
@@ -69,7 +72,6 @@ const Login = () => {
         </RegisterWrapper>
       </InnerContainer>
     </Container>
-    // </Layout>
   );
 };
 

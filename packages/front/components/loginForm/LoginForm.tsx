@@ -2,6 +2,18 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import LogoImage from '../header/LogoImage';
 import Link from 'next/link';
+import styled from 'styled-components';
+
+const LoginWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+`;
 
 interface Props {
   handleFlip?: () => void;
@@ -43,7 +55,7 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
   };
 
   return (
-    <>
+    <LoginWrapper>
       <div className="grid place-items-center mx-2">
         <div
           className="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
@@ -131,7 +143,7 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
         </div>
       </div>
       {error && <p>{error}</p>}
-    </>
+    </LoginWrapper>
   );
 });
 

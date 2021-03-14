@@ -46,8 +46,8 @@ const Cryptos = React.memo(() => {
   );
 
   return (
-    <ClippedSection className="bg-gray-700" bgImage={bgImage}>
-      <div className="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:py-40">
+    <ClippedSection className="bg-gray-700 py-6 sm:py-0" bgImage={bgImage}>
+      <div className="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:py-28">
         {token ? (
           <CryptosAuthUser cryptos={cryptos} />
         ) : (

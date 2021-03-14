@@ -36,7 +36,7 @@ const Cryptos = React.memo(() => {
 
   if (!cryptos)
     return (
-      <div className="flex w-full justify-center bg-white h-screen">
+      <div className="flex w-full justify-center bg-black h-screen">
         <LoadingSpinner />
       </div>
     );

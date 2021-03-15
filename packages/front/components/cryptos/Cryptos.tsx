@@ -7,6 +7,7 @@ import { ClippedSection } from '../shared/styledComponents/ClippedSection';
 // @ts-ignore
 import bgImage from '../../assets/btc_wallet.jpg';
 import { useCryptosState } from '../../context/cryptosContext';
+import { useWindowWidth } from '../../customHooks/useWindowWidth';
 
 export interface Currency {
   symbol: string;
@@ -34,11 +35,15 @@ const Cryptos = React.memo(() => {
 
   if (error) return <div>{error}Jakiś tam error na serwerze</div>;
 
+  const width = useWindowWidth();
+
   if (!cryptos)
     return (
-      <div className="flex w-full justify-center bg-black h-screen">
-        <LoadingSpinner />
-      </div>
+      <ClippedSection className="py-6 sm:py-0 bg-black">
+        <div className="flex w-full justify-center bg-black min-h-screen">
+          <LoadingSpinner />
+        </div>
+      </ClippedSection>
     );
 
   const visibleCryptos = cryptos.filter((item: CryptoData) =>
@@ -46,7 +51,7 @@ const Cryptos = React.memo(() => {
   );
 
   return (
-    <ClippedSection className="bg-gray-700 py-6 sm:py-0" bgImage={bgImage}>
+    <ClippedSection className="bg-gray-700 py-6 sm:py-0" bgImage={bgImage} windowWidth={width}>
       <div className="container mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:py-28">
         {token ? (
           <CryptosAuthUser cryptos={cryptos} />

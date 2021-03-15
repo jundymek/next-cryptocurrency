@@ -1,13 +1,16 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
 interface ClippedSectionProps {
   bgImage?: string;
+  windowWidth?: number;
 }
 
 const DIAGONAL = 80;
 
-export const ClippedSection = styled.section<ClippedSectionProps>`
+export const ClippedSection = memo(styled.section<ClippedSectionProps>`
   z-index: 0;
+
   position: relative;
   &::before {
     background-color: inherit;
@@ -34,4 +37,17 @@ export const ClippedSection = styled.section<ClippedSectionProps>`
       );
     }
   }
-`;
+  /* &::after {
+    @media (min-width: 640px) {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -40px;
+      height: 5px;
+      width: 100%;
+      background: #e56e0f;
+      transform: ${(props) =>
+    props.windowWidth ? `rotate(-${(1440 / props.windowWidth) * 3}deg)` : 'none'};
+    }
+  } */
+`);

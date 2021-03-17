@@ -4,11 +4,14 @@ import Arrow from '../utils/arrow/Arrow';
 import { Icon } from 'coinmarketcap-cryptocurrency-icons';
 
 interface CryptoProps {
-  crypto: CryptoData;
+  crypto?: CryptoData;
   animate?: string;
 }
 
 const CryptoNotInAsset = React.memo<CryptoProps>(({ crypto, animate }) => {
+  if (!crypto) {
+    return null;
+  }
   const { firstCurrency, name, price, pair } = crypto;
   return (
     <li className="flex items-center">

@@ -24,21 +24,34 @@ const RegisterForm = React.memo<Props>(({ handleFlip }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const payload = { username, password };
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      await response.json();
 
-    const { token } = await response.json();
-    if (response.status !== 200) {
-      setError('Credentials not valid');
-    } else {
-      localStorage.setItem('token', token);
-      localStorage.setItem('username', username);
-      router.push('/');
+      const login = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const { token } = await login.json();
+      if (login.status !== 200) {
+        setError('Credentials not valid');
+      } else {
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', username);
+        router.push('/');
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

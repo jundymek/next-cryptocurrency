@@ -84,7 +84,7 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
           <LogoImage className="w-40 h-40 mx-auto" />
           <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">Login</h2>
 
-          <form className="mt-10" method="POST" onSubmit={handleSubmit}>
+          <form className="mt-10 flex flex-col" method="POST" onSubmit={handleSubmit}>
             <label
               htmlFor="username"
               className="block text-xs font-semibold text-gray-600 uppercase"
@@ -134,15 +134,15 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
               Login
             </button>
 
-            <div className="mt-8 sm:mb-4 text-sm float-right">
+            <div className="mt-8 sm:mb-4 text-sm self-end">
               <button type="button" onClick={handleFlip} className="flex-2 underline">
                 Create an Account
               </button>
             </div>
+            {error && <p className="text-red-600">{error}</p>}
           </form>
         </div>
       </div>
-      {error && <p>{error}</p>}
     </LoginWrapper>
   );
 });

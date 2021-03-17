@@ -15,9 +15,9 @@ const Arrow = React.memo<ArrowProps>(({ pair, currentPrice }) => {
   const [arrow, setArrow] = useState<ArrowEnum | undefined>(undefined);
   const [arrowClass, setArrowClass] = useState('');
 
-  const getArrow = async () => {
+  const getArrow = async (signal: AbortSignal) => {
     try {
-      const data = await fetch(`https://api.bitbay.net/rest/trading/stats/${pair}`);
+      const data = await fetch(`https://api.bitbay.net/rest/trading/stats/${pair}`, { signal });
       const res = await data.json();
       const price24h = parseFloat(res.stats.r24h);
 
@@ -34,8 +34,10 @@ const Arrow = React.memo<ArrowProps>(({ pair, currentPrice }) => {
   };
 
   useEffect(() => {
-    getArrow();
-    return () => {};
+    const controller = new AbortController();
+    const { signal } = controller;
+    getArrow(signal);
+    return () => controller.abort();
   }, []);
 
   if (!arrow) return null;

@@ -1,6 +1,4 @@
 import React from 'react';
-// @ts-ignore
-import mockup from '../../assets/mockup1.png';
 
 interface FeatureProps {
   title: string;

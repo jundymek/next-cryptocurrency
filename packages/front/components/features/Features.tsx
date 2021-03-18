@@ -6,7 +6,7 @@ import FeaturesCarousel from './carousel/FeaturesCarousel';
 
 const Features = () => {
   return (
-    <ClippedSection className="bg-black text-gray-100 h-full sm:my-10">
+    <ClippedSection className="bg-black text-gray-100 sm:my-10">
       <FeaturesCarousel>
         <Feature
           title="The world's most popular Bitcoin & cryptocurrency portfolio tracker. Now with trading."

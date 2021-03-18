@@ -9,7 +9,7 @@ interface ClippedSectionProps {
 const DIAGONAL = 80;
 
 export const ClippedSection = memo(styled.section<ClippedSectionProps>`
-  z-index: 0;
+  /* z-index: 100; */
 
   position: relative;
   &::before {
@@ -23,7 +23,7 @@ export const ClippedSection = memo(styled.section<ClippedSectionProps>`
     position: absolute;
     left: 0;
     top: 0;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     @media (min-width: 640px) {
       top: calc(-1 * ${DIAGONAL}px);

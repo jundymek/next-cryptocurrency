@@ -36,20 +36,33 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
 
   const customStyles = {
     option: () => ({
-      borderBottom: '1px dotted pink',
       cursor: 'pointer',
       padding: 10,
-      // width: '500px',
+      color: 'red',
+      '&:hover': {
+        backgroundColor: 'rgba(55, 65, 81, 1);',
+      },
     }),
     control: () => ({
       borderRadius: '0.125rem',
       padding: 10,
       width: '100%',
-      backgroundColor: 'white',
+      backgroundColor: 'rgba(17, 24, 39, .9)',
+      border: '1px solid rgba(229, 231, 235, 1)',
       display: 'flex',
     }),
     valueContainer: () => ({
       width: '100%',
+      color: 'red',
+    }),
+    menu: (_provided: any) => ({
+      ..._provided,
+      backgroundColor: 'rgba(17, 24, 39, 1)',
+      color: 'red',
+    }),
+    placeholder: (_provided: any) => ({
+      ..._provided,
+      color: 'rgba(229, 231, 235, 1)',
     }),
   };
 
@@ -58,9 +71,12 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
       value: item.firstCurrency,
       label: (
         <div className="flex items-center">
-          <CryptoIcon i={item.firstCurrency.toLowerCase()} className="h-6 w-6 rounded-full" />
-          <span className="text-black mx-4">{item.firstCurrency}</span>{' '}
-          <span className="text-black">({item.name})</span>
+          <CryptoIcon
+            i={item.firstCurrency.toLowerCase()}
+            className="h-6 w-6 rounded-full bg-gray-700"
+          />
+          <span className="text-gray-200 mx-4">{item.firstCurrency}</span>{' '}
+          <span className="text-gray-200">({item.name})</span>
         </div>
       ),
     };
@@ -95,10 +111,10 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
 
   return (
     <form
-      className="w-full flex flex-col items-center  py-8 scale-up-center"
+      className="w-full flex flex-col items-center py-4 scale-up-center"
       onSubmit={handleSubmit}
     >
-      <div className="w-full px-4 sm:w-1/2">
+      <div className="w-full px-4 sm:w-1/2 h-full">
         <label id="listbox-label" className="block text-sm font-medium text-white">
           Add selected asset
         </label>
@@ -107,7 +123,7 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
           styles={customStyles}
           placeholder="Select crypto..."
           onChange={handleChange}
-          isSearchable={false}
+          onBlur={(event) => event.preventDefault()}
         />
       </div>
       <div className="flex items-center justify-center relative">

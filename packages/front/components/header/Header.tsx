@@ -8,8 +8,8 @@ const Header = React.memo(() => {
     <header className="py-4 sm:py-10 bg-black">
       <div className="container mx-auto py-2 flex justify-between items-center transform z-10 relative">
         <Link href="/">
-          <a className="p-4 md:m-0 cursor-pointer" title="Cryptocurrences portfolio">
-            <LogoImage className="w-24 h-24 md:w-40 md:h-40" />
+          <a className="p-4 sm:p-0" title="Cryptocurrences portfolio">
+            <LogoImage className="w-20 h-20 sm:w-52 sm:h-52" />
           </a>
         </Link>
 

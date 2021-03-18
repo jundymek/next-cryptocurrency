@@ -20,7 +20,7 @@ const Features = () => {
         />
         <Feature
           title="Account system"
-          text="Every user has personal portfolio. Add new assets to your portfolio using simplest form on earth. Just add items and monitor your assets."
+          text="Every user has personal portfolio. You can add new assets to your portfolio using simplest form on earth. Just add items and monitor your assets."
           img={mockup2}
         />
         <Feature

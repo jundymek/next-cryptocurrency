@@ -6,7 +6,7 @@ import bgImage from '../../assets/bg_circle.svg';
 
 const About = () => {
   return (
-    <ClippedSection className="bg-gray-700 text-white h-full relative pb-10" bgImage={bgImage}>
+    <ClippedSection className="bg-gray-700 h-full relative pb-10" bgImage={bgImage}>
       <div className="container mx-auto relative overflow-hidden">
         <div className="sm:w-1/2 px-2 mx-auto flex flex-col items-center justify-center">
           <h3 className="text-2xl my-4 text-blue-500">Few words about...</h3>
@@ -25,7 +25,7 @@ const About = () => {
               className="rounded-full w-16 h-16"
             />
             <div className="px-6">
-              <p className="text-lg font-bold tracking-widest ">jundymek</p>
+              <p className="text-lg font-bold tracking-widest text-gray-100">jundymek</p>
               <p className="text-gray-400 text-sm">Frontend developer</p>
             </div>
           </div>

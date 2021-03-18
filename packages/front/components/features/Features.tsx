@@ -4,24 +4,29 @@ import { ClippedSection } from '../shared/styledComponents/ClippedSection';
 import Feature from './Feature';
 import FeaturesCarousel from './carousel/FeaturesCarousel';
 
+// @ts-ignore
+import mockup1 from '../../assets/mockup1.png';
+// @ts-ignore
+import mockup2 from '../../assets/mockup2.png';
+
 const Features = () => {
   return (
     <ClippedSection className="bg-black text-gray-100 sm:my-10">
       <FeaturesCarousel>
         <Feature
-          title="The world's most popular Bitcoin & cryptocurrency portfolio tracker. Now with trading."
-          text="Track your portfolio, get Blockfolio Signal updates from top teams, and buy and sell
-          crypto with zero fees."
+          title="The world's most popular Bitcoin & cryptocurrency portfolio tracker. Without any redundant options."
+          text="Create your acount and track your portfolio. It is simple as that."
+          img={mockup1}
         />
         <Feature
-          title="Connect to Blockfolio with your favorite messaging apps"
-          text="Automatically receive the latest real-time Blockfolio Signal updates and pricing straight
-              to your Slack groups"
+          title="Account system"
+          text="Every user has personal portfolio. Add new assets to your portfolio using simplest form on earth. Just add items and monitor your assets."
+          img={mockup2}
         />
         <Feature
-          title="3 feature"
-          text="Automatically receive the latest real-time Blockfolio Signal updates and pricing straight
-              to your Slack groups"
+          title="Nothing more..."
+          text="It has no signals, no trade options. Nothing but your personal portfolio tracker. Monitor your portfolio without beeing disctupted by any redundant options."
+          img={mockup1}
         />
       </FeaturesCarousel>
     </ClippedSection>

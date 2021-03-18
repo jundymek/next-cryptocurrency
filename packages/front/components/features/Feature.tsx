@@ -1,26 +1,29 @@
 import React from 'react';
-import styled from 'styled-components';
+// @ts-ignore
+import mockup from '../../assets/mockup1.png';
 
 interface FeatureProps {
   title: string;
   text: string;
+  img: string;
 }
 
-const StyledDiv = styled.div`
-  scroll-snap-align: center;
-`;
-
-const Feature = ({ title, text }: FeatureProps) => {
+const Feature = ({ title, text, img }: FeatureProps) => {
   return (
-    <StyledDiv className="flex flex-col  justify-center items-center my-4">
-      <div className="p-4  sm:w-1/2 relative">
-        <span className="absolute top-0 left-4 uppercase mb-2 text-sm text-gray-400">
-          Key features
-        </span>
-        <h2 className="font-bold text-2xl sm:text-5xl tracking-wide pt-2">{title}</h2>
-        <p className="my-4 text-gray-400 text-md sm:text-2xl">{text}</p>
+    <div className="flex flex-col sm:flex-row items-center w-full  mb-12">
+      <div className="flex flex-col justify-center items-center">
+        <div className="p-4 sm:w-2/3 relative">
+          <span className="absolute top-0 left-4 uppercase mb-2 text-sm text-gray-400">
+            Key features
+          </span>
+          <h2 className="font-bold text-2xl sm:text-5xl tracking-wide pt-2">{title}</h2>
+          <p className="my-4 text-gray-400 text-md sm:text-2xl">{text}</p>
+        </div>
       </div>
-    </StyledDiv>
+      <div className="w-1/3">
+        <img src={img} alt="" className="max-w-96 max-h-96" />
+      </div>
+    </div>
   );
 };
 

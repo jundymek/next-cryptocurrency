@@ -24,33 +24,40 @@ const LoginLogout = () => {
         <div className="flex flex-col items-end">
           <div className="text-xs text-gray-300 flex flex-col justify-center items-center">
             <div title={username}>
-              <LoggedUserIcon className="w-14 h-14" />
+              <LoggedUserIcon className="w-24 sm:w-14 h-24 sm:h-14" />
             </div>
-            <button className="text-red-400 underline text-xs" onClick={handleLogout}>
+            <button
+              className="text-red-400 underline text-2xl sm:text-sm mt-10 sm:mt-2"
+              onClick={handleLogout}
+            >
               Logout
             </button>
           </div>
         </div>
       ) : (
         <div className="flex flex-col items-center">
-          <UserIcon className="w-14 h-14" />
-          <div className="text-gray-200">
+          <UserIcon className="w-24 sm:w-14 h-24 sm:h-14" />
+          <div className="text-gray-200 mt-10 sm:mt-2 flex flex-col items-center justify-center sm:block">
             <Link
               href={{
                 pathname: '/login',
                 query: { isRegisterOpen: false },
               }}
             >
-              <span className="text-xs text-yellow-500 underline cursor-pointer">Log in</span>
+              <span className="text-2xl sm:text-sm text-yellow-500 underline cursor-pointer">
+                Log in
+              </span>
             </Link>{' '}
-            <span className="text-xs mx-2">or </span>
+            <span className="text-xs mx-2 py-4 sm:py-0">or </span>
             <Link
               href={{
                 pathname: '/login',
                 query: { isRegisterOpen: true },
               }}
             >
-              <span className="text-xs text-blue-500 underline cursor-pointer">Register</span>
+              <span className="text-2xl sm:text-sm text-blue-500 underline cursor-pointer">
+                Register
+              </span>
             </Link>
           </div>
         </div>

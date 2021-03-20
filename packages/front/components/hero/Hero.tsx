@@ -12,7 +12,7 @@ const Hero = () => {
         </h2>
         <p className="mt-4 text-gray-400 text-md sm:text-2xl leading-relaxed">
           Sign up, add cryptos to your portfolio and monitor your wallet ballance in real time. No
-          redundant opions - no pain.
+          redundant options - no pain.
         </p>
       </div>
     </section>

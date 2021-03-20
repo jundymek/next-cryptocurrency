@@ -21,11 +21,11 @@ const StyledMenu = styled.nav<MenuProps>`
   left: 0;
   transition: transform 0.3s ease-in-out;
 
-  @media (min-width: 576px) {
+  @media (min-width: 640px) {
     display: none;
   }
 
-  @media (max-width: 576px) {
+  @media (max-width: 640px) {
     width: 100%;
   }
 `;

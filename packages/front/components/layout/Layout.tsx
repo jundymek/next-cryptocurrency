@@ -1,9 +1,10 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import MobileMenu from '../mobileMenu/MobileMenu';
 import Hamburger from '../mobileMenu/Hamburger';
+import { useWindowWidth } from '../../customHooks/useWindowWidth';
 
 interface LayoutProps {
   readonly children: ReactNode;
@@ -12,6 +13,13 @@ interface LayoutProps {
 
 const Layout = React.memo<LayoutProps>(({ children, title }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const windowWidth = useWindowWidth();
+
+  useEffect(() => {
+    if (windowWidth > 640) {
+      setIsMobileMenuOpen(false);
+    }
+  }, [windowWidth]);
   return (
     <>
       <Head>

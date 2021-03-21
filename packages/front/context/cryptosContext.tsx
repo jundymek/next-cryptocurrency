@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useSWR from 'swr';
 
 interface CryptosProviderProps {
@@ -16,20 +16,26 @@ interface CryptoData {
 interface CryptosStateProps {
   cryptos: CryptoData[] | undefined;
   error: Error | undefined;
+  isLoading: boolean;
 }
 
 const CryptosStateContext = React.createContext<CryptosStateProps>({
   cryptos: undefined,
   error: undefined,
+  isLoading: false,
 });
 
 function CryptosProvider({ children }: CryptosProviderProps) {
+  const [isLoading, setIsLoading] = useState(false);
   const fetcher = async (url: string) => {
+    setIsLoading(true);
     const res = await fetch(url);
     if (!res.ok) {
       const error = new Error('An error occurred while fetching the data.');
+      setIsLoading(false);
       throw error;
     }
+    setIsLoading(false);
     return res.json();
   };
 
@@ -38,7 +44,7 @@ function CryptosProvider({ children }: CryptosProviderProps) {
   });
   const cryptos = data;
 
-  const state = { cryptos, error };
+  const state = { cryptos, error, isLoading };
 
   return <CryptosStateContext.Provider value={state}>{children}</CryptosStateContext.Provider>;
 }

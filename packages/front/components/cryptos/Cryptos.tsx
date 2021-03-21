@@ -31,7 +31,9 @@ const Cryptos = React.memo(() => {
   ];
 
   const { token } = useAuthState();
-  const { cryptos, error } = useCryptosState();
+  const { cryptos, error, isLoading } = useCryptosState();
+
+  console.log(isLoading);
 
   if (error) return <div>{error}Jakiś tam error na serwerze</div>;
 
@@ -46,7 +48,7 @@ const Cryptos = React.memo(() => {
       </ClippedSection>
     );
 
-  const visibleCryptos = cryptos.filter((item: CryptoData) =>
+  const visibleCryptos = cryptos?.filter((item: CryptoData) =>
     mainPageCurrences.find((el) => el.symbol === item.firstCurrency),
   );
 
@@ -56,7 +58,7 @@ const Cryptos = React.memo(() => {
         {token ? (
           <CryptosAuthUser cryptos={cryptos} />
         ) : (
-          <CryptosNotAuthUser visibleCryptos={visibleCryptos} />
+          <CryptosNotAuthUser visibleCryptos={visibleCryptos} isLoading={isLoading} />
         )}
       </div>
     </ClippedSection>

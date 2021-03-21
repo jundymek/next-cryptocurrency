@@ -8,7 +8,7 @@ import { CryptoData } from '../Cryptos';
 import AddNewAssetForm from './addNewAssetForm/AddNewAssetForm';
 
 interface CryptoInAssetUserProps {
-  cryptos: CryptoData[];
+  cryptos?: CryptoData[];
 }
 
 const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
@@ -19,6 +19,10 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
     return assets?.filter((item) => item.currencyName === currency)[0];
   };
 
+  if (isLoading || !cryptos) {
+    return <LoadingSpinner />;
+  }
+
   const notInAssets = cryptos?.filter(
     (item: CryptoData) => !assets?.some((asset) => asset.currencyName === item.firstCurrency),
   );
@@ -27,10 +31,6 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
     setIsAddFormVisible(!isAddFormVisible);
   };
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <div className="w-full flex flex-col">
       <div className="w-full p-2 text-white z-10 flex flex-col justify-center items-center">
@@ -38,18 +38,24 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
           <h2 className="text-xl md:text-4xl">Your assets</h2>
           <Total />
         </div>
-        <ul className="list-none mt-4 py-2 w-full ms:w-2/3 mx-auto flex flex-wrap justify-center">
-          {cryptos?.map((item: CryptoData) => (
-            <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
-          ))}
-        </ul>
-        {notInAssets.length > 0 && !isAddFormVisible && (
-          <div className="mt-8 md:self-end">
-            <ActionButton handleFunction={toggleAddFormVisible} text="add new asset" />
-          </div>
-        )}
-        {isAddFormVisible && (
-          <AddNewAssetForm cryptos={notInAssets} toggleAddFormVisible={toggleAddFormVisible} />
+        {isLoading || !cryptos ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <ul className="list-none mt-4 py-2 w-full ms:w-2/3 mx-auto flex flex-wrap justify-center">
+              {cryptos?.map((item: CryptoData) => (
+                <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
+              ))}
+            </ul>
+            {notInAssets.length > 0 && !isAddFormVisible && (
+              <div className="mt-8 md:self-end">
+                <ActionButton handleFunction={toggleAddFormVisible} text="add new asset" />
+              </div>
+            )}
+            {isAddFormVisible && (
+              <AddNewAssetForm cryptos={notInAssets} toggleAddFormVisible={toggleAddFormVisible} />
+            )}
+          </>
         )}
       </div>
     </div>

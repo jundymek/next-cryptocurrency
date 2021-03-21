@@ -14,7 +14,7 @@ const Features = () => {
     <ClippedSection className="bg-black text-gray-100 sm:my-10">
       <FeaturesCarousel>
         <Feature
-          title="The world's most popular Bitcoin & cryptocurrency portfolio tracker. Without any redundant options."
+          title="Simplest Bitcoin & cryptocurrency portfolio tracker. Without any redundant options."
           text="Create your acount and track your portfolio. It is simple as that."
           img={mockup1}
         />

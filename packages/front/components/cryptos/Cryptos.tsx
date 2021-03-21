@@ -2,7 +2,6 @@ import React from 'react';
 import CryptosAuthUser from './cryptosAuthUser/CryptosAuthUser';
 import CryptosNotAuthUser from './CryptosNotAuthUser';
 import { useAuthState } from '../../context/authContext';
-import LoadingSpinner from '../shared/loadingSpinner/LoadingSpinner';
 import { ClippedSection } from '../shared/styledComponents/ClippedSection';
 // @ts-ignore
 import bgImage from '../../assets/btc_wallet.jpg';
@@ -38,15 +37,6 @@ const Cryptos = React.memo(() => {
   if (error) return <div>{error}Jakiś tam error na serwerze</div>;
 
   const width = useWindowWidth();
-
-  if (!cryptos)
-    return (
-      <ClippedSection className="py-6 sm:py-0 bg-black">
-        <div className="flex w-full justify-center bg-black min-h-screen">
-          <LoadingSpinner />
-        </div>
-      </ClippedSection>
-    );
 
   const visibleCryptos = cryptos?.filter((item: CryptoData) =>
     mainPageCurrences.find((el) => el.symbol === item.firstCurrency),

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import LogoImage from '../header/LogoImage';
 import Link from 'next/link';
 import styled from 'styled-components';
+// @ts-ignore
+import logo from '../../assets/logo1.svg';
 
 const LoginWrapper = styled.div`
   position: absolute;
@@ -81,20 +82,15 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
             </a>
           </Link>
 
-          <LogoImage className="w-40 h-40 mx-auto" />
+          <img src={logo} alt="Logo" className="max-w-20 max-h-20 sm:max-w-28 sm:max-h-28" />
           <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">Login</h2>
 
           <form className="mt-10 flex flex-col" method="POST" onSubmit={handleSubmit}>
-            <label
-              htmlFor="username"
-              className="block text-xs font-semibold text-gray-600 uppercase"
-            >
-              Username
-            </label>
             <input
               id="username"
               type="text"
               name="username"
+              aria-label="username"
               placeholder="username"
               autoComplete="username"
               className="block w-full py-3 px-1 mt-2 
@@ -104,17 +100,11 @@ const LoginForm = React.memo<Props>(({ handleFlip }) => {
               required
               onChange={handleUsernameChange}
             />
-
-            <label
-              htmlFor="password"
-              className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
-            >
-              Password
-            </label>
             <input
               id="password"
               type="password"
               name="password"
+              aria-label="password"
               placeholder="password"
               autoComplete="current-password"
               className="block w-full py-3 px-1 mt-2 mb-4

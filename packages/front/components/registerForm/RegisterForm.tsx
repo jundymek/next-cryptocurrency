@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import LogoImage from '../header/LogoImage';
+// @ts-ignore
+import logo from '../../assets/logo1.svg';
 
 interface Props {
   handleFlip?: () => void;
@@ -79,20 +80,15 @@ const RegisterForm = React.memo<Props>(({ handleFlip }) => {
               />
             </svg>
           </Link>
-          <LogoImage className="w-40 h-40 mx-auto" />
+          <img src={logo} alt="Logo" className="max-w-20 max-h-20 sm:max-w-28 sm:max-h-28" />
           <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">Register</h2>
 
           <form className="mt-10" method="POST" onSubmit={handleSubmit}>
-            <label
-              htmlFor="username"
-              className="block text-xs font-semibold text-gray-600 uppercase"
-            >
-              Username
-            </label>
             <input
               id="reg_username"
               type="text"
               name="username"
+              aria-label="username"
               placeholder="username"
               autoComplete="username"
               className="block w-full py-3 px-1 mt-2 
@@ -102,17 +98,11 @@ const RegisterForm = React.memo<Props>(({ handleFlip }) => {
               required
               onChange={handleUsernameChange}
             />
-
-            <label
-              htmlFor="password"
-              className="block mt-2 text-xs font-semibold text-gray-600 uppercase"
-            >
-              Password
-            </label>
             <input
               id="reg_password"
               type="password"
               name="password"
+              aria-label="password"
               placeholder="password"
               autoComplete="current-password"
               className="block w-full py-3 px-1 mt-2 mb-4

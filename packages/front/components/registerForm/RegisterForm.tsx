@@ -61,8 +61,8 @@ const RegisterForm = React.memo<Props>(({ handleFlip }) => {
       <div className="grid place-items-center mx-2">
         <div
           className="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
-              px-6 py-10 sm:px-10 sm:py-6 
-              bg-white rounded-lg shadow-md lg:shadow-lg"
+          px-6 py-10 sm:px-10 sm:py-6 max-w-md 
+          bg-white rounded-lg shadow-md lg:shadow-lg"
         >
           <Link href="/">
             <svg
@@ -83,7 +83,7 @@ const RegisterForm = React.memo<Props>(({ handleFlip }) => {
           <img src={logo} alt="Logo" className="max-w-20 max-h-20 sm:max-w-28 sm:max-h-28" />
           <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">Register</h2>
 
-          <form className="mt-10" method="POST" onSubmit={handleSubmit}>
+          <form className="mt-10 flex flex-col" method="POST" onSubmit={handleSubmit}>
             <input
               id="reg_username"
               type="text"
@@ -115,14 +115,14 @@ const RegisterForm = React.memo<Props>(({ handleFlip }) => {
 
             <button
               type="submit"
-              className="w-full py-3 mt-10 bg-gray-800 rounded-sm
+              className="w-3/4 mx-auto py-3 mt-10 bg-yellow-600 rounded-sm 
                       font-medium text-white uppercase
                       focus:outline-none hover:bg-gray-700 hover:shadow-none"
             >
               Register
             </button>
 
-            <div className="mt-8 sm:mb-4 text-sm float-right">
+            <div className="mt-8 sm:mb-4 text-sm self-end">
               <button type="button" onClick={handleFlip} className="flex-2 underline">
                 Log in
               </button>

@@ -24,6 +24,7 @@ export async function createUserHandler(request: Hapi.Request, h: Hapi.ResponseT
     });
     return h.response(newUser).code(201);
   } catch (err) {
+    console.log(err);
     return handlePrismaError(err);
   }
 }

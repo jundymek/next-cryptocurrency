@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import LoginForm from '../../components/loginForm/LoginForm';
-import RegisterForm from '../../components/registerForm/RegisterForm';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import AuthForm from '../../components/authForm/AuthForm';
 
 interface Props {
   isRegisterOpen: boolean;
@@ -65,10 +64,10 @@ const Login = () => {
     <Container className="bg-black">
       <InnerContainer isRegisterOpen={isRegisterOpen}>
         <LoginWrapper className="bg-black">
-          <LoginForm handleFlip={handleFlip} />
+          <AuthForm handleFlip={handleFlip} variant="login" />
         </LoginWrapper>
         <RegisterWrapper>
-          <RegisterForm handleFlip={handleFlip} />
+          <AuthForm handleFlip={handleFlip} variant="register" />
         </RegisterWrapper>
       </InnerContainer>
     </Container>

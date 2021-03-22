@@ -19,7 +19,7 @@ module.exports = {
     translate: ['responsive', 'hover', 'focus', 'group-hover'],
     scale: ['responsive', 'hover', 'focus', 'group-hover'],
     opacity: ['group-hover'],
-    backgroundColor: ['group-focus', 'hover'],
+    backgroundColor: ['group-focus', 'hover', 'active'],
     extend: {},
   },
   plugins: [],

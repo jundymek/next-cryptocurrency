@@ -32,8 +32,6 @@ const Cryptos = React.memo(() => {
   const { token } = useAuthState();
   const { cryptos, error, isLoading } = useCryptosState();
 
-  console.log(isLoading);
-
   if (error) return <div>{error}Jakiś tam error na serwerze</div>;
 
   const width = useWindowWidth();

@@ -15,6 +15,23 @@ const LoginWrapper = styled.div`
   backface-visibility: hidden;
 `;
 
+interface LabelProps {
+  usernameInputFocused: boolean;
+  passwordInputFocused: boolean;
+}
+
+const StyledUsernameLabel = styled.label<Partial<LabelProps>>`
+  color: ${(props) => props.usernameInputFocused && '#888888'};
+  transition: 0.3s;
+  transform: ${(props) => props.usernameInputFocused && 'translateY(-1.75rem) scale(.9)'};
+`;
+
+const StyledPasswordLabel = styled.label<Partial<LabelProps>>`
+  color: ${(props) => props.passwordInputFocused && '#888888'};
+  transition: 0.3s;
+  transform: ${(props) => props.passwordInputFocused && 'translateY(-1.75rem) scale(.9)'};
+`;
+
 interface AuthFormProps {
   handleFlip?: () => void;
   variant: 'login' | 'register';
@@ -24,6 +41,8 @@ const AuthForm = React.memo<AuthFormProps>(({ variant, handleFlip }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | undefined>(undefined);
+  const [usernameInputFocused, setUsernameInputFocused] = useState(false);
+  const [passwordInputFocused, setPasswordInputFocused] = useState(false);
 
   const router = useRouter();
 
@@ -37,40 +56,21 @@ const AuthForm = React.memo<AuthFormProps>(({ variant, handleFlip }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const payload = { username, password };
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
-
-    console.log(response);
-
-    const { token } = await response.json();
-    if (response.status !== 200) {
-      setError('Credentials not valid');
+    if (variant === 'register') {
+      try {
+        await register(payload);
+        login(payload);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
-      localStorage.setItem('token', token);
-      localStorage.setItem('username', username);
-      router.push('/');
+      login(payload);
     }
   };
 
-  const handleSubmitRegister = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const payload = { username, password };
+  async function login(payload: { username: string; password: string }) {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      await response.json();
-
-      const login = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,9 +78,12 @@ const AuthForm = React.memo<AuthFormProps>(({ variant, handleFlip }) => {
         body: JSON.stringify(payload),
       });
 
-      const { token } = await login.json();
-      if (login.status !== 200) {
-        setError('Credentials not valid');
+      const { token } = await response.json();
+      if (response.status === 404) {
+        return setError('Credentials not valid');
+      }
+      if (response.status !== 200) {
+        setError('Something went wrong');
       } else {
         localStorage.setItem('token', token);
         localStorage.setItem('username', username);
@@ -89,7 +92,27 @@ const AuthForm = React.memo<AuthFormProps>(({ variant, handleFlip }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
+
+  async function register(payload: { username: string; password: string }) {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      const res = await response.json();
+      console.log(res);
+      if (res.statusCode === 409) {
+        setError('User already exist');
+        throw new Error('User already exist');
+      }
+    } catch (error) {
+      throw new Error('dupa');
+    }
+  }
 
   return (
     <LoginWrapper>
@@ -97,7 +120,7 @@ const AuthForm = React.memo<AuthFormProps>(({ variant, handleFlip }) => {
         <div
           className="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
           px-6 py-10 sm:px-10 sm:py-6 max-w-md 
-          bg-white rounded-lg shadow-md lg:shadow-lg"
+          bg-white rounded-lg shadow-md lg:shadow-lg text-g"
         >
           <Link href="/">
             <a title="Home page">
@@ -119,42 +142,54 @@ const AuthForm = React.memo<AuthFormProps>(({ variant, handleFlip }) => {
           </Link>
 
           <img src={logo} alt="Logo" className="max-w-20 max-h-20 sm:max-w-28 sm:max-h-28" />
-          <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">Login</h2>
+          <h2 className="text-center font-semibold text-3xl lg:text-4xl text-gray-800">
+            {variant === 'login' ? 'Login' : 'Register'}
+          </h2>
 
-          <form
-            className="mt-10 flex flex-col"
-            method="POST"
-            onSubmit={variant === 'login' ? handleSubmit : handleSubmitRegister}
-          >
-            <input
-              id="username"
-              type="text"
-              name="username"
-              aria-label="username"
-              placeholder="username"
-              autoComplete="username"
-              className="block w-full py-3 px-1 mt-2 
-                  text-gray-800 appearance-none 
-                  border-b-2 border-gray-100
-                  focus:text-gray-500 focus:outline-none focus:border-gray-200"
-              required
-              onChange={handleUsernameChange}
-            />
-            <input
-              id="password"
-              type="password"
-              name="password"
-              aria-label="password"
-              placeholder="password"
-              autoComplete="current-password"
-              className="block w-full py-3 px-1 mt-2 mb-4
-                  text-gray-800 appearance-none 
-                  border-b-2 border-gray-100
-                  focus:text-gray-500 focus:outline-none focus:border-gray-200"
-              required
-              onChange={handlePasswordChange}
-            />
-
+          <form className="mt-10 flex flex-col" method="POST" onSubmit={handleSubmit}>
+            <div className="relative">
+              <StyledUsernameLabel
+                usernameInputFocused={usernameInputFocused}
+                className="absolute left-0 top-6 text-gray-800"
+                htmlFor={`${variant}-username`}
+              >
+                Username
+              </StyledUsernameLabel>
+              <input
+                id={`${variant}-username`}
+                type="text"
+                name="username"
+                className="block w-full py-3 px-1 mt-2 
+                    text-gray-800 appearance-none 
+                    border-b-2 border-gray-100
+                     focus:outline-none focus:border-gray-200"
+                required
+                onChange={handleUsernameChange}
+                onFocus={() => setUsernameInputFocused(true)}
+                onBlur={() => !username.length && setUsernameInputFocused(false)}
+              />
+            </div>
+            <div className="relative mt-2">
+              <StyledPasswordLabel
+                passwordInputFocused={passwordInputFocused}
+                className="absolute left-0 top-6 text-gray-800"
+                htmlFor={`${variant}-password`}
+              >
+                Password
+              </StyledPasswordLabel>
+              <input
+                type="password"
+                name="password"
+                className="block w-full py-3 px-1 mt-2 mb-4
+                    text-gray-800 appearance-none 
+                    border-b-2 border-gray-100
+                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                required
+                onChange={handlePasswordChange}
+                onFocus={() => setPasswordInputFocused(true)}
+                onBlur={() => !password.length && setPasswordInputFocused(false)}
+              />
+            </div>
             <button
               type="submit"
               className="w-3/4 mx-auto py-3 mt-10 bg-yellow-600 rounded-sm 

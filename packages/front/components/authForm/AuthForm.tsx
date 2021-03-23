@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 // @ts-ignore
 import logo from '../../assets/logo1.svg';
+import { login } from './utils/login';
+import { register } from './utils/register';
 
 const LoginWrapper = styled.div`
   position: absolute;
@@ -57,60 +59,25 @@ const AuthForm = React.memo<AuthFormProps>(({ variant, handleFlip }) => {
     e.preventDefault();
     const payload = { username, password };
     if (variant === 'register') {
-      try {
-        await register(payload);
-        login(payload);
-      } catch (error) {
-        console.log(error);
+      const res = await register(payload);
+      if (res === 409) {
+        setError('User already exist');
+      } else {
+        processLogin(payload);
       }
     } else {
-      login(payload);
+      processLogin(payload);
     }
   };
 
-  async function login(payload: { username: string; password: string }) {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const { token } = await response.json();
-      if (response.status === 404) {
-        return setError('Credentials not valid');
-      }
-      if (response.status !== 200) {
-        setError('Something went wrong');
-      } else {
-        localStorage.setItem('token', token);
-        localStorage.setItem('username', username);
-        router.push('/');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function register(payload: { username: string; password: string }) {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      const res = await response.json();
-      console.log(res);
-      if (res.statusCode === 409) {
-        setError('User already exist');
-        throw new Error('User already exist');
-      }
-    } catch (error) {
-      throw new Error('dupa');
+  async function processLogin(payload: { username: string; password: string }) {
+    const response = await login(payload);
+    if (response === 404) {
+      setError('Credentials not valid');
+    } else if (response !== 200) {
+      setError('Something went wrong');
+    } else {
+      router.push('/');
     }
   }
 

@@ -14,25 +14,23 @@ const CryptoNotInAsset = React.memo<CryptoProps>(({ crypto, animate }) => {
   }
   const { firstCurrency, name, price, pair } = crypto;
   return (
-    <li className="flex items-center">
-      <div
-        className={`flex rounded-md items-center shadow-xl  py-4 w-full max-w-md mx-auto text-gray-200 bg-gray-800 m-2 p-2 ${animate}`}
-      >
-        <div className="flex justify-between items-center w-full">
-          <div className="flex items-center">
-            <div className="mr-2">
-              <Icon i={firstCurrency.toLowerCase()} size={32} />
-            </div>
-            <div>
-              <p className="font-mono">{name}</p>
-              <p className="font-bold text-xs">{firstCurrency}</p>
-            </div>
+    <li
+      className={`flex rounded-md items-center shadow-xl py-4 max-w-md sm:ml-auto text-gray-200 bg-gray-800 m-2 p-2 ${animate}`}
+    >
+      <div className="flex justify-between items-center w-full">
+        <div className="flex items-center">
+          <div className="mr-2">
+            <Icon i={firstCurrency.toLowerCase()} size={32} />
           </div>
-          <p className="font-mono text-sm md:text-xl">
-            {price} <span className="text-xs">PLN</span>
-          </p>
-          <Arrow pair={pair} currentPrice={price} />
+          <div>
+            <p className="font-mono">{name}</p>
+            <p className="font-bold text-xs">{firstCurrency}</p>
+          </div>
         </div>
+        <p className="font-mono text-sm md:text-xl">
+          {price} <span className="text-xs">PLN</span>
+        </p>
+        <Arrow pair={pair} currentPrice={price} />
       </div>
     </li>
   );

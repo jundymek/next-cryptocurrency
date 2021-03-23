@@ -27,7 +27,7 @@ const LoginLogout = () => {
               <LoggedUserIcon className="w-24 sm:w-14 h-24 sm:h-14" />
             </div>
             <button
-              className="text-red-400 underline text-2xl sm:text-sm mt-10 sm:mt-2"
+              className="text-yellow-600 underline text-2xl sm:text-sm mt-10 sm:mt-2"
               onClick={handleLogout}
             >
               Logout

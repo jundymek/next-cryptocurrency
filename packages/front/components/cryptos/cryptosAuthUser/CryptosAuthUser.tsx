@@ -42,13 +42,13 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
           <LoadingSpinner />
         ) : (
           <>
-            <ul className="list-none mt-4 py-2 w-full ms:w-2/3 mx-auto flex flex-wrap justify-center">
+            <ul className="list-none mt-4 py-2 w-full mx-auto flex flex-wrap justify-center">
               {cryptos?.map((item: CryptoData) => (
                 <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
               ))}
             </ul>
             {notInAssets.length > 0 && !isAddFormVisible && (
-              <div className="mt-8 md:self-end">
+              <div className="mt-4 sm:mt-8 sm:self-end">
                 <ActionButton handleFunction={toggleAddFormVisible} text="add new asset" />
               </div>
             )}

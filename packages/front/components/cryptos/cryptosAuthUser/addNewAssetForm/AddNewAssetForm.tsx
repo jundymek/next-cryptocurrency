@@ -140,17 +140,18 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
           name="amount"
           step="0.000001"
           onChange={handleAmountChange}
+          disabled={selectedAsset === ''}
           onFocus={() => setInputFocused(true)}
           onBlur={() => !amount && setInputFocused(false)}
           className="text-white appearance-none text-center text-2xl w-full h-14
                           border-b-2 border-gray-500 bg-transparent group
-                          focus:text-green-500 focus:outline-none focus:border-white"
+                          focus:text-yellow-500 focus:outline-none focus:border-white"
           required
         />
       </div>
-      <div className="grid grid-cols-2 gap-4 mt-8">
+      <div className="flex w-4/5 sm:w-auto sm:grid grid-cols-2 gap-4 mt-8">
         <ActionButton type="submit" text="submit" />
-        <ActionButton handleFunction={toggleAddFormVisible} text="cancel" />
+        <ActionButton handleFunction={toggleAddFormVisible} text="cancel" variant="cancel" />
       </div>
     </form>
   );

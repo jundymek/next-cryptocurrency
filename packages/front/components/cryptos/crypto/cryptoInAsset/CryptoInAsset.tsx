@@ -12,7 +12,6 @@ import { Icon } from '@iconify/react';
 import squareEditOutline from '@iconify/icons-mdi/square-edit-outline';
 import deleteOutline from '@iconify/icons-mdi/delete-outline';
 import { useWindowWidth } from '../../../../customHooks/useWindowWidth';
-import AssetTable from './AssetTable';
 
 interface CryptoProps {
   crypto: CryptoData;

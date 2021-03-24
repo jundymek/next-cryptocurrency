@@ -4,7 +4,6 @@ import ActionButton from '../../shared/button/ActionButton';
 import LoadingSpinner from '../../shared/loadingSpinner/LoadingSpinner';
 import Total from '../../total/Total';
 import AssetTable from '../crypto/cryptoInAsset/AssetTable';
-import CryptoInAsset from '../crypto/cryptoInAsset/CryptoInAsset';
 import { CryptoData } from '../Cryptos';
 import AddNewAssetForm from './addNewAssetForm/AddNewAssetForm';
 
@@ -15,10 +14,6 @@ interface CryptoInAssetUserProps {
 const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
   const [isAddFormVisible, setIsAddFormVisible] = useState(false);
   const { assets, isLoading } = useAssetState();
-
-  const getAsset = (currency: string) => {
-    return assets?.filter((item) => item.currencyName === currency)[0];
-  };
 
   if (isLoading || !cryptos) {
     return <LoadingSpinner />;
@@ -44,11 +39,6 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
         ) : (
           <>
             <AssetTable cryptos={cryptos} assets={assets} />
-            {/* <ul className="list-none mt-4 py-2 w-full mx-auto flex flex-wrap justify-center">
-              {cryptos?.map((item: CryptoData) => (
-                <CryptoInAsset key={item.name} crypto={item} asset={getAsset(item.firstCurrency)} />
-              ))}
-            </ul> */}
             {notInAssets.length > 0 && !isAddFormVisible && (
               <div className="mt-4 sm:mt-8 sm:self-end">
                 <ActionButton handleFunction={toggleAddFormVisible} text="add new asset" />

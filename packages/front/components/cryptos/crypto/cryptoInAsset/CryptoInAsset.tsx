@@ -12,6 +12,7 @@ import { Icon } from '@iconify/react';
 import squareEditOutline from '@iconify/icons-mdi/square-edit-outline';
 import deleteOutline from '@iconify/icons-mdi/delete-outline';
 import { useWindowWidth } from '../../../../customHooks/useWindowWidth';
+import AssetTable from './AssetTable';
 
 interface CryptoProps {
   crypto: CryptoData;
@@ -104,38 +105,40 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
   if (asset?.amount) {
     if (!isEditVisible) {
       return (
-        <li className="w-full h-24 bg-gray-900  bg-opacity-80 flex items-center justify-between my-2 bg-transparent rounded-md px-4 hover:bg-gray-700 transition-colors duration-200 text-gray-300">
-          <div className="flex items-center w-4/5 justify-between text-sm">
-            <div className="flex items-center">
-              <CryptoIcon i={firstCurrency.toLowerCase()} size={cryptoIconSize} />
-              <h3 className="lg:text-lg  ml-4 w-20 md:w-40">
-                {name} <span className="text-md font-bold ">({firstCurrency})</span>
-              </h3>
-              <span className="md:text-3xl lg:text-4xl ml-2 md:ml-12 font-sans">
-                {asset.amount}
+        <>
+          <li className="w-full h-24 bg-gray-900  bg-opacity-80 flex items-center justify-between my-2 bg-transparent rounded-md px-4 hover:bg-gray-700 transition-colors duration-200 text-gray-300">
+            <div className="flex items-center w-4/5 justify-between text-sm">
+              <div className="flex items-center">
+                <CryptoIcon i={firstCurrency.toLowerCase()} size={cryptoIconSize} />
+                <h3 className="lg:text-lg  ml-4 w-20 md:w-40">
+                  {name} <span className="text-md font-bold ">({firstCurrency})</span>
+                </h3>
+                <span className="md:text-3xl lg:text-4xl ml-2 md:ml-12 font-sans">
+                  {asset.amount}
+                </span>
+              </div>
+              <span className="ml-4 md:text-3xl lg:text-4xl font-sans ">
+                {parseFloat((asset?.amount * parseFloat(price)).toPrecision(5))} PLN
               </span>
             </div>
-            <span className="ml-4 md:text-3xl lg:text-4xl font-sans ">
-              {parseFloat((asset?.amount * parseFloat(price)).toPrecision(5))} PLN
-            </span>
-          </div>
-          <div className="flex">
-            <button
-              className="text-2xl sm:text-4xl lg:text-6xl md:mr-4 transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
-              onClick={handleToggleEdit}
-              title="Edit"
-            >
-              <Icon icon={squareEditOutline} />
-            </button>
-            <button
-              className="text-2xl sm:text-4xl lg:text-6xl transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
-              onClick={handleOpenDeleteModal}
-              title="Delete"
-            >
-              <Icon icon={deleteOutline} />
-            </button>
-          </div>
-        </li>
+            <div className="flex">
+              <button
+                className="text-2xl sm:text-4xl lg:text-6xl md:mr-4 transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
+                onClick={handleToggleEdit}
+                title="Edit"
+              >
+                <Icon icon={squareEditOutline} className="text-yellow-600" />
+              </button>
+              <button
+                className="text-2xl sm:text-4xl lg:text-6xl transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
+                onClick={handleOpenDeleteModal}
+                title="Delete"
+              >
+                <Icon icon={deleteOutline} className="text-red-600" />
+              </button>
+            </div>
+          </li>
+        </>
       );
     }
     return (

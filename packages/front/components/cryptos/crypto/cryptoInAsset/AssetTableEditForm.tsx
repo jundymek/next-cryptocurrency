@@ -1,23 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Asset, useAssetDispatch } from '../../../../context/assetContext';
+import { useAssetDispatch } from '../../../../context/assetContext';
 import { useAuthState } from '../../../../context/authContext';
-import { CryptoData } from '../../Cryptos';
 import { Icon as CryptoIcon } from 'coinmarketcap-cryptocurrency-icons';
 import { Icon } from '@iconify/react';
 import contentSaveEditOutline from '@iconify/icons-mdi/content-save-edit-outline';
 import closeBoxOutline from '@iconify/icons-mdi/close-box-outline';
+import { FinalAsset } from './AssetTable';
 
 interface AssetTableEditFormProps {
-  crypto: CryptoData;
-  asset: Asset;
+  asset: FinalAsset;
   handleOpenDeleteModal: () => Promise<void>;
   setIsEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
   windowWidth: number;
 }
 
 const AssetTableEditForm = React.memo<AssetTableEditFormProps>(
-  ({ crypto, asset, handleOpenDeleteModal, setIsEditVisible, windowWidth }) => {
-    const { firstCurrency, name, price } = crypto;
+  ({ asset, handleOpenDeleteModal, setIsEditVisible, windowWidth }) => {
+    const { currency, price, id } = asset;
     const inputReference = useRef<HTMLInputElement>(null);
     const [amount, setAmount] = useState(asset.amount);
     const wrapperRef = useRef<HTMLTableRowElement>(null);
@@ -39,7 +38,7 @@ const AssetTableEditForm = React.memo<AssetTableEditFormProps>(
     const handleSubmit = async (e: React.SyntheticEvent) => {
       e.preventDefault();
       if (token) {
-        const payload = { id: asset.id, amount: amount };
+        const payload = { id: id, amount: amount };
         const headers = {
           'Content-Type': 'application/json',
           Authorization: token,
@@ -54,7 +53,7 @@ const AssetTableEditForm = React.memo<AssetTableEditFormProps>(
         } else {
           setAssets((prevState) =>
             prevState.map((item) => {
-              if (item.currencyName === firstCurrency) return { ...item, amount: amount };
+              if (item.currencyName === currency) return { ...item, amount: amount };
               return item;
             }),
           );
@@ -67,7 +66,6 @@ const AssetTableEditForm = React.memo<AssetTableEditFormProps>(
       setAmount(e.target.valueAsNumber);
     };
 
-    // const windowWidth = useWindowWidth();
     const cryptoIconSize = windowWidth < 1024 ? 32 : 64;
 
     return (
@@ -78,19 +76,19 @@ const AssetTableEditForm = React.memo<AssetTableEditFormProps>(
         >
           <td>
             <div className="flex items-center px-4">
-              <CryptoIcon i={firstCurrency.toLowerCase()} size={cryptoIconSize} />
+              <CryptoIcon i={currency.toLowerCase()} size={cryptoIconSize} />
               <h3 className="px-4 sm:w-full">
-                {name} <span className="text-md font-bold ">({firstCurrency})</span>
+                {name} <span className="text-md font-bold ">({currency})</span>
               </h3>
             </div>
           </td>
           <td className="text-center">
             <input
-              id={firstCurrency}
+              id={currency}
               ref={inputReference}
               type="number"
               step="0.000001"
-              name={firstCurrency}
+              name={currency}
               onChange={handleChange}
               defaultValue={asset.amount.toString()}
               className="py-2 px-1 m-4 w-2/3

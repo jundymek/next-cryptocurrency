@@ -3,8 +3,7 @@ import { Icon } from '@iconify/react';
 import { Icon as CryptoIcon } from 'coinmarketcap-cryptocurrency-icons';
 import squareEditOutline from '@iconify/icons-mdi/square-edit-outline';
 import deleteOutline from '@iconify/icons-mdi/delete-outline';
-import { Asset, useAssetDispatch } from '../../../../context/assetContext';
-import { CryptoData } from '../../Cryptos';
+import { useAssetDispatch } from '../../../../context/assetContext';
 import { useWindowWidth } from '../../../../customHooks/useWindowWidth';
 import { useAuthState } from '../../../../context/authContext';
 import { confirmAlert } from 'react-confirm-alert';
@@ -19,7 +18,7 @@ interface AssetTableItemProps {
 
 const AssetTableItem = ({ asset }: AssetTableItemProps) => {
   const [isEditVisible, setIsEditVisible] = useState(false);
-  const { currency, currencyName, amount, price } = asset;
+  const { currency, currencyName, amount, value } = asset;
   const { token } = useAuthState();
   const { setAssets } = useAssetDispatch();
 
@@ -107,9 +106,7 @@ const AssetTableItem = ({ asset }: AssetTableItemProps) => {
               </div>
             </td>
             <td className="text-center">{amount}</td>
-            <td className="text-center">
-              {parseFloat((amount * parseFloat(price)).toPrecision(5))} PLN
-            </td>
+            <td className="text-center">{value} PLN</td>
             <td className="w-12">
               <div className="flex items-center justify-center px-2">
                 <button
@@ -135,7 +132,6 @@ const AssetTableItem = ({ asset }: AssetTableItemProps) => {
     }
     return (
       <AssetTableEditForm
-        crypto={crypto}
         asset={asset}
         handleOpenDeleteModal={handleOpenDeleteModal}
         setIsEditVisible={setIsEditVisible}

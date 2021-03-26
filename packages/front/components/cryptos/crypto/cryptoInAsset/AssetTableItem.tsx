@@ -10,16 +10,16 @@ import { useAuthState } from '../../../../context/authContext';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import AssetTableEditForm from './AssetTableEditForm';
+import { FinalAsset } from './AssetTable';
 
 interface AssetTableItemProps {
-  crypto: CryptoData;
   animate?: string;
-  asset?: Asset;
+  asset: FinalAsset;
 }
 
-const AssetTableItem = ({ crypto, asset }: AssetTableItemProps) => {
+const AssetTableItem = ({ asset }: AssetTableItemProps) => {
   const [isEditVisible, setIsEditVisible] = useState(false);
-  const { firstCurrency, name, price } = crypto;
+  const { currency, currencyName, amount, price } = asset;
   const { token } = useAuthState();
   const { setAssets } = useAssetDispatch();
 
@@ -38,7 +38,7 @@ const AssetTableItem = ({ crypto, asset }: AssetTableItemProps) => {
         }, 1000);
         return (
           <div className="w-96 h-64 bg-black text-white p-4 flex flex-col items-center justify-center rounded-md">
-            <h3 className="text-xl">{firstCurrency} was removed</h3>
+            <h3 className="text-xl">{currencyName} was removed</h3>
           </div>
         );
       },
@@ -54,7 +54,7 @@ const AssetTableItem = ({ crypto, asset }: AssetTableItemProps) => {
             <h3 className="text-xl mt-8">Are you sure?</h3>
             <div className="h-full flex flex-col justify-center">
               <p className="mb-10 text-center">
-                You want to remove <span>{firstCurrency}</span> from your wallet?
+                You want to remove <span>{currencyName}</span> from your wallet?
               </p>
               <div className="flex w-1/2 self-end">
                 <button className="mr-2 border border-white py-2 w-20" onClick={onClose}>
@@ -100,15 +100,15 @@ const AssetTableItem = ({ crypto, asset }: AssetTableItemProps) => {
           <tr className="h-16 sm:h-20 bg-gray-900 rounded-md text-gray-300 text-sm sm:text-2xl font-sans">
             <td>
               <div className="flex items-center px-4">
-                <CryptoIcon i={firstCurrency.toLowerCase()} size={cryptoIconSize} />
+                <CryptoIcon i={currency.toLowerCase()} size={cryptoIconSize} />
                 <h3 className="px-4  sm:w-full">
-                  {name} <span className="text-md font-bold ">({firstCurrency})</span>
+                  {currencyName} <span className="text-md font-bold ">({currency})</span>
                 </h3>
               </div>
             </td>
-            <td className="text-center">{asset?.amount}</td>
+            <td className="text-center">{amount}</td>
             <td className="text-center">
-              {asset && parseFloat((asset.amount * parseFloat(price)).toPrecision(5))} PLN
+              {parseFloat((amount * parseFloat(price)).toPrecision(5))} PLN
             </td>
             <td className="w-12">
               <div className="flex items-center justify-center px-2">

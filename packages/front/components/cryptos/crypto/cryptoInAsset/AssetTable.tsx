@@ -2,11 +2,21 @@ import React, { useState } from 'react';
 import { CryptoData } from '../../Cryptos';
 import { Asset } from '../../../../context/assetContext';
 import AssetTableItem from './AssetTableItem';
+import styled from 'styled-components';
 
 interface AssetTableProps {
   cryptos: CryptoData[];
   animate?: string;
   assets: Asset[] | undefined;
+}
+
+type SortedBy = 'currency' | 'amount' | 'value' | null;
+type SortDirection = 'ascending' | 'descending';
+
+interface StyledSpanProps {
+  sorted: SortedBy;
+  direction: SortDirection;
+  variant: 'currency' | 'amount' | 'value';
 }
 
 export interface FinalAsset {
@@ -18,9 +28,22 @@ export interface FinalAsset {
   value: number;
 }
 
+const StyledSpan = styled.span<StyledSpanProps>`
+  position: relative;
+  &::before {
+    position: absolute;
+    display: ${(props) => (props.variant === props.sorted ? 'block' : 'none')};
+    left: -20px;
+    top: 0;
+    color: #fff;
+    font-size: 18px;
+    content: '${(props) => (props.direction === 'ascending' ? '\\2191' : `\\2193`)}';
+  }
+`;
+
 const AssetTable = ({ cryptos, assets }: AssetTableProps) => {
-  const [sortedBy, setSortedBy] = useState<'currency' | 'amount' | 'value' | null>(null);
-  const [sortDirection, setSortDirection] = useState<'ascending' | 'descending'>('ascending');
+  const [sortedBy, setSortedBy] = useState<SortedBy>(null);
+  const [sortDirection, setSortDirection] = useState<SortDirection>('ascending');
   const getAsset = (currency: string) => {
     return assets?.filter((item) => item.currencyName === currency)[0];
   };
@@ -71,10 +94,38 @@ const AssetTable = ({ cryptos, assets }: AssetTableProps) => {
       <thead>
         <tr className="border-t border-b border-gray-300 h-10 text-center text-sm sm:text-2xl">
           <th>
-            <button onClick={() => setSorted('currency')}>Crypto</button>
+            <StyledSpan
+              role="button"
+              onClick={() => setSorted('currency')}
+              variant={'currency'}
+              sorted={sortedBy}
+              direction={sortDirection}
+            >
+              Crypto
+            </StyledSpan>
           </th>
-          <th onClick={() => setSorted('amount')}>Amount</th>
-          <th onClick={() => setSorted('value')}>Value</th>
+          <th>
+            <StyledSpan
+              role="button"
+              onClick={() => setSorted('amount')}
+              variant={'amount'}
+              sorted={sortedBy}
+              direction={sortDirection}
+            >
+              Amount
+            </StyledSpan>
+          </th>
+          <th>
+            <StyledSpan
+              role="button"
+              onClick={() => setSorted('value')}
+              variant={'value'}
+              sorted={sortedBy}
+              direction={sortDirection}
+            >
+              Value
+            </StyledSpan>
+          </th>
           <th>Actions</th>
         </tr>
       </thead>

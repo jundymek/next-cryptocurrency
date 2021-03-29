@@ -96,7 +96,7 @@ const AssetTableItem = ({ asset }: AssetTableItemProps) => {
     if (!isEditVisible) {
       return (
         <>
-          <tr className="h-16 sm:h-20 bg-gray-900 rounded-md text-gray-300 text-sm sm:text-2xl font-sans">
+          <tr className="h-16 sm:h-20 bg-gray-900 rounded-md text-gray-200 text-sm sm:text-2xl font-sans">
             <td>
               <div className="flex items-center px-4">
                 <CryptoIcon i={currency.toLowerCase()} size={cryptoIconSize} />

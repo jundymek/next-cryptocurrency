@@ -8,6 +8,8 @@ import FeaturesCarousel from './carousel/FeaturesCarousel';
 import mockup1 from '../../assets/mockup1.png';
 // @ts-ignore
 import mockup2 from '../../assets/mockup2.png';
+// @ts-ignore
+import mockup3 from '../../assets/mockup3.png';
 
 const Features = () => {
   return (
@@ -26,7 +28,7 @@ const Features = () => {
         <Feature
           title="Nothing more..."
           text="It has no signals, no trade options. Nothing but your personal portfolio tracker. Monitor your portfolio without beeing disctupted by any redundant options."
-          img={mockup1}
+          img={mockup3}
         />
       </FeaturesCarousel>
     </ClippedSection>

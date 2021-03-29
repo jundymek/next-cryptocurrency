@@ -53,10 +53,7 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
               </div>
             ) : (
               <>
-                <div className="flex justify-between w-full items-center">
-                  <h2 className="text-xl md:text-4xl">Your assets</h2>
-                  <Total />
-                </div>
+                <Total />
                 <AssetTable cryptos={cryptos} assets={assets} />
                 {notInAssets.length > 0 && !isAddFormVisible && (
                   <div className="mt-4 sm:mt-8 sm:self-end">

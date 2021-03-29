@@ -30,22 +30,46 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
   return (
     <div className="w-full flex flex-col">
       <div className="w-full p-2 text-white z-10 flex flex-col justify-center items-center">
-        <div className="flex justify-between w-full items-center">
-          <h2 className="text-xl md:text-4xl">Your assets</h2>
-          <Total />
-        </div>
         {isLoading || !cryptos ? (
           <LoadingSpinner />
         ) : (
           <>
-            <AssetTable cryptos={cryptos} assets={assets} />
-            {notInAssets.length > 0 && !isAddFormVisible && (
-              <div className="mt-4 sm:mt-8 sm:self-end">
-                <ActionButton handleFunction={toggleAddFormVisible} text="add new asset" />
+            {!assets?.length ? (
+              <div className="w-full flex flex-col items-center justify-center">
+                <h3 className="px-4 text-2xl sm:text-4xl text-center tracking-wide font-bold">
+                  Create your portfolio here. Simply add your asset.
+                </h3>
+                {!isAddFormVisible && (
+                  <div className="mt-4 sm:mt-8">
+                    <ActionButton handleFunction={toggleAddFormVisible} text="add new asset" />
+                  </div>
+                )}
+                {isAddFormVisible && (
+                  <AddNewAssetForm
+                    cryptos={notInAssets}
+                    toggleAddFormVisible={toggleAddFormVisible}
+                  />
+                )}
               </div>
-            )}
-            {isAddFormVisible && (
-              <AddNewAssetForm cryptos={notInAssets} toggleAddFormVisible={toggleAddFormVisible} />
+            ) : (
+              <>
+                <div className="flex justify-between w-full items-center">
+                  <h2 className="text-xl md:text-4xl">Your assets</h2>
+                  <Total />
+                </div>
+                <AssetTable cryptos={cryptos} assets={assets} />
+                {notInAssets.length > 0 && !isAddFormVisible && (
+                  <div className="mt-4 sm:mt-8 sm:self-end">
+                    <ActionButton handleFunction={toggleAddFormVisible} text="add new asset" />
+                  </div>
+                )}
+                {isAddFormVisible && (
+                  <AddNewAssetForm
+                    cryptos={notInAssets}
+                    toggleAddFormVisible={toggleAddFormVisible}
+                  />
+                )}
+              </>
             )}
           </>
         )}

@@ -5,6 +5,10 @@ export function useWindowWidth() {
 
   if (typeof window !== 'undefined') {
     useEffect(() => {
+      setWindowWidth(window.innerWidth);
+    }, []);
+
+    useEffect(() => {
       function handleResize() {
         setWindowWidth(window.innerWidth);
       }

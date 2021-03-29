@@ -87,13 +87,11 @@ const AssetTable = ({ cryptos, assets }: AssetTableProps) => {
     return sortableItems;
   }, [myAssets, sortDirection]);
 
-  console.log(myAssets);
-
   return (
     <table className="w-full table-auto rounded-md px-4 mt-10 row-span-2">
       <thead>
-        <tr className="border-t border-b border-gray-300 h-10 text-center text-sm sm:text-2xl">
-          <th>
+        <tr className="border-t border-b border-gray-300 h-10 text-center text-xs sm:text-sm">
+          <th aria-sort={sortedBy === 'currency' ? sortDirection : 'none'}>
             <StyledSpan
               role="button"
               onClick={() => setSorted('currency')}
@@ -104,7 +102,7 @@ const AssetTable = ({ cryptos, assets }: AssetTableProps) => {
               Crypto
             </StyledSpan>
           </th>
-          <th>
+          <th aria-sort={sortedBy === 'amount' ? sortDirection : 'none'}>
             <StyledSpan
               role="button"
               onClick={() => setSorted('amount')}
@@ -115,7 +113,7 @@ const AssetTable = ({ cryptos, assets }: AssetTableProps) => {
               Amount
             </StyledSpan>
           </th>
-          <th>
+          <th aria-sort={sortedBy === 'value' ? sortDirection : 'none'}>
             <StyledSpan
               role="button"
               onClick={() => setSorted('value')}

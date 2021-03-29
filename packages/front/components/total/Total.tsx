@@ -4,7 +4,7 @@ import { useGetTotal } from '../cryptos/utils/useGetTotal';
 const Total = () => {
   const total = useGetTotal();
   return (
-    <div className="text-center md:text-left sm:float-right font-bold  border-b py-4">
+    <div className="text-center md:text-left sm:float-right font-bold py-4">
       <p className="text-black bg-white inline-block text-xl sm:text-4xl p-2 my-2 font-mono transform rotate-3">
         TOTAL
       </p>

@@ -8,20 +8,18 @@ import { CryptoData } from '../Cryptos';
 import AddNewAssetForm from './addNewAssetForm/AddNewAssetForm';
 
 interface CryptoInAssetUserProps {
-  cryptos?: CryptoData[];
+  cryptos: CryptoData[] | undefined;
 }
 
 const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
   const [isAddFormVisible, setIsAddFormVisible] = useState(false);
   const { assets, isLoading } = useAssetState();
 
-  if (isLoading || !cryptos) {
-    return <LoadingSpinner />;
-  }
-
-  const notInAssets = cryptos?.filter(
-    (item: CryptoData) => !assets?.some((asset) => asset.currencyName === item.firstCurrency),
-  );
+  const notInAssets = (cryptos: CryptoData[]) => {
+    return cryptos.filter(
+      (item: CryptoData) => !assets?.some((asset) => asset.currencyName === item.firstCurrency),
+    );
+  };
 
   const toggleAddFormVisible = () => {
     setIsAddFormVisible(!isAddFormVisible);
@@ -46,7 +44,7 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
                 )}
                 {isAddFormVisible && (
                   <AddNewAssetForm
-                    cryptos={notInAssets}
+                    cryptos={notInAssets(cryptos)}
                     toggleAddFormVisible={toggleAddFormVisible}
                   />
                 )}
@@ -62,7 +60,7 @@ const CryptosAuthUser = React.memo<CryptoInAssetUserProps>(({ cryptos }) => {
                 )}
                 {isAddFormVisible && (
                   <AddNewAssetForm
-                    cryptos={notInAssets}
+                    cryptos={notInAssets(cryptos)}
                     toggleAddFormVisible={toggleAddFormVisible}
                   />
                 )}

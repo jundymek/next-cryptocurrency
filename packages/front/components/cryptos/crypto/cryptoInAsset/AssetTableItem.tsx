@@ -110,14 +110,14 @@ const AssetTableItem = ({ asset }: AssetTableItemProps) => {
             <td className="w-12">
               <div className="flex items-center justify-center px-2">
                 <button
-                  className="text-2xl sm:text-4xl lg:text-6xl md:mr-4 transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
+                  className="text-2xl sm:text-4xl  md:mr-4 transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
                   onClick={handleToggleEdit}
                   title="Edit"
                 >
                   <Icon icon={squareEditOutline} className="text-gray-600 hover:text-yellow-600" />
                 </button>
                 <button
-                  className="text-2xl sm:text-4xl lg:text-6xl transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
+                  className="text-2xl sm:text-4xl transform transition-all duration-200 hover:text-gray-500 hover:scale-125"
                   onClick={handleOpenDeleteModal}
                   title="Delete"
                 >

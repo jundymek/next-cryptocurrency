@@ -9,13 +9,7 @@ export async function register(payload: { username: string; password: string }) 
     });
     const res = await response.json();
     return res.statusCode;
-    if (res.statusCode === 409) {
-      setError('User already exist');
-      throw new Error('User already exist');
-    } else {
-      return res.statusCode;
-    }
   } catch (error) {
-    throw new Error('dupa');
+    throw new Error(error);
   }
 }

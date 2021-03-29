@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import styled from 'styled-components';
 
 interface ClippedSectionProps {
@@ -8,7 +7,7 @@ interface ClippedSectionProps {
 
 const DIAGONAL = 80;
 
-export const ClippedSection = memo(styled.section<ClippedSectionProps>`
+export const ClippedSection = styled.section<ClippedSectionProps>`
   position: relative;
   &::before {
     background-color: inherit;
@@ -35,4 +34,4 @@ export const ClippedSection = memo(styled.section<ClippedSectionProps>`
       );
     }
   }
-`);
+`;

@@ -159,9 +159,9 @@ const AuthForm = React.memo<AuthFormProps>(({ variant, handleFlip }) => {
             </div>
             <button
               type="submit"
-              className="w-3/4 mx-auto py-3 mt-10 bg-yellow-600 rounded-sm 
+              className="w-3/4 sm:w-2/4 mx-auto py-3 mt-10 bg-yellow-600 rounded-sm 
                   font-medium text-white uppercase
-                  focus:outline-none hover:bg-gray-700 hover:shadow-none"
+                  focus:outline-none hover:bg-blue-500 transform hover:scale-105 transition duration-200"
             >
               {variant === 'login' ? 'Login' : 'Register'}
             </button>

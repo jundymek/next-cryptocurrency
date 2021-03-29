@@ -8,7 +8,7 @@ import logo from '../../assets/logo1.svg';
 const Footer = () => {
   return (
     <footer className="h-64 w-screen bg-black py-8">
-      <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center h-full px-2">
+      <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center h-full px-8">
         <img src={logo} alt="Logo" className="max-w-12 max-h-12" />
         <p className="text-gray-500">
           made with passion by{' '}

@@ -42,7 +42,10 @@ function CryptosProvider({ children }: CryptosProviderProps) {
   const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/cryptos`, fetcher, {
     refreshInterval: 100000,
   });
-  const cryptos = data;
+
+  const cryptos = data?.sort((crypto1: CryptoData, crypto2: CryptoData) => {
+    return compareCryptos(crypto1, crypto2);
+  });
 
   const state = { cryptos, error, isLoading };
 
@@ -58,3 +61,15 @@ function useCryptosState() {
 }
 
 export { CryptosProvider, useCryptosState };
+
+const compareCryptos = (crypto1: CryptoData, crypto2: CryptoData) => {
+  const obj1 = crypto1['firstCurrency'];
+  const obj2 = crypto2['firstCurrency'];
+  if (obj1 < obj2) {
+    return -1;
+  }
+  if (obj1 > obj2) {
+    return 1;
+  }
+  return 0;
+};

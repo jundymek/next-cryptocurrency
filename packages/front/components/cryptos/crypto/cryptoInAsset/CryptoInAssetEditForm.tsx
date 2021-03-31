@@ -81,7 +81,7 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
           <div className="flex items-center">
             <img
               src={loadImage(`./${firstCurrency.toLowerCase()}.svg`).default}
-              alt={'bitcoin'}
+              alt={`${firstCurrency} icon`}
               width={cryptoIconSize}
               height={cryptoIconSize}
             />

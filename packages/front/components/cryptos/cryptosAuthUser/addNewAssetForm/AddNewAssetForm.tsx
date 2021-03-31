@@ -73,7 +73,7 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
         <div className="flex items-center">
           <img
             src={loadImage(`./${item.firstCurrency.toLowerCase()}.svg`).default}
-            alt={'bitcoin'}
+            alt={`${item.firstCurrency} icon`}
             className="h-6 w-6 rounded-full bg-gray-700"
           />
           <span className="text-gray-200 mx-4">{item.firstCurrency}</span>{' '}

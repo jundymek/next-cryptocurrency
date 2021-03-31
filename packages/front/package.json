@@ -10,7 +10,7 @@
     "build": "next build",
     "start-dev": "next start",
     "start": "next start -p $PORT",
-    "publish-heroku": "cd ../../ && git subtree push --prefix packages/front next-crypto-front master"
+    "publish-heroku": "cd ../../ && git subtree push --prefix packages/front heroku master"
   },
   "dependencies": {
     "@iconify/icons-ic": "^1.1.3",

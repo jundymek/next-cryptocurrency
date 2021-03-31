@@ -100,7 +100,7 @@ const AssetTableItem = ({ asset }: AssetTableItemProps) => {
               <div className="flex items-center px-4">
                 <img
                   src={loadImage(`./${currency.toLowerCase()}.svg`).default}
-                  alt={'bitcoin'}
+                  alt={`${currency} icon`}
                   width={cryptoIconSize}
                   height={cryptoIconSize}
                 />

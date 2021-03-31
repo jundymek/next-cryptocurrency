@@ -17,7 +17,6 @@
     "@iconify/icons-mdi": "^1.1.12",
     "autoprefixer": "^10.1.0",
     "clsx": "^1.1.1",
-    "coinmarketcap-cryptocurrency-icons": "^1.0.1",
     "next": "10.0.4",
     "postcss": "^8.2.2",
     "postcss-import": "^14.0.0",
@@ -40,6 +39,7 @@
     "@types/node": "^14.14.33",
     "@types/react-select": "^4.0.13",
     "@types/styled-components": "^5.1.7",
+    "@types/webpack-env": "^1.16.0",
     "typescript": "^4.1.3"
   }
 }

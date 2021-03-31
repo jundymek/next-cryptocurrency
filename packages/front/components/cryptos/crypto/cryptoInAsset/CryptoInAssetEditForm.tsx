@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Asset, useAssetDispatch } from '../../../../context/assetContext';
 import { useAuthState } from '../../../../context/authContext';
 import { CryptoData } from '../../Cryptos';
-import { Icon as CryptoIcon } from 'coinmarketcap-cryptocurrency-icons';
 import { Icon } from '@iconify/react';
 import contentSaveEditOutline from '@iconify/icons-mdi/content-save-edit-outline';
 import closeBoxOutline from '@iconify/icons-mdi/close-box-outline';
 import { useWindowWidth } from '../../../../customHooks/useWindowWidth';
+import { loadImage } from '../../../../helpers/loadImage';
 
 interface CryptoInAssetEditFormProps {
   crypto: CryptoData;
@@ -79,7 +79,12 @@ const CryptoInAssetEditForm = React.memo<CryptoInAssetEditFormProps>(
       >
         <div className="flex items-center w-4/5 justify-between text-sm">
           <div className="flex items-center">
-            <CryptoIcon i={firstCurrency.toLowerCase()} size={cryptoIconSize} />
+            <img
+              src={loadImage(`./${firstCurrency.toLowerCase()}.svg`).default}
+              alt={'bitcoin'}
+              width={cryptoIconSize}
+              height={cryptoIconSize}
+            />
             <h3 className="lg:text-lg text-white ml-4 w-20 md:w-40">
               {name} <span className="text-md font-bold text-white">({firstCurrency})</span>
             </h3>

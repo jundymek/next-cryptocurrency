@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { CryptoData } from '../../Cryptos';
-import { Icon as CryptoIcon } from 'coinmarketcap-cryptocurrency-icons';
 import Select from 'react-select';
 import { useAuthState } from '../../../../context/authContext';
 import { useAssetDispatch } from '../../../../context/assetContext';
 import styled from 'styled-components';
 import ActionButton from '../../../shared/button/ActionButton';
+import { loadImage } from '../../../../helpers/loadImage';
 
 const StyledInput = styled.input`
   &::placeholder {
@@ -71,8 +71,9 @@ const AddNewAssetForm = React.memo<AddNewAssetFormProps>(({ cryptos, toggleAddFo
       value: item.firstCurrency,
       label: (
         <div className="flex items-center">
-          <CryptoIcon
-            i={item.firstCurrency.toLowerCase()}
+          <img
+            src={loadImage(`./${item.firstCurrency.toLowerCase()}.svg`).default}
+            alt={'bitcoin'}
             className="h-6 w-6 rounded-full bg-gray-700"
           />
           <span className="text-gray-200 mx-4">{item.firstCurrency}</span>{' '}

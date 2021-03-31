@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAssetDispatch } from '../../../../context/assetContext';
 import { useAuthState } from '../../../../context/authContext';
-import { Icon as CryptoIcon } from 'coinmarketcap-cryptocurrency-icons';
 import { Icon } from '@iconify/react';
 import contentSaveEditOutline from '@iconify/icons-mdi/content-save-edit-outline';
 import closeBoxOutline from '@iconify/icons-mdi/close-box-outline';
 import { FinalAsset } from './AssetTable';
+import { loadImage } from '../../../../helpers/loadImage';
 
 interface AssetTableEditFormProps {
   asset: FinalAsset;
@@ -76,7 +76,12 @@ const AssetTableEditForm = React.memo<AssetTableEditFormProps>(
         >
           <td>
             <div className="flex items-center px-4">
-              <CryptoIcon i={currency.toLowerCase()} size={cryptoIconSize} />
+              <img
+                src={loadImage(`./${currency.toLowerCase()}.svg`).default}
+                alt={'bitcoin'}
+                width={cryptoIconSize}
+                height={cryptoIconSize}
+              />
               <h3 className="px-4 sm:w-full">
                 {name} <span className="text-md font-bold ">({currency})</span>
               </h3>

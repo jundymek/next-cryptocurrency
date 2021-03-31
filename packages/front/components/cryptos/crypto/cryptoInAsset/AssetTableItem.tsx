@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
-import { Icon as CryptoIcon } from 'coinmarketcap-cryptocurrency-icons';
 import squareEditOutline from '@iconify/icons-mdi/square-edit-outline';
 import deleteOutline from '@iconify/icons-mdi/delete-outline';
 import { useAssetDispatch } from '../../../../context/assetContext';
@@ -10,6 +9,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import AssetTableEditForm from './AssetTableEditForm';
 import { FinalAsset } from './AssetTable';
+import { loadImage } from '../../../../helpers/loadImage';
 
 interface AssetTableItemProps {
   animate?: string;
@@ -45,7 +45,6 @@ const AssetTableItem = ({ asset }: AssetTableItemProps) => {
   };
 
   const handleOpenDeleteModal = async () => {
-    console.log('dupa');
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
@@ -99,8 +98,13 @@ const AssetTableItem = ({ asset }: AssetTableItemProps) => {
           <tr className="h-16 sm:h-20 bg-gray-900 rounded-md text-gray-200 text-sm sm:text-2xl font-sans">
             <td>
               <div className="flex items-center px-4">
-                <CryptoIcon i={currency.toLowerCase()} size={cryptoIconSize} />
-                <h3 className="px-4  sm:w-full">
+                <img
+                  src={loadImage(`./${currency.toLowerCase()}.svg`).default}
+                  alt={'bitcoin'}
+                  width={cryptoIconSize}
+                  height={cryptoIconSize}
+                />
+                <h3 className="px-4 sm:w-full">
                   {currencyName} <span className="text-md font-bold ">({currency})</span>
                 </h3>
               </div>

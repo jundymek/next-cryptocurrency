@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CryptoData } from '../../Cryptos';
-import { Icon as CryptoIcon } from 'coinmarketcap-cryptocurrency-icons';
 // @ts-ignore
 import bgImage from '../../../../assets/bg_circle1.svg';
 import CryptoInAssetEditForm from './CryptoInAssetEditForm';
@@ -12,6 +11,7 @@ import { Icon } from '@iconify/react';
 import squareEditOutline from '@iconify/icons-mdi/square-edit-outline';
 import deleteOutline from '@iconify/icons-mdi/delete-outline';
 import { useWindowWidth } from '../../../../customHooks/useWindowWidth';
+import { loadImage } from '../../../../helpers/loadImage';
 
 interface CryptoProps {
   crypto: CryptoData;
@@ -108,7 +108,12 @@ const CryptoInAsset = React.memo<CryptoProps>(({ crypto, asset }) => {
           <li className="w-full h-24 bg-gray-900  bg-opacity-80 flex items-center justify-between my-2 bg-transparent rounded-md px-4 hover:bg-gray-700 transition-colors duration-200 text-gray-300">
             <div className="flex items-center w-4/5 justify-between text-sm">
               <div className="flex items-center">
-                <CryptoIcon i={firstCurrency.toLowerCase()} size={cryptoIconSize} />
+                <img
+                  src={loadImage(`./${firstCurrency.toLowerCase()}.svg`).default}
+                  alt={'bitcoin'}
+                  width={cryptoIconSize}
+                  height={cryptoIconSize}
+                />
                 <h3 className="lg:text-lg  ml-4 w-20 md:w-40">
                   {name} <span className="text-md font-bold ">({firstCurrency})</span>
                 </h3>

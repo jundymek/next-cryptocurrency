@@ -8,7 +8,7 @@ interface FeatureProps {
 
 const Feature = ({ title, text, img }: FeatureProps) => {
   return (
-    <div className="flex flex-col sm:flex-row items-center w-full mb-12">
+    <div className="flex flex-col xl:flex-row items-center w-full 2xl:w-2/3 2xl:mx-auto mb-12">
       <div className="p-4 sm:w-2/3 relative">
         <span className="absolute top-0 left-4 uppercase mb-2 text-sm text-gray-400">
           Key features

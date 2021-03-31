@@ -71,7 +71,7 @@ const FeaturesCarousel = React.memo<FeaturesCarouselProps>(({ children }) => {
   return (
     <Carousel
       responsive={responsive}
-      className="sm:w-2/3 mx-auto py-10"
+      className="lg:w-2/3 mx-auto py-10"
       draggable={true}
       showDots
       customDot={<CustomDot />}

@@ -9,7 +9,7 @@ export async function register(payload: { username: string; password: string }) 
     });
     const res = await response.json();
     return res.statusCode;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 }

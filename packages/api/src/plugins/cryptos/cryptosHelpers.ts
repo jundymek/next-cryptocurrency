@@ -36,7 +36,8 @@ export interface CryptoData {
 }
 
 export async function getCryptoData() {
-  const data = await fetch('https://api.bitbay.net/rest/trading/ticker');
+  const data = await fetch('https://api.zonda.exchange/rest/trading/ticker');
+
   const res = await data.json();
   const cryptos = Object.keys(res.items)
     .map((pair) => getNecessaryData(res.items[pair]))
